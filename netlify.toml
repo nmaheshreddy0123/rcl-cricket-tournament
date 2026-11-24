@@ -1,0 +1,3 @@
+[build]
+  command = "mkdir -p dist/assets && cp index.html firebase-applet-config.json dist/ && cp -R public/assets/. dist/assets/"
+  publish = "dist"
