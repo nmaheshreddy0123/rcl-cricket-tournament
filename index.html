@@ -650,12 +650,12 @@
       <div class="flex items-start justify-between gap-4">
         <div>
           <p id="registration-slot-label" class="text-[10px] font-bold uppercase tracking-widest text-amber-400">Next slot assigned in registration order</p>
-          <h2 class="font-display mt-1 text-2xl sm:text-3xl">REGISTER YOUR TEAM</h2>
+          <h2 id="registration-dialog-title" class="font-display mt-1 text-2xl sm:text-3xl">REGISTER YOUR TEAM</h2>
         </div>
         <button type="button" id="close-registration-dialog" class="rounded-lg bg-slate-800 px-2.5 py-1.5 text-xs font-bold text-white hover:bg-slate-700" aria-label="Close registration form">✕</button>
       </div>
 
-      <p class="text-xs text-slate-300">Enter your team details to register this open slot. Team name and brand name must be unique.</p>
+      <p id="registration-dialog-subtitle" class="text-xs text-slate-300">Enter your team details to register this open slot. Team name and brand name must be unique.</p>
 
       <label class="block text-xs font-semibold text-slate-200">
         Team name <span class="text-red-400" aria-hidden="true">*</span>
@@ -672,7 +672,7 @@
       </label>
 
       <label class="block text-xs font-semibold text-slate-200">
-        Team logo (JPG, PNG, or WebP; up to 5 MB) <span class="text-red-400" aria-hidden="true">*</span>
+        <span id="registration-logo-label">Team logo (JPG, PNG, or WebP; up to 5 MB)</span> <span id="registration-logo-required" class="text-red-400" aria-hidden="true">*</span>
         <input id="registration-team-logo" name="teamLogo" type="file" accept="image/jpeg,image/png,image/webp" required
                class="mt-1 block w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 file:mr-2 file:rounded-md file:border-0 file:bg-amber-500 file:px-2.5 file:py-1 file:font-bold file:text-slate-950" />
       </label>
@@ -701,6 +701,101 @@
     </form>
   </dialog>
 
+  <dialog id="payment-confirmation-dialog" class="w-[min(100%-2rem,34rem)] max-h-[90dvh] overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-0 text-white shadow-2xl backdrop:bg-black/80">
+    <div class="flex items-center justify-between gap-3 border-b border-slate-800 bg-slate-900 px-4 py-3.5 sm:px-6">
+      <h2 class="font-display text-base tracking-wide text-white sm:text-lg">PAY ENTRY FEE ₹22,222 &amp; NOTIFY ORGANISERS GROUP</h2>
+      <button type="button" id="close-payment-dialog" class="shrink-0 rounded-lg bg-slate-800 px-2.5 py-1.5 text-xs font-bold text-white transition hover:bg-slate-700" aria-label="Close payment instructions">✕</button>
+    </div>
+
+    <div class="max-h-[calc(90dvh-3.75rem)] space-y-4 overflow-y-auto p-4 sm:p-6">
+      <div class="grid gap-4 rounded-xl border border-purple-300/35 bg-gradient-to-br from-[#5F259F] via-[#4D1D84] to-[#361162] p-4 text-white shadow-lg sm:grid-cols-[1fr_auto] sm:items-center">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white shadow" aria-hidden="true">
+              <svg viewBox="0 0 48 48" class="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 16H35M29 16V35M18 16V22.5C18 26.5 21.5 28.5 29 27M29 16C28 11.5 24.5 9.5 20.5 9.5" stroke="#5F259F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p class="text-[11px] font-extrabold uppercase tracking-wider text-purple-100">PhonePe / UPI Payment Details</p>
+          </div>
+          <p class="text-xl font-extrabold text-white">₹22,222 <span class="text-xs font-medium text-purple-100">Tournament Entry Fee</span></p>
+          <div class="flex flex-wrap items-center gap-2">
+            <p class="text-[11px] text-purple-100">UPI ID: <span id="payment-upi-id-text" class="font-mono font-semibold text-white select-all">nmaheshreddy01232@ybl</span></p>
+            <button type="button" id="copy-upi-id-btn"
+                    class="inline-flex items-center gap-1 rounded-md border border-white/35 bg-white/15 px-2 py-0.5 text-[10px] font-bold text-white transition hover:bg-white/25"
+                    aria-label="Copy UPI ID">
+              Copy UPI ID
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-col items-center justify-center rounded-xl border border-white/40 bg-white p-2 shadow-md">
+          <img id="payment-upi-qr" src="/assets/aistudio/scanner_0ed89382.jpeg" alt="PhonePe UPI Scanner QR Code for nmaheshreddy01232@ybl" class="h-32 w-32 rounded object-contain" />
+          <span class="mt-1 text-[10px] font-extrabold text-[#5F259F]">Scan with PhonePe / UPI</span>
+        </div>
+      </div>
+
+      <div class="space-y-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4">
+        <p class="text-xs font-bold text-emerald-300">Final step: Notify Organisers Group via WhatsApp</p>
+
+        <label class="block text-xs font-semibold text-slate-200">
+          Attach payment screenshot image here: <span class="text-red-400" aria-hidden="true">*</span>
+          <input id="payment-screenshot-input" type="file" accept="image/*" required
+                 class="mt-1.5 block w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 file:mr-2 file:rounded-md file:border-0 file:bg-emerald-500 file:px-2.5 file:py-1 file:font-bold file:text-slate-950" />
+        </label>
+        <p id="payment-screenshot-required-note" class="text-[11px] font-medium text-amber-300">
+          Please attach your payment screenshot image to enable the WhatsApp notification link.
+        </p>
+        <div id="payment-screenshot-preview-wrap" class="hidden items-center gap-3 rounded-lg border border-slate-800 bg-slate-950/80 p-2">
+          <img id="payment-screenshot-preview" alt="Attached payment screenshot preview" class="h-14 w-14 shrink-0 rounded-md border border-slate-700 object-cover" />
+          <p id="payment-screenshot-hint" class="text-[11px] leading-snug text-emerald-300"></p>
+        </div>
+
+        <div class="flex items-start gap-2 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-[11px] leading-relaxed text-amber-100">
+          <span class="mt-0.5 shrink-0 text-amber-300" aria-hidden="true">ℹ️</span>
+          <p>
+            <strong class="font-bold text-amber-300">Status Update Notice:</strong> Once you notify the Organisers Group via WhatsApp with your payment screenshot, your team&rsquo;s payment status on this website will be verified and updated within a few minutes.
+          </p>
+        </div>
+
+        <pre id="payment-whatsapp-preview" class="max-h-40 overflow-y-auto whitespace-pre-wrap rounded-lg border border-slate-800 bg-slate-950/90 p-2.5 font-sans text-[11px] leading-relaxed text-slate-200"></pre>
+
+        <div class="pt-1">
+          <a id="payment-whatsapp-link" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1"
+             class="inline-flex w-full pointer-events-none cursor-not-allowed items-center justify-center gap-1.5 rounded-lg bg-emerald-500/40 px-4 py-2.5 text-center text-xs font-extrabold text-slate-950/70 opacity-60">
+            Notify Organisers Group on WhatsApp ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <button type="button" id="done-payment-dialog" class="rounded-lg bg-slate-800 px-4 py-2 text-xs font-bold text-white transition hover:bg-slate-700">
+          Done • View Team Cards
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="slot-order-alert-dialog" role="alertdialog" aria-labelledby="slot-order-alert-title" aria-describedby="slot-order-alert-message"
+          class="m-auto w-[min(100%-2rem,26rem)] rounded-2xl border border-amber-500/60 bg-slate-950 p-0 text-white shadow-2xl backdrop:bg-black/80">
+    <div class="space-y-4 p-5 text-center sm:p-6">
+      <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-amber-500/40 bg-amber-500/15 text-xl" aria-hidden="true">
+        ⚠️
+      </div>
+      <div>
+        <h3 id="slot-order-alert-title" class="font-display text-lg tracking-wide text-amber-400">SEQUENTIAL REGISTRATION</h3>
+        <p id="slot-order-alert-message" class="mt-2 text-center text-sm leading-relaxed text-slate-200"></p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+        <button type="button" id="slot-order-alert-register-btn" class="gold-gradient rounded-lg px-4 py-2 text-xs font-extrabold text-slate-950 transition hover:brightness-110">
+          Register Slot #01
+        </button>
+        <button type="button" id="slot-order-alert-close-btn" class="rounded-lg bg-slate-800 px-4 py-2 text-xs font-bold text-white transition hover:bg-slate-700">
+          OK
+        </button>
+      </div>
+    </div>
+  </dialog>
+
   <!-- ==================== LIGHTBOX MODAL ==================== -->
   <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-3 backdrop-blur-sm sm:p-6">
     <div class="relative w-full max-w-4xl text-center" onclick="event.stopPropagation()">
@@ -712,15 +807,45 @@
     </div>
   </div>
 
-  <!-- Firebase compat SDKs: add your Firebase web app config below to enable shared registration sync. -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <!-- ==================== JAVASCRIPT (MODULAR FIREBASE v10) ==================== -->
+  <script type="module">
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signInAnonymously
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      doc,
+      getDoc,
+      getDocFromServer,
+      onSnapshot,
+      query,
+      where,
+      runTransaction,
+      updateDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import {
+      getStorage,
+      ref,
+      uploadBytes,
+      getDownloadURL,
+      deleteObject
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-  <!-- ==================== JAVASCRIPT ==================== -->
-  <script>
-    function toggleMobileMenu() {
+    const OperationType = {
+      CREATE: "create",
+      UPDATE: "update",
+      DELETE: "delete",
+      LIST: "list",
+      GET: "get",
+      WRITE: "write"
+    };
+
+    window.toggleMobileMenu = function toggleMobileMenu() {
       const menu = document.getElementById("mobile-menu");
       const btn = document.getElementById("mobile-menu-btn");
       const isHidden = menu.classList.contains("hidden");
@@ -733,32 +858,64 @@
         menu.classList.remove("flex");
         btn.innerText = "☰";
       }
-    }
-
-    // Replace these placeholders with the Firebase web app config from Project settings.
-    const firebaseConfig = {
-      apiKey: "YOUR_FIREBASE_API_KEY",
-      authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
-      projectId: "rcl-cricket-tournament",
-      storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET",
-      appId: "YOUR_FIREBASE_APP_ID"
     };
 
     const rclTeamSlots = Array.from({ length: 24 }, (_, idx) => {
       return { slotNumber: idx + 1, name: `Slot #${String(idx + 1).padStart(2, "0")}`, status: "open" };
     });
 
+    const ORGANISER_EMAIL = "nmaheshreddy0123@gmail.com";
+    const PAYMENT_UPI_NUMBER = "8951067228";
+    const PAYMENT_UPI_ID = "nmaheshreddy01232@ybl";
+    const PAYMENT_AMOUNT = 22222;
+    const ORGANISERS_WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/EDf0HOV1ICq2JUqaEK1sHg";
+
+    const ownedCaptainPhones = new Map();
     let currentTeamTab = "all";
-    let firebaseAuth;
-    let firebaseDb;
-    let firebaseStorage;
-    let firebaseAuthPromise;
-    let teamLogoPreviewUrl;
+    let firebaseAuth = null;
+    let firebaseDb = null;
+    let firebaseStorage = null;
+    let firebaseReady = false;
+    let anonAuthUnavailable = false;
+    let currentUser = null;
+    let isOrganiserAdmin = false;
+    let privateRegsUnsubscribe = null;
+    let teamLogoPreviewUrl = null;
+    let editingSlotNumber = null;
+    let lastPaymentMessageText = "";
+
+    function handleFirestoreError(error, operationType, path) {
+      const user = firebaseAuth ? firebaseAuth.currentUser : null;
+      const errInfo = {
+        error: error instanceof Error ? error.message : String(error),
+        authInfo: {
+          userId: user?.uid || null,
+          email: user?.email || null,
+          emailVerified: user?.emailVerified ?? null,
+          isAnonymous: user?.isAnonymous ?? null,
+          tenantId: user?.tenantId || null,
+          providerInfo: user?.providerData?.map((provider) => ({
+            providerId: provider.providerId,
+            email: provider.email
+          })) || []
+        },
+        operationType,
+        path
+      };
+      console.error("Firestore Error:", JSON.stringify(errInfo));
+      throw new Error(JSON.stringify(errInfo));
+    }
 
     function normalizeUniqueValue(value) {
       const normalized = value.trim().normalize("NFKC").toLowerCase()
-        .replace(/[^\p{L}\p{N}]+/gu, " ").replace(/\s+/g, " ");
-      return encodeURIComponent(normalized);
+        .replace(/[^\p{L}\p{N}]+/gu, " ").trim().replace(/\s+/g, " ");
+      if (!normalized) return "";
+      const asciiSlug = normalized.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      const bytes = Array.from(new TextEncoder().encode(normalized))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+      const prefix = asciiSlug ? `${asciiSlug.slice(0, 48)}-` : "k-";
+      return `${prefix}${bytes.slice(0, 64)}`;
     }
 
     function updateTeamCounts() {
@@ -795,30 +952,33 @@
       });
     }
 
-    function setTeamTab(tab, activeBtn) {
+    window.setTeamTab = function setTeamTab(tab, activeBtn) {
       currentTeamTab = tab;
       document.querySelectorAll(".team-filter-btn").forEach((btn) => {
         btn.className = "team-filter-btn rounded-lg bg-slate-800 px-3.5 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700";
       });
       activeBtn.className = "team-filter-btn rounded-lg bg-amber-500 px-3.5 py-2 text-xs font-bold text-slate-950 transition";
-      applyTeamFilters();
-    }
+      window.applyTeamFilters();
+    };
 
-    function applyTeamFilters() {
-      const query = (document.getElementById("team-search").value || "").trim().toLowerCase();
+    window.applyTeamFilters = function applyTeamFilters() {
+      const queryText = (document.getElementById("team-search").value || "").trim().toLowerCase();
       const teamsGrid = document.getElementById("teams-grid");
       teamsGrid.replaceChildren();
 
       rclTeamSlots.forEach((slot) => {
         if (currentTeamTab !== "all" && slot.status !== currentTeamTab) return;
         const searchableText = [slot.name, slot.brandName, slot.teamName].filter(Boolean).join(" ").toLowerCase();
-        if (query && !searchableText.includes(query)) return;
+        if (queryText && !searchableText.includes(queryText)) return;
 
         const isBooked = slot.status === "booked";
-        const card = document.createElement(isBooked ? "article" : "button");
+        const slotId = `slot-${slot.slotNumber}`;
+        const ownedPhone = ownedCaptainPhones.get(slotId);
+        const isOwnedBooked = isBooked && Boolean(ownedPhone);
+        const card = document.createElement(!isBooked ? "button" : "article");
         card.className = isBooked
-          ? "flex h-52 w-full flex-col rounded-xl border border-amber-500/50 bg-gradient-to-b from-amber-500/10 to-slate-900 p-3.5 text-left shadow-md transition hover:border-amber-400"
-          : "flex h-52 w-full flex-col rounded-xl border border-dashed border-slate-700 bg-slate-950/70 p-3.5 text-left shadow-md transition hover:border-amber-400 hover:bg-slate-900";
+          ? `flex min-h-60 w-full flex-col rounded-xl border ${isOwnedBooked ? "border-emerald-500/60" : "border-amber-500/50"} bg-gradient-to-b from-amber-500/10 to-slate-900 p-3.5 text-left shadow-md transition`
+          : "flex min-h-60 w-full flex-col rounded-xl border border-dashed border-slate-700 bg-slate-950/70 p-3.5 text-left shadow-md transition hover:border-amber-400 hover:bg-slate-900";
         if (!isBooked) {
           card.type = "button";
           card.setAttribute("aria-label", `Register for ${slot.name}`);
@@ -840,7 +1000,7 @@
 
         const logoContainer = document.createElement("div");
         logoContainer.className = "mb-2 flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-700 bg-slate-950";
-        if (isBooked && slot.logoUrl) {
+        if (isBooked && slot.logoUrl && (/^https:\/\/.+/i.test(slot.logoUrl) || /^data:image\/(jpeg|png|webp);base64,/i.test(slot.logoUrl))) {
           const logo = document.createElement("img");
           logo.src = slot.logoUrl;
           logo.alt = `${slot.teamName || slot.name} logo`;
@@ -884,13 +1044,73 @@
         const captainPhoneLabel = document.createElement("span");
         captainPhoneLabel.className = "font-semibold";
         captainPhoneLabel.textContent = "Captain Mobile No: ";
-        captainPhone.append(captainPhoneLabel, document.createTextNode(isBooked ? (slot.captainPhone || "—") : "—"));
+        captainPhone.append(
+          captainPhoneLabel,
+          document.createTextNode(isBooked ? (ownedPhone || "Verified (Private)") : "—")
+        );
         card.append(captainPhone);
 
         const cardStatus = document.createElement("p");
         cardStatus.className = `mt-auto pt-1 text-[11px] font-semibold ${isBooked ? "text-emerald-400" : "text-amber-400"}`;
         cardStatus.textContent = isBooked ? "Registered" : "Click here to register";
         card.append(cardStatus);
+
+        if (isBooked) {
+          const isPaid = slot.paymentStatus === "paid";
+          const paymentBadge = document.createElement("span");
+          paymentBadge.className = isPaid
+            ? "mt-1 inline-flex w-fit items-center gap-1 rounded border border-emerald-500/40 bg-emerald-500/15 px-2 py-0.5 text-[10px] font-bold text-emerald-300"
+            : "mt-1 inline-flex w-fit items-center gap-1 rounded border border-amber-500/40 bg-amber-500/15 px-2 py-0.5 text-[10px] font-bold text-amber-300";
+          paymentBadge.textContent = isPaid ? "✓ Fee Paid" : "⏳ Payment Pending";
+          card.append(paymentBadge);
+
+          if (!isPaid && isOwnedBooked && !isOrganiserAdmin) {
+            const payNowBtn = document.createElement("button");
+            payNowBtn.type = "button";
+            payNowBtn.className = "mt-1.5 inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-purple-400/50 bg-[#5F259F] px-2 py-1 text-[10px] font-bold text-white transition hover:bg-[#7030B8]";
+            payNowBtn.innerHTML = `<svg viewBox="0 0 48 48" class="h-3.5 w-3.5 shrink-0" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#FFFFFF"/><path d="M13 16H35M29 16V35M18 16V22.5C18 26.5 21.5 28.5 29 27M29 16C28 11.5 24.5 9.5 20.5 9.5" stroke="#5F259F" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pay ₹22,222 &amp; Notify Organisers Group</span>`;
+            payNowBtn.addEventListener("click", (event) => {
+              event.stopPropagation();
+              openPaymentConfirmationModal({
+                slotNumber: slot.slotNumber,
+                teamName: slot.teamName || slot.name,
+                brandName: slot.brandName || "",
+                captainName: slot.captainName || "",
+                captainPhone: ownedPhone || ""
+              });
+            });
+            card.append(payNowBtn);
+          }
+
+          if (isOrganiserAdmin) {
+            const adminActions = document.createElement("div");
+            adminActions.className = "mt-1.5 flex gap-1.5";
+
+            const adminToggleBtn = document.createElement("button");
+            adminToggleBtn.type = "button";
+            adminToggleBtn.className = isPaid
+              ? "flex-1 rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-[10px] font-bold text-slate-300 transition hover:border-amber-400 hover:text-amber-300"
+              : "flex-1 rounded-md bg-emerald-500 px-2 py-1 text-[10px] font-extrabold text-slate-950 transition hover:bg-emerald-400";
+            adminToggleBtn.textContent = isPaid ? "Mark Pending" : "Mark Fee Paid";
+            adminToggleBtn.addEventListener("click", (event) => {
+              event.stopPropagation();
+              toggleTeamPaymentStatus(slot.slotNumber, isPaid ? "pending" : "paid", adminToggleBtn);
+            });
+
+            const adminEditBtn = document.createElement("button");
+            adminEditBtn.type = "button";
+            adminEditBtn.className = "rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-[10px] font-bold text-amber-300 transition hover:border-amber-400 hover:bg-slate-700";
+            adminEditBtn.textContent = "Edit";
+            adminEditBtn.addEventListener("click", (event) => {
+              event.stopPropagation();
+              openTeamEdit(slot.slotNumber);
+            });
+
+            adminActions.append(adminToggleBtn, adminEditBtn);
+            card.append(adminActions);
+          }
+        }
+
         teamsGrid.append(card);
       });
 
@@ -900,7 +1120,7 @@
         emptyState.textContent = "No matching team slots found.";
         teamsGrid.append(emptyState);
       }
-    }
+    };
 
     function openTeamRegistration(slotNumber) {
       const slot = rclTeamSlots[slotNumber - 1];
@@ -908,18 +1128,93 @@
       const nextSlot = rclTeamSlots.find((teamSlot) => teamSlot.status === "open");
       if (!nextSlot) return;
       if (slotNumber !== nextSlot.slotNumber) {
-        window.alert(
-          `Please register your team in Slot #${String(nextSlot.slotNumber).padStart(2, "0")} first. Teams must register in sequential order.`
-        );
+        showSlotOrderAlert(nextSlot.slotNumber);
         return;
       }
+      editingSlotNumber = null;
+      document.getElementById("team-registration-form").reset();
+      if (teamLogoPreviewUrl) {
+        URL.revokeObjectURL(teamLogoPreviewUrl);
+        teamLogoPreviewUrl = null;
+      }
+      document.getElementById("registration-logo-preview").classList.add("hidden");
+      document.getElementById("registration-team-logo").required = true;
+      document.getElementById("registration-logo-required").classList.remove("hidden");
+      document.getElementById("registration-logo-label").textContent = "Team logo (JPG, PNG, or WebP; up to 5 MB)";
+      document.getElementById("registration-dialog-title").textContent = "REGISTER YOUR TEAM";
+      document.getElementById("registration-dialog-subtitle").textContent =
+        "Enter your team details to register this open slot. Team name and brand name must be unique.";
+      document.getElementById("submit-team-registration").textContent = "Submit Team Registration";
       document.getElementById("registration-slot-label").textContent =
         `Next in order: Slot #${String(nextSlot.slotNumber).padStart(2, "0")}`;
-      document.getElementById("registration-form-status").textContent = firebaseAuth
-        ? "Your slot is assigned automatically in registration order. Fill in your team details to continue."
-        : "Firebase is not configured yet. Add the web config and enable Firestore, Storage, and anonymous sign-in to submit.";
+      if (!firebaseReady) {
+        setRegistrationFormStatus("Connecting to Firebase... Please wait a moment and try again.", false);
+      } else if (!currentUser && anonAuthUnavailable) {
+        setRegistrationFormStatus(
+          "Enable Anonymous Sign-In in Firebase Console (Authentication → Sign-in method → Anonymous) to allow direct registrations.",
+          true
+        );
+      } else {
+        setRegistrationFormStatus(
+          "Your slot is assigned automatically in registration order. Fill in your team details to continue.",
+          false
+        );
+      }
       updateRegistrationSubmitState();
       document.getElementById("team-registration-dialog").showModal();
+    }
+
+    function openTeamEdit(slotNumber) {
+      if (!isOrganiserAdmin) return;
+      const slot = rclTeamSlots[slotNumber - 1];
+      const slotId = `slot-${slotNumber}`;
+      const ownedPhone = ownedCaptainPhones.get(slotId) || "";
+      if (!slot || slot.status !== "booked") return;
+
+      editingSlotNumber = slotNumber;
+      const form = document.getElementById("team-registration-form");
+      form.reset();
+      if (teamLogoPreviewUrl) {
+        URL.revokeObjectURL(teamLogoPreviewUrl);
+        teamLogoPreviewUrl = null;
+      }
+      document.getElementById("registration-team-name").value = slot.teamName || "";
+      document.getElementById("registration-brand-name").value = slot.brandName || "";
+      document.getElementById("registration-captain-name").value = slot.captainName || "";
+      document.getElementById("registration-captain-phone").value = ownedPhone;
+
+      const preview = document.getElementById("registration-logo-preview");
+      if (slot.logoUrl) {
+        preview.src = slot.logoUrl;
+        preview.classList.remove("hidden");
+      } else {
+        preview.classList.add("hidden");
+      }
+
+      document.getElementById("registration-team-logo").required = false;
+      document.getElementById("registration-logo-required").classList.add("hidden");
+      document.getElementById("registration-logo-label").textContent = "Change team logo (optional; JPG, PNG, or WebP up to 5 MB)";
+      document.getElementById("registration-dialog-title").textContent = "ADMIN: UPDATE TEAM";
+      document.getElementById("registration-dialog-subtitle").textContent =
+        "Admin-only edit mode. Team name and brand name must remain unique.";
+      document.getElementById("submit-team-registration").textContent = "Update Team Details";
+      document.getElementById("registration-slot-label").textContent =
+        `Admin Editing Slot #${String(slotNumber).padStart(2, "0")}`;
+      setRegistrationFormStatus("Edit any field and click Update Team Details to save.", false);
+      updateRegistrationSubmitState();
+      document.getElementById("team-registration-dialog").showModal();
+    }
+
+    function setRegistrationFormStatus(message, isError = false) {
+      const status = document.getElementById("registration-form-status");
+      status.textContent = message || "";
+      if (isError) {
+        status.setAttribute("role", "alert");
+        status.className = "rounded-lg border border-red-500/70 bg-red-950/80 px-3 py-2 text-xs font-bold text-red-300";
+      } else {
+        status.setAttribute("role", "status");
+        status.className = "min-h-4 text-xs text-slate-300";
+      }
     }
 
     function updateRegistrationSubmitState() {
@@ -928,9 +1223,9 @@
       const captainName = document.getElementById("registration-captain-name").value.trim();
       const captainPhone = document.getElementById("registration-captain-phone").value.trim();
       const logoFile = document.getElementById("registration-team-logo").files[0];
-      const validLogo = logoFile
-        && ["image/jpeg", "image/png", "image/webp"].includes(logoFile.type)
-        && logoFile.size <= 5 * 1024 * 1024;
+      const validLogo = editingSlotNumber !== null
+        ? (!logoFile || (["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) && logoFile.size <= 5 * 1024 * 1024))
+        : (logoFile && ["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) && logoFile.size <= 5 * 1024 * 1024);
       document.getElementById("submit-team-registration").disabled =
         !(teamName && brandName && captainName && captainPhone && validLogo);
     }
@@ -946,79 +1241,337 @@
       status.className = `mb-4 text-sm ${isError ? "text-red-400" : "text-slate-400"}`;
     }
 
-    function startTeamSync() {
-      const configIsReady = firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY"
-        && firebaseConfig.authDomain !== "YOUR_FIREBASE_AUTH_DOMAIN"
-        && firebaseConfig.storageBucket !== "YOUR_FIREBASE_STORAGE_BUCKET"
-        && firebaseConfig.appId !== "YOUR_FIREBASE_APP_ID";
-      if (!configIsReady || !window.firebase) {
-        updateTeamCounts();
-        applyTeamFilters();
+    async function testConnection() {
+      try {
+        await getDocFromServer(doc(firebaseDb, "test", "connection"));
+      } catch (error) {
+        if (error instanceof Error && error.message.includes("the client is offline")) {
+          console.error("Please check your Firebase configuration.");
+          setTeamSyncStatus("Firestore appears offline. Please check your Firebase configuration.", true);
+        }
+      }
+    }
+
+    async function ensureAuthenticatedUser() {
+      if (!firebaseAuth) return null;
+      if (firebaseAuth.currentUser) return firebaseAuth.currentUser;
+      try {
+        const cred = await signInAnonymously(firebaseAuth);
+        currentUser = cred.user;
+        anonAuthUnavailable = false;
+        return cred.user;
+      } catch (error) {
+        if (
+          error?.code === "auth/operation-not-allowed"
+          || error?.code === "auth/admin-restricted-operation"
+          || (error?.message && error.message.includes("ADMIN_ONLY_OPERATION"))
+        ) {
+          anonAuthUnavailable = true;
+          throw new Error(
+            "Anonymous Sign-In is disabled in Firebase Console. Enable Authentication → Sign-in method → Anonymous for project indigo-influence-dbpf3."
+          );
+        }
+        throw error;
+      }
+    }
+
+    function subscribeOwnedRegistrations(user) {
+      if (privateRegsUnsubscribe) {
+        privateRegsUnsubscribe();
+        privateRegsUnsubscribe = null;
+      }
+      ownedCaptainPhones.clear();
+      if (!user || !firebaseDb) {
+        window.applyTeamFilters();
         return;
       }
+      const regQuery = isOrganiserAdmin
+        ? collection(firebaseDb, "teamRegistrations")
+        : query(
+            collection(firebaseDb, "teamRegistrations"),
+            where("ownerUid", "==", user.uid)
+          );
+      privateRegsUnsubscribe = onSnapshot(regQuery, (snapshot) => {
+        ownedCaptainPhones.clear();
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data.teamId && data.captainPhone) {
+            ownedCaptainPhones.set(data.teamId, data.captainPhone);
+          }
+        });
+        window.applyTeamFilters();
+      }, (error) => {
+        try {
+          handleFirestoreError(error, OperationType.LIST, "teamRegistrations");
+        } catch (err) {
+          console.warn("Could not load private registration details:", err.message);
+        }
+      });
+    }
 
+    async function startTeamSync() {
       try {
-        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-        firebaseAuth = firebase.auth();
-        firebaseDb = firebase.firestore();
-        firebaseStorage = firebase.storage();
+        const response = await fetch("./firebase-applet-config.json", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Could not load firebase-applet-config.json");
+        }
+        const firebaseConfig = await response.json();
+        if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.appId) {
+          throw new Error("Incomplete Firebase configuration in firebase-applet-config.json");
+        }
 
-        firebaseAuthPromise = new Promise((resolve, reject) => {
-          let signInStarted = false;
-          const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
-            if (user) {
-              unsubscribe();
-              resolve(user);
-              firebaseDb.collection("teams").onSnapshot((snapshot) => {
-                rclTeamSlots.forEach((slot, index) => {
-                  rclTeamSlots[index] = {
-                    slotNumber: index + 1,
-                    name: `Slot #${String(index + 1).padStart(2, "0")}`,
-                    status: "open"
-                  };
-                });
-                snapshot.forEach((teamDoc) => {
-                  const data = teamDoc.data();
-                  const index = Number(data.slot) - 1;
-                  if (index < 0 || index > 23) return;
-                  rclTeamSlots[index] = {
-                    slotNumber: index + 1,
-                    status: "booked",
-                    name: data.teamName,
-                    teamName: data.teamName,
-                    brandName: data.brandName,
-                    logoUrl: data.logoUrl,
-                    captainName: data.captainName,
-                    captainPhone: data.captainPhone
-                  };
-                });
-                updateTeamCounts();
-                applyTeamFilters();
-                setTeamSyncStatus("Live team list connected. New registrations appear automatically.");
-              }, (error) => {
-                setTeamSyncStatus(`Could not sync teams: ${error.message}`, true);
-              });
-            } else if (!signInStarted) {
-              signInStarted = true;
-              firebaseAuth.signInAnonymously().catch((error) => {
-                unsubscribe();
-                reject(error);
-              });
-            }
-          }, (error) => {
-            unsubscribe();
-            reject(error);
+        const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+        firebaseAuth = getAuth(app);
+        firebaseDb = firebaseConfig.firestoreDatabaseId
+          ? getFirestore(app, firebaseConfig.firestoreDatabaseId)
+          : getFirestore(app);
+        firebaseStorage = getStorage(app);
+        firebaseStorage.maxUploadRetryTime = 3500;
+        firebaseStorage.maxOperationRetryTime = 3500;
+        firebaseReady = true;
+
+        testConnection();
+        if (firebaseConfig.storageBucket) {
+          fetch(`https://firebasestorage.googleapis.com/v0/b/${encodeURIComponent(firebaseConfig.storageBucket)}/o`)
+            .then((res) => {
+              if (res.status === 404) {
+                firebaseStorage._bucketMissing = true;
+              }
+            })
+            .catch(() => {});
+        }
+
+        onSnapshot(collection(firebaseDb, "teams"), (snapshot) => {
+          rclTeamSlots.forEach((_slot, index) => {
+            rclTeamSlots[index] = {
+              slotNumber: index + 1,
+              name: `Slot #${String(index + 1).padStart(2, "0")}`,
+              status: "open"
+            };
           });
+          snapshot.forEach((teamDoc) => {
+            const data = teamDoc.data();
+            const index = Number(data.slot) - 1;
+            if (index < 0 || index > 23) return;
+            rclTeamSlots[index] = {
+              slotNumber: index + 1,
+              status: "booked",
+              name: data.teamName,
+              teamName: data.teamName,
+              teamNameKey: data.teamNameKey,
+              brandName: data.brandName,
+              brandNameKey: data.brandNameKey,
+              logoUrl: data.logoUrl,
+              captainName: data.captainName,
+              paymentStatus: data.paymentStatus === "paid" ? "paid" : "pending"
+            };
+          });
+          updateTeamCounts();
+          window.applyTeamFilters();
+          const syncStatusEl = document.getElementById("team-sync-status");
+          if (syncStatusEl && syncStatusEl.classList.contains("text-red-400")) {
+            setTeamSyncStatus("");
+          }
+        }, (error) => {
+          setTeamSyncStatus(`Could not sync teams: ${error.message}`, true);
+          try {
+            handleFirestoreError(error, OperationType.LIST, "teams");
+          } catch (_) {
+            // Structured error already logged
+          }
         });
 
-        firebaseAuthPromise.catch((error) => {
-          setTeamSyncStatus(`Firebase sign-in failed: ${error.message}`, true);
+        let initialAuthChecked = false;
+        onAuthStateChanged(firebaseAuth, async (user) => {
+          currentUser = user;
+          updateOrganiserAuthUI(user);
+          subscribeOwnedRegistrations(user);
+          if (!user && !initialAuthChecked) {
+            initialAuthChecked = true;
+            try {
+              await signInAnonymously(firebaseAuth);
+            } catch (error) {
+              if (
+                error?.code === "auth/operation-not-allowed"
+                || error?.code === "auth/admin-restricted-operation"
+                || (error?.message && error.message.includes("ADMIN_ONLY_OPERATION"))
+              ) {
+                anonAuthUnavailable = true;
+              } else {
+                setTeamSyncStatus(`Firebase auth notice: ${error.message}`, true);
+              }
+            }
+          }
         });
       } catch (error) {
         setTeamSyncStatus(`Firebase could not start: ${error.message}`, true);
       }
       updateTeamCounts();
-      applyTeamFilters();
+      window.applyTeamFilters();
+    }
+
+    function updateOrganiserAuthUI(user) {
+      const email = user && !user.isAnonymous ? (user.email || "").toLowerCase() : "";
+      isOrganiserAdmin = Boolean(email && email === ORGANISER_EMAIL && user.emailVerified);
+      window.applyTeamFilters();
+    }
+
+    async function toggleTeamPaymentStatus(slotNumber, nextStatus, buttonEl) {
+      if (!firebaseDb || !isOrganiserAdmin) return;
+      const slotId = `slot-${slotNumber}`;
+      const originalText = buttonEl.textContent;
+      buttonEl.disabled = true;
+      buttonEl.textContent = "Updating...";
+      try {
+        await updateDoc(doc(firebaseDb, "teams", slotId), {
+          paymentStatus: nextStatus,
+          updatedAt: serverTimestamp()
+        });
+        setTeamSyncStatus(
+          `Slot #${String(slotNumber).padStart(2, "0")} updated to ${nextStatus === "paid" ? "Fee Paid" : "Payment Pending"}.`,
+          false
+        );
+      } catch (error) {
+        buttonEl.disabled = false;
+        buttonEl.textContent = originalText;
+        if (error?.code === "permission-denied" || (error?.message && error.message.includes("Missing or insufficient permissions"))) {
+          setTeamSyncStatus(`Permission denied updating Slot #${String(slotNumber).padStart(2, "0")}. Sign in with the authorised organiser account.`, true);
+          try {
+            handleFirestoreError(error, OperationType.UPDATE, `teams/${slotId}`);
+          } catch (_) {
+            // Structured error logged
+          }
+        } else {
+          setTeamSyncStatus(`Could not update payment status: ${error.message}`, true);
+        }
+      }
+    }
+
+    let paymentScreenshotPreviewUrl = null;
+
+    async function openPaymentConfirmationModal(details) {
+      const slotDigits = String(details.slotNumber).padStart(2, "0");
+
+      const copyUpiBtn = document.getElementById("copy-upi-id-btn");
+      if (copyUpiBtn) copyUpiBtn.textContent = "Copy UPI ID";
+
+      const screenshotInput = document.getElementById("payment-screenshot-input");
+      const screenshotWrap = document.getElementById("payment-screenshot-preview-wrap");
+      const screenshotPreview = document.getElementById("payment-screenshot-preview");
+      if (paymentScreenshotPreviewUrl) {
+        URL.revokeObjectURL(paymentScreenshotPreviewUrl);
+        paymentScreenshotPreviewUrl = null;
+      }
+      if (screenshotInput) screenshotInput.value = "";
+      if (screenshotPreview) screenshotPreview.removeAttribute("src");
+      if (screenshotWrap) {
+        screenshotWrap.classList.add("hidden");
+        screenshotWrap.classList.remove("flex");
+      }
+
+      const qrImg = document.getElementById("payment-upi-qr");
+      if (qrImg) {
+        qrImg.src = "/assets/aistudio/scanner_0ed89382.jpeg";
+      }
+
+      const lines = [
+        "Hello RCL-2027 Organisers Group,",
+        "Entry Fee Payment Details:",
+        `• Slot: ${slotDigits}`,
+        `• Team Name: ${details.teamName || ""}`,
+        `• Brand Name: ${details.brandName || ""}`,
+        `• Captain Name: ${details.captainName || ""}`,
+        `• Captain Mobile No: ${details.captainPhone || ""}`,
+        `• Fee Amount: ₹22,222 (PhonePe / UPI: ${PAYMENT_UPI_ID})`,
+        "• Payment status: Done",
+        "",
+        "Attaching PhonePe payment screenshot to verify Fee Paid status."
+      ];
+      lastPaymentMessageText = lines.join("\n");
+      document.getElementById("payment-whatsapp-preview").textContent = lastPaymentMessageText;
+      updatePaymentWhatsappLinkState();
+
+      document.getElementById("payment-confirmation-dialog").showModal();
+    }
+
+    function updatePaymentWhatsappLinkState() {
+      const link = document.getElementById("payment-whatsapp-link");
+      const requiredNote = document.getElementById("payment-screenshot-required-note");
+      const file = document.getElementById("payment-screenshot-input")?.files?.[0];
+      const hasValidImage = Boolean(file && (!file.type || file.type.startsWith("image/")));
+      if (!link) return;
+
+      if (hasValidImage && lastPaymentMessageText) {
+        link.href = ORGANISERS_WHATSAPP_GROUP_URL;
+        link.setAttribute("aria-disabled", "false");
+        link.tabIndex = 0;
+        link.className = "inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-emerald-500 px-4 py-2.5 text-center text-xs font-extrabold text-slate-950 transition hover:bg-emerald-400";
+        requiredNote?.classList.add("hidden");
+      } else {
+        link.removeAttribute("href");
+        link.setAttribute("aria-disabled", "true");
+        link.tabIndex = -1;
+        link.className = "inline-flex w-full pointer-events-none cursor-not-allowed items-center justify-center gap-1.5 rounded-lg bg-emerald-500/40 px-4 py-2.5 text-center text-xs font-extrabold text-slate-950/70 opacity-60";
+        requiredNote?.classList.remove("hidden");
+      }
+    }
+
+    function compressLogoToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const objectUrl = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          const maxSize = 144;
+          const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+          const width = Math.max(1, Math.round(img.width * scale));
+          const height = Math.max(1, Math.round(img.height * scale));
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+          let dataUrl = canvas.toDataURL("image/jpeg", 0.78);
+          if (dataUrl.length > 60000) {
+            dataUrl = canvas.toDataURL("image/jpeg", 0.55);
+          }
+          if (dataUrl.length > 65000) {
+            reject(new Error("Logo image is too complex to compress. Please choose a smaller image."));
+            return;
+          }
+          resolve(dataUrl);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error("Could not read the selected logo image."));
+        };
+        img.src = objectUrl;
+      });
+    }
+
+    async function uploadLogoWithFallback(logoFile, slotId, uid) {
+      if (firebaseStorage._bucketMissing) {
+        const compressedUrl = await compressLogoToDataUrl(logoFile);
+        return { logoUrl: compressedUrl, uploadedLogoRef: null };
+      }
+      const ext = (logoFile.type.split("/")[1] || "png").replace(/[^a-z0-9]/gi, "");
+      const logoFileName = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
+      const logoRef = ref(firebaseStorage, `team-logos/${slotId}/${logoFileName}`);
+      try {
+        const uploadTask = uploadBytes(logoRef, logoFile, {
+          contentType: logoFile.type,
+          customMetadata: { ownerUid: uid }
+        });
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error("Storage upload timed out")), 4000);
+        });
+        await Promise.race([uploadTask, timeoutPromise]);
+        const downloadUrl = await getDownloadURL(logoRef);
+        return { logoUrl: downloadUrl, uploadedLogoRef: logoRef };
+      } catch (_storageError) {
+        const compressedUrl = await compressLogoToDataUrl(logoFile);
+        return { logoUrl: compressedUrl, uploadedLogoRef: null };
+      }
     }
 
     async function submitTeamRegistration(event) {
@@ -1033,111 +1586,356 @@
       const logoFile = document.getElementById("registration-team-logo").files[0];
       const teamNameKey = normalizeUniqueValue(teamName);
       const brandNameKey = normalizeUniqueValue(brandName);
+      const isEditMode = editingSlotNumber !== null;
 
-      if (!firebaseAuth || !firebaseDb || !firebaseStorage) {
-        status.textContent = "Registration was not saved. Configure Firebase in index.html and enable Firestore, Storage, and anonymous sign-in.";
+      if (!firebaseReady || !firebaseAuth || !firebaseDb || !firebaseStorage) {
+        setRegistrationFormStatus("Firebase is still initializing. Please try again in a moment.", true);
         return;
       }
       if (!teamNameKey || !brandNameKey) {
-        status.textContent = "Team name and brand name must contain letters or numbers.";
+        setRegistrationFormStatus("Team name and brand name must contain letters or numbers.", true);
         return;
       }
-      if (!logoFile || !["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) || logoFile.size > 5 * 1024 * 1024) {
-        status.textContent = "Choose a JPG, PNG, or WebP logo smaller than 5 MB.";
+      if (teamName.length > 60 || brandName.length > 60 || captainName.length > 80 || captainPhone.length > 25) {
+        setRegistrationFormStatus("One or more fields exceed the allowed character limit.", true);
+        return;
+      }
+      if (logoFile && (!["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) || logoFile.size > 5 * 1024 * 1024)) {
+        setRegistrationFormStatus("Choose a JPG, PNG, or WebP logo smaller than 5 MB.", true);
+        return;
+      }
+      if (!isEditMode && !logoFile) {
+        setRegistrationFormStatus("Choose a JPG, PNG, or WebP logo smaller than 5 MB.", true);
         return;
       }
 
       submitButton.disabled = true;
-      status.textContent = "Uploading logo and saving registration...";
-      let uploadedLogoRef;
+      setRegistrationFormStatus("Connecting to tournament database...", false);
+      let uploadedLogoRef = null;
       let registrationSaved = false;
+
       try {
-        const user = await firebaseAuthPromise;
-        const sequenceRef = firebaseDb.collection("registrationMeta").doc("sequence");
-        const sequenceSnapshot = await sequenceRef.get();
-        const slotNumber = sequenceSnapshot.exists ? Number(sequenceSnapshot.data().nextSlot) : 1;
+        const user = await ensureAuthenticatedUser();
+        if (!user) {
+          throw new Error("Could not initialize registration session. Please refresh and try again.");
+        }
+
+        if (isEditMode) {
+          if (!isOrganiserAdmin) {
+            throw new Error("Only the tournament admin can edit registered teams.");
+          }
+          const slotNumber = editingSlotNumber;
+          const slotId = `slot-${slotNumber}`;
+          const existingSlot = rclTeamSlots[slotNumber - 1];
+          if (!existingSlot || existingSlot.status !== "booked") {
+            throw new Error("Could not find the registered team slot to update.");
+          }
+
+          let logoUrl = existingSlot.logoUrl;
+          if (logoFile) {
+            setRegistrationFormStatus("Preparing updated team logo...", false);
+            const logoResult = await uploadLogoWithFallback(logoFile, slotId, user.uid);
+            uploadedLogoRef = logoResult.uploadedLogoRef;
+            logoUrl = logoResult.logoUrl;
+          }
+
+          setRegistrationFormStatus(`Updating Slot #${String(slotNumber).padStart(2, "0")} in Firestore...`, false);
+          const slotRef = doc(firebaseDb, "teams", slotId);
+          const registrationRef = doc(firebaseDb, "teamRegistrations", slotId);
+
+          try {
+            await runTransaction(firebaseDb, async (transaction) => {
+              const slotDoc = await transaction.get(slotRef);
+              const regDoc = await transaction.get(registrationRef);
+              if (!slotDoc.exists() || !regDoc.exists()) {
+                throw new Error("Team registration record could not be found.");
+              }
+              const oldData = slotDoc.data();
+              const oldTeamNameKey = oldData.teamNameKey;
+              const oldBrandNameKey = oldData.brandNameKey;
+              const nameChanged = teamNameKey !== oldTeamNameKey;
+              const brandChanged = brandNameKey !== oldBrandNameKey;
+
+              const newTeamNameRef = doc(firebaseDb, "teamNames", teamNameKey);
+              const newBrandNameRef = doc(firebaseDb, "teamBrands", brandNameKey);
+              const [newTeamNameDoc, newBrandNameDoc] = await Promise.all([
+                nameChanged ? transaction.get(newTeamNameRef) : Promise.resolve(null),
+                brandChanged ? transaction.get(newBrandNameRef) : Promise.resolve(null)
+              ]);
+
+              if (nameChanged && newTeamNameDoc && newTeamNameDoc.exists()) {
+                throw new Error("That team name is already registered. Please choose another.");
+              }
+              if (brandChanged && newBrandNameDoc && newBrandNameDoc.exists()) {
+                throw new Error("That team brand name is already registered. Please choose another.");
+              }
+
+              if (nameChanged) {
+                transaction.delete(doc(firebaseDb, "teamNames", oldTeamNameKey));
+                transaction.set(newTeamNameRef, { teamId: slotId });
+              }
+              if (brandChanged) {
+                transaction.delete(doc(firebaseDb, "teamBrands", oldBrandNameKey));
+                transaction.set(newBrandNameRef, { teamId: slotId });
+              }
+
+              transaction.update(slotRef, {
+                teamName,
+                teamNameKey,
+                brandName,
+                brandNameKey,
+                logoUrl,
+                captainName,
+                paymentStatus: oldData.paymentStatus === "paid" ? "paid" : "pending",
+                updatedAt: serverTimestamp()
+              });
+              transaction.update(registrationRef, {
+                captainName,
+                captainPhone
+              });
+            });
+          } catch (txError) {
+            if (txError?.code === "permission-denied" || (txError?.message && txError.message.includes("Missing or insufficient permissions"))) {
+              handleFirestoreError(txError, OperationType.UPDATE, `teams/${slotId}`);
+            }
+            throw txError;
+          }
+
+          registrationSaved = true;
+          editingSlotNumber = null;
+          document.getElementById("team-registration-dialog").close();
+          form.reset();
+          updateRegistrationSubmitState();
+          if (teamLogoPreviewUrl) URL.revokeObjectURL(teamLogoPreviewUrl);
+          teamLogoPreviewUrl = null;
+          document.getElementById("registration-logo-preview").classList.add("hidden");
+          setTeamSyncStatus(`Slot #${String(slotNumber).padStart(2, "0")} details updated successfully.`, false);
+          return;
+        }
+
+        const sequenceRef = doc(firebaseDb, "registrationMeta", "sequence");
+        let sequenceSnapshot;
+        try {
+          sequenceSnapshot = await getDoc(sequenceRef);
+        } catch (err) {
+          handleFirestoreError(err, OperationType.GET, "registrationMeta/sequence");
+        }
+
+        const slotNumber = sequenceSnapshot.exists() ? Number(sequenceSnapshot.data().nextSlot) : 1;
         if (!Number.isInteger(slotNumber) || slotNumber < 1 || slotNumber > 24) {
           throw new Error("All 24 team slots have already been registered.");
         }
         const slotId = `slot-${slotNumber}`;
-        const logoFileName = `${Date.now()}-${crypto.randomUUID()}.${logoFile.type.split("/")[1]}`;
-        const logoRef = firebaseStorage.ref(`team-logos/${slotId}/${logoFileName}`);
-        await logoRef.put(logoFile, {
-          contentType: logoFile.type,
-          customMetadata: { ownerUid: user.uid }
-        });
-        uploadedLogoRef = logoRef;
-        const logoUrl = await uploadedLogoRef.getDownloadURL();
-        const slotRef = firebaseDb.collection("teams").doc(slotId);
-        const teamNameRef = firebaseDb.collection("teamNames").doc(teamNameKey);
-        const brandNameRef = firebaseDb.collection("teamBrands").doc(brandNameKey);
-        const registrationRef = firebaseDb.collection("teamRegistrations").doc(slotId);
 
-        await firebaseDb.runTransaction(async (transaction) => {
-          const [sequenceDoc, slotDoc, teamNameDoc, brandNameDoc] = await Promise.all([
-            transaction.get(sequenceRef),
-            transaction.get(slotRef),
-            transaction.get(teamNameRef),
-            transaction.get(brandNameRef)
-          ]);
-          const nextSlot = sequenceDoc.exists ? Number(sequenceDoc.data().nextSlot) : 1;
-          if (nextSlot !== slotNumber) {
-            throw new Error("Another team just registered first. Submit again to take the next available slot.");
+        setRegistrationFormStatus("Preparing team logo...", false);
+        const logoResult = await uploadLogoWithFallback(logoFile, slotId, user.uid);
+        uploadedLogoRef = logoResult.uploadedLogoRef;
+        const logoUrl = logoResult.logoUrl;
+
+        setRegistrationFormStatus(`Saving Slot #${String(slotNumber).padStart(2, "0")} to Firestore...`, false);
+        const slotRef = doc(firebaseDb, "teams", slotId);
+        const teamNameRef = doc(firebaseDb, "teamNames", teamNameKey);
+        const brandNameRef = doc(firebaseDb, "teamBrands", brandNameKey);
+        const registrationRef = doc(firebaseDb, "teamRegistrations", slotId);
+
+        try {
+          await runTransaction(firebaseDb, async (transaction) => {
+            const [sequenceDoc, slotDoc, teamNameDoc, brandNameDoc] = await Promise.all([
+              transaction.get(sequenceRef),
+              transaction.get(slotRef),
+              transaction.get(teamNameRef),
+              transaction.get(brandNameRef)
+            ]);
+            const nextSlot = sequenceDoc.exists() ? Number(sequenceDoc.data().nextSlot) : 1;
+            if (nextSlot !== slotNumber) {
+              throw new Error("Another team just registered first. Submit again to take the next available slot.");
+            }
+            if (slotDoc.exists()) throw new Error("This slot is already registered. Reload the page and try again.");
+            if (teamNameDoc.exists()) throw new Error("That team name is already registered. Please choose another.");
+            if (brandNameDoc.exists()) throw new Error("That team brand name is already registered. Please choose another.");
+
+            transaction.set(slotRef, {
+              slot: slotNumber,
+              teamName,
+              teamNameKey,
+              brandName,
+              brandNameKey,
+              logoUrl,
+              captainName,
+              paymentStatus: "pending",
+              registeredAt: serverTimestamp()
+            });
+            transaction.set(teamNameRef, { teamId: slotId });
+            transaction.set(brandNameRef, { teamId: slotId });
+            transaction.set(registrationRef, {
+              teamId: slotId,
+              captainName,
+              captainPhone,
+              ownerUid: user.uid
+            });
+            transaction.set(sequenceRef, { nextSlot: slotNumber + 1 });
+          });
+        } catch (txError) {
+          if (txError?.code === "permission-denied" || (txError?.message && txError.message.includes("Missing or insufficient permissions"))) {
+            handleFirestoreError(txError, OperationType.WRITE, `teams/${slotId}`);
           }
-          if (slotDoc.exists) throw new Error("This slot is already registered. Reload the page and try again.");
-          if (teamNameDoc.exists) throw new Error("That team name is already registered. Please choose another.");
-          if (brandNameDoc.exists) throw new Error("That team brand name is already registered. Please choose another.");
+          throw txError;
+        }
 
-          transaction.set(slotRef, {
-            slot: slotNumber,
-            teamName,
-            teamNameKey,
-            brandName,
-            brandNameKey,
-            logoUrl,
-            captainName,
-            captainPhone,
-            registeredAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          transaction.set(teamNameRef, { teamId: slotId });
-          transaction.set(brandNameRef, { teamId: slotId });
-          transaction.set(registrationRef, {
-            teamId: slotId,
-            captainName,
-            captainPhone,
-            ownerUid: user.uid
-          });
-          transaction.set(sequenceRef, { nextSlot: slotNumber + 1 });
-        });
         registrationSaved = true;
-
         document.getElementById("team-registration-dialog").close();
         form.reset();
         updateRegistrationSubmitState();
         if (teamLogoPreviewUrl) URL.revokeObjectURL(teamLogoPreviewUrl);
         teamLogoPreviewUrl = null;
         document.getElementById("registration-logo-preview").classList.add("hidden");
-        setTeamSyncStatus("Registration saved successfully. The registered team is syncing to the list.", false);
+        setTeamSyncStatus(
+          `Slot #${String(slotNumber).padStart(2, "0")} registered! Complete ₹22,222 PhonePe payment to ${PAYMENT_UPI_ID} and send your screenshot on WhatsApp.`,
+          false
+        );
+        openPaymentConfirmationModal({
+          slotNumber,
+          teamName,
+          brandName,
+          captainName,
+          captainPhone
+        });
       } catch (error) {
-        let errorMessage = error.message;
+        let errorMessage = error?.message || String(error);
         if (!registrationSaved && uploadedLogoRef) {
           try {
-            await uploadedLogoRef.delete();
+            await deleteObject(uploadedLogoRef);
           } catch (cleanupError) {
             errorMessage += ` Logo cleanup also failed: ${cleanupError.message}`;
           }
         }
-        status.textContent = registrationSaved
-          ? `Registration saved, but the form could not close: ${errorMessage}`
-          : `Registration was not saved: ${errorMessage}`;
+        setRegistrationFormStatus(
+          registrationSaved
+            ? `Registration saved, but the form could not close: ${errorMessage}`
+            : `Registration was not saved: ${errorMessage}`,
+          true
+        );
       } finally {
         submitButton.disabled = false;
       }
     }
 
     document.getElementById("team-registration-form").addEventListener("submit", submitTeamRegistration);
+    document.getElementById("team-registration-dialog").addEventListener("close", () => {
+      editingSlotNumber = null;
+    });
     document.getElementById("close-registration-dialog").addEventListener("click", () => {
       document.getElementById("team-registration-dialog").close();
+    });
+    document.getElementById("close-payment-dialog")?.addEventListener("click", () => {
+      document.getElementById("payment-confirmation-dialog")?.close();
+    });
+    document.getElementById("done-payment-dialog")?.addEventListener("click", () => {
+      document.getElementById("payment-confirmation-dialog")?.close();
+    });
+    let copyUpiTimeoutId = null;
+    document.getElementById("copy-upi-id-btn")?.addEventListener("click", async () => {
+      const btn = document.getElementById("copy-upi-id-btn");
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(PAYMENT_UPI_ID);
+        } else {
+          const tempInput = document.createElement("textarea");
+          tempInput.value = PAYMENT_UPI_ID;
+          tempInput.setAttribute("readonly", "");
+          tempInput.style.position = "fixed";
+          tempInput.style.opacity = "0";
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempInput);
+        }
+        if (btn) {
+          btn.textContent = "✓ Copied!";
+          if (copyUpiTimeoutId) clearTimeout(copyUpiTimeoutId);
+          copyUpiTimeoutId = setTimeout(() => {
+            btn.textContent = "Copy UPI ID";
+          }, 2000);
+        }
+      } catch (_) {
+        if (btn) btn.textContent = "Copy failed";
+      }
+    });
+    document.getElementById("payment-screenshot-input")?.addEventListener("change", (event) => {
+      const file = event.currentTarget.files?.[0];
+      const wrap = document.getElementById("payment-screenshot-preview-wrap");
+      const preview = document.getElementById("payment-screenshot-preview");
+      const hint = document.getElementById("payment-screenshot-hint");
+      if (paymentScreenshotPreviewUrl) {
+        URL.revokeObjectURL(paymentScreenshotPreviewUrl);
+        paymentScreenshotPreviewUrl = null;
+      }
+      if (!file || (file.type && !file.type.startsWith("image/"))) {
+        if (file && file.type && !file.type.startsWith("image/")) {
+          event.currentTarget.value = "";
+        }
+        if (wrap) {
+          wrap.classList.add("hidden");
+          wrap.classList.remove("flex");
+        }
+        updatePaymentWhatsappLinkState();
+        return;
+      }
+      paymentScreenshotPreviewUrl = URL.createObjectURL(file);
+      if (preview) preview.src = paymentScreenshotPreviewUrl;
+      if (hint) {
+        hint.textContent = "Screenshot attached — clicking Notify Organisers Group on WhatsApp copies your payment details and opens the group chat. Paste the message & attach this screenshot there.";
+      }
+      if (wrap) {
+        wrap.classList.remove("hidden");
+        wrap.classList.add("flex");
+      }
+      updatePaymentWhatsappLinkState();
+    });
+    document.getElementById("payment-whatsapp-link")?.addEventListener("click", (event) => {
+      const link = event.currentTarget;
+      const file = document.getElementById("payment-screenshot-input")?.files?.[0];
+      if (!file || (file.type && !file.type.startsWith("image/")) || link.getAttribute("aria-disabled") === "true") {
+        event.preventDefault();
+        return;
+      }
+      if (lastPaymentMessageText) {
+        navigator.clipboard?.writeText(lastPaymentMessageText).then(() => {
+          const hint = document.getElementById("payment-screenshot-hint");
+          if (hint) {
+            hint.textContent = "Payment details copied! Paste the message & attach your screenshot in the RCL-2027 Organisers WhatsApp group.";
+          }
+        }).catch(() => {});
+      }
+    });
+
+    let alertTargetSlotNumber = null;
+    function showSlotOrderAlert(nextSlotNumber) {
+      alertTargetSlotNumber = nextSlotNumber;
+      const slotLabel = `Slot #${String(nextSlotNumber).padStart(2, "0")}`;
+      const messageEl = document.getElementById("slot-order-alert-message");
+      const registerBtn = document.getElementById("slot-order-alert-register-btn");
+      if (messageEl) {
+        messageEl.textContent = `Please register your team in ${slotLabel} first. Teams must register in sequential order.`;
+      }
+      if (registerBtn) {
+        registerBtn.textContent = `Register ${slotLabel}`;
+      }
+      document.getElementById("slot-order-alert-dialog")?.showModal();
+    }
+    document.getElementById("slot-order-alert-close-btn")?.addEventListener("click", () => {
+      document.getElementById("slot-order-alert-dialog")?.close();
+    });
+    document.getElementById("slot-order-alert-register-btn")?.addEventListener("click", () => {
+      document.getElementById("slot-order-alert-dialog")?.close();
+      if (alertTargetSlotNumber !== null) {
+        openTeamRegistration(alertTargetSlotNumber);
+      }
+    });
+    document.getElementById("slot-order-alert-dialog")?.addEventListener("click", (event) => {
+      if (event.target === event.currentTarget) {
+        event.currentTarget.close();
+      }
     });
     ["registration-team-name", "registration-brand-name", "registration-captain-name"].forEach((id) => {
       document.getElementById(id).addEventListener("input", updateRegistrationSubmitState);
@@ -1149,7 +1947,13 @@
       if (teamLogoPreviewUrl) URL.revokeObjectURL(teamLogoPreviewUrl);
       if (!file) {
         teamLogoPreviewUrl = null;
-        preview.classList.add("hidden");
+        const existingSlot = editingSlotNumber !== null ? rclTeamSlots[editingSlotNumber - 1] : null;
+        if (existingSlot && existingSlot.logoUrl) {
+          preview.src = existingSlot.logoUrl;
+          preview.classList.remove("hidden");
+        } else {
+          preview.classList.add("hidden");
+        }
         updateRegistrationSubmitState();
         return;
       }
@@ -1164,7 +1968,7 @@
       button.dataset.filterType = ["all", "booked", "open"][index];
     });
     updateTeamCounts();
-    applyTeamFilters();
+    window.applyTeamFilters();
     startTeamSync();
 
     // Countdown to Entry Fee Last Date: Dec 5, 2026
@@ -1180,7 +1984,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    function filterMedia(type, activeBtn) {
+    window.filterMedia = function filterMedia(type, activeBtn) {
       document.querySelectorAll(".media-filter-btn").forEach((btn) => {
         btn.className = "media-filter-btn rounded-lg bg-slate-800 px-4 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700";
       });
@@ -1189,9 +1993,9 @@
       document.querySelectorAll(".media-card").forEach((card) => {
         card.style.display = type === "all" || card.getAttribute("data-type") === type ? "block" : "none";
       });
-    }
+    };
 
-    function previewLocalPhoto(input, imgId, fbId) {
+    window.previewLocalPhoto = function previewLocalPhoto(input, imgId, fbId) {
       const file = input.files && input.files[0];
       if (!file) return;
       const imgEl = document.getElementById(imgId);
@@ -1205,9 +2009,9 @@
         fbEl.classList.add("hidden");
         fbEl.classList.remove("flex");
       }
-    }
+    };
 
-    function openCardLightbox(cardEl, caption) {
+    window.openCardLightbox = function openCardLightbox(cardEl, caption) {
       const img = cardEl.querySelector("img");
       if (!img || img.style.display === "none") return;
       document.getElementById("lightbox-img").src = img.currentSrc || img.src;
@@ -1215,13 +2019,13 @@
       const modal = document.getElementById("lightbox");
       modal.classList.remove("hidden");
       modal.classList.add("flex");
-    }
+    };
 
-    function closeLightbox() {
+    window.closeLightbox = function closeLightbox() {
       const modal = document.getElementById("lightbox");
       modal.classList.add("hidden");
       modal.classList.remove("flex");
-    }
+    };
   </script>
 </body>
 </html>

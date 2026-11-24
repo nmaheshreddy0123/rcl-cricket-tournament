@@ -1,0 +1,160 @@
+{
+  "entities": {
+    "TeamSlot": {
+      "title": "TeamSlot",
+      "description": "Publicly visible registered team entry for one of the 24 RCL 2027 tournament slots.",
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "integer",
+          "description": "Sequential slot number from 1 to 24."
+        },
+        "teamName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "description": "Unique team display name."
+        },
+        "teamNameKey": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Normalized unique key for the team name."
+        },
+        "brandName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "description": "Unique team brand or sponsor name."
+        },
+        "brandNameKey": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Normalized unique key for the brand name."
+        },
+        "logoUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536,
+          "description": "Download URL or compact compressed image Data URL for the team logo."
+        },
+        "captainName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "Captain's display name."
+        },
+        "registeredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of registration."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the latest team details update."
+        },
+        "paymentStatus": {
+          "type": "string",
+          "enum": ["pending", "paid"],
+          "description": "Fee payment status for the registered team (defaults to pending)."
+        }
+      },
+      "required": [
+        "slot",
+        "teamName",
+        "teamNameKey",
+        "brandName",
+        "brandNameKey",
+        "logoUrl",
+        "captainName",
+        "registeredAt"
+      ]
+    },
+    "UniqueKeyReservation": {
+      "title": "UniqueKeyReservation",
+      "description": "Uniqueness index document mapping a normalized team or brand key to its slot ID.",
+      "type": "object",
+      "properties": {
+        "teamId": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 7,
+          "pattern": "^slot-([1-9]|1[0-9]|2[0-4])$",
+          "description": "Slot document ID (slot-1 through slot-24)."
+        }
+      },
+      "required": ["teamId"]
+    },
+    "TeamRegistrationPrivate": {
+      "title": "TeamRegistrationPrivate",
+      "description": "Private captain contact and ownership record for a registered team slot.",
+      "type": "object",
+      "properties": {
+        "teamId": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 7,
+          "pattern": "^slot-([1-9]|1[0-9]|2[0-4])$",
+          "description": "Slot document ID (slot-1 through slot-24)."
+        },
+        "captainName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "description": "Captain's full name."
+        },
+        "captainPhone": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 25,
+          "description": "Captain's private mobile phone number."
+        },
+        "ownerUid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Firebase Auth UID of the registering user."
+        }
+      },
+      "required": ["teamId", "captainName", "captainPhone", "ownerUid"]
+    },
+    "RegistrationSequence": {
+      "title": "RegistrationSequence",
+      "description": "Sequential slot counter ensuring slots 1..24 are assigned strictly in order.",
+      "type": "object",
+      "properties": {
+        "nextSlot": {
+          "type": "integer",
+          "description": "Next available slot number (2..25 after registration)."
+        }
+      },
+      "required": ["nextSlot"]
+    }
+  },
+  "firestore": {
+    "/teams/{teamId}": {
+      "schema": { "$ref": "#/entities/TeamSlot" },
+      "description": "Publicly readable list of registered RCL 2027 teams (slot-1 through slot-24) without private phone numbers."
+    },
+    "/teamNames/{nameKey}": {
+      "schema": { "$ref": "#/entities/UniqueKeyReservation" },
+      "description": "Uniqueness reservation documents for team names."
+    },
+    "/teamBrands/{brandKey}": {
+      "schema": { "$ref": "#/entities/UniqueKeyReservation" },
+      "description": "Uniqueness reservation documents for team brand names."
+    },
+    "/teamRegistrations/{teamId}": {
+      "schema": { "$ref": "#/entities/TeamRegistrationPrivate" },
+      "description": "Private registration records containing captainPhone and ownerUid, readable only by the owner or admin."
+    },
+    "/registrationMeta/{metaId}": {
+      "schema": { "$ref": "#/entities/RegistrationSequence" },
+      "description": "Registration sequence metadata document at registrationMeta/sequence."
+    }
+  }
+}

@@ -2,8 +2,35 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidSlotId(teamId) {
+      return teamId is string && teamId.matches('^slot-([1-9]|1[0-9]|2[0-4])$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
     function isSignedIn() {
       return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        || (request.auth.token.email == 'nmaheshreddy0123@gmail.com' && request.auth.token.email_verified == true)
+      );
     }
 
     function slotIsNext(slot) {
@@ -66,85 +93,198 @@ service cloud.firestore {
         || (slot == 24 && teamId == 'slot-24');
     }
 
-    match /teams/{teamId} {
-      allow read: if true;
-      allow create: if isSignedIn()
-        && request.resource.data.keys().hasOnly([
-          'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'captainPhone', 'registeredAt'
+    function isValidTeamSlot(data) {
+      return data.keys().hasAll([
+          'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'registeredAt'
         ])
-        && request.resource.data.slot is int
-        && slotMatchesId(teamId, request.resource.data.slot)
-        && slotIsNext(request.resource.data.slot)
-        && getAfter(/databases/$(database)/documents/registrationMeta/sequence).data.nextSlot == request.resource.data.slot + 1
-        && request.resource.data.teamName is string
-        && request.resource.data.teamNameKey is string
-        && request.resource.data.teamName.size() > 0
-        && request.resource.data.teamName.size() <= 60
-        && request.resource.data.brandName is string
-        && request.resource.data.brandNameKey is string
-        && request.resource.data.brandName.size() > 0
-        && request.resource.data.brandName.size() <= 60
-        && request.resource.data.captainName is string
-        && request.resource.data.captainName.size() > 0
-        && request.resource.data.captainName.size() <= 80
-        && request.resource.data.captainPhone is string
-        && request.resource.data.captainPhone.size() > 0
-        && request.resource.data.captainPhone.size() <= 25
-        && getAfter(/databases/$(database)/documents/teamNames/$(request.resource.data.teamNameKey)).data.teamId == teamId
-        && getAfter(/databases/$(database)/documents/teamBrands/$(request.resource.data.brandNameKey)).data.teamId == teamId
-        && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.teamId == teamId;
-      allow update, delete: if false;
+        && data.keys().hasOnly([
+          'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'registeredAt', 'updatedAt', 'paymentStatus'
+        ])
+        && data.slot is int
+        && data.slot >= 1
+        && data.slot <= 24
+        && data.teamName is string
+        && data.teamName.size() > 0
+        && data.teamName.size() <= 60
+        && isValidId(data.teamNameKey)
+        && data.brandName is string
+        && data.brandName.size() > 0
+        && data.brandName.size() <= 60
+        && isValidId(data.brandNameKey)
+        && data.logoUrl is string
+        && data.logoUrl.size() > 0
+        && data.logoUrl.size() <= 65536
+        && data.logoUrl.matches('^(https://.+|data:image/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+)$')
+        && data.captainName is string
+        && data.captainName.size() > 0
+        && data.captainName.size() <= 80
+        && data.registeredAt is timestamp
+        && (!('updatedAt' in data) || data.updatedAt is timestamp)
+        && (!('paymentStatus' in data) || data.paymentStatus in ['pending', 'paid']);
+    }
+
+    function isValidUniqueKeyReservation(data) {
+      return data.keys().hasAll(['teamId'])
+        && data.keys().hasOnly(['teamId'])
+        && isValidSlotId(data.teamId);
+    }
+
+    function isValidTeamRegistration(data, teamId) {
+      return data.keys().hasAll(['teamId', 'captainName', 'captainPhone', 'ownerUid'])
+        && data.keys().hasOnly(['teamId', 'captainName', 'captainPhone', 'ownerUid'])
+        && data.teamId == teamId
+        && isValidSlotId(data.teamId)
+        && data.ownerUid is string
+        && data.ownerUid.size() > 0
+        && data.ownerUid.size() <= 128
+        && data.captainName is string
+        && data.captainName.size() > 0
+        && data.captainName.size() <= 80
+        && data.captainPhone is string
+        && data.captainPhone.size() > 0
+        && data.captainPhone.size() <= 25;
+    }
+
+    function isValidSequence(data) {
+      return data.keys().hasAll(['nextSlot'])
+        && data.keys().hasOnly(['nextSlot'])
+        && data.nextSlot is int
+        && data.nextSlot >= 2
+        && data.nextSlot <= 25;
+    }
+
+    match /test/{docId} {
+      allow get: if docId == 'connection';
+    }
+
+    match /teams/{teamId} {
+      allow get: if isValidSlotId(teamId);
+      allow list: if true;
+      allow create: if isSignedIn()
+        && isValidSlotId(teamId)
+        && isValidTeamSlot(incoming())
+        && !('updatedAt' in incoming())
+        && 'paymentStatus' in incoming()
+        && incoming().paymentStatus == 'pending'
+        && incoming().registeredAt == request.time
+        && slotMatchesId(teamId, incoming().slot)
+        && slotIsNext(incoming().slot)
+        && getAfter(/databases/$(database)/documents/registrationMeta/sequence).data.nextSlot == incoming().slot + 1
+        && getAfter(/databases/$(database)/documents/teamNames/$(incoming().teamNameKey)).data.teamId == teamId
+        && getAfter(/databases/$(database)/documents/teamBrands/$(incoming().brandNameKey)).data.teamId == teamId
+        && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.teamId == teamId
+        && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.ownerUid == request.auth.uid;
+      allow update: if isSignedIn()
+        && isValidSlotId(teamId)
+        && isValidTeamSlot(incoming())
+        && isAdmin()
+        && incoming().slot == existing().slot
+        && incoming().registeredAt == existing().registeredAt
+        && incoming().updatedAt is timestamp
+        && incoming().updatedAt == request.time
+        && (
+          (
+            incoming().diff(existing()).affectedKeys().hasOnly(['paymentStatus', 'updatedAt'])
+            && 'paymentStatus' in incoming()
+            && incoming().paymentStatus in ['pending', 'paid']
+          )
+          || (
+            incoming().diff(existing()).affectedKeys().hasOnly([
+              'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'updatedAt', 'paymentStatus'
+            ])
+            && (
+              (!('paymentStatus' in existing()) && 'paymentStatus' in incoming() && incoming().paymentStatus == 'pending')
+              || ('paymentStatus' in existing() && 'paymentStatus' in incoming() && incoming().paymentStatus in ['pending', 'paid'])
+            )
+            && (
+              incoming().teamNameKey == existing().teamNameKey
+              || (
+                !existsAfter(/databases/$(database)/documents/teamNames/$(existing().teamNameKey))
+                && getAfter(/databases/$(database)/documents/teamNames/$(incoming().teamNameKey)).data.teamId == teamId
+              )
+            )
+            && (
+              incoming().brandNameKey == existing().brandNameKey
+              || (
+                !existsAfter(/databases/$(database)/documents/teamBrands/$(existing().brandNameKey))
+                && getAfter(/databases/$(database)/documents/teamBrands/$(incoming().brandNameKey)).data.teamId == teamId
+              )
+            )
+            && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.captainName == incoming().captainName
+          )
+        );
+      allow delete: if false;
     }
 
     match /teamNames/{nameKey} {
-      allow read: if isSignedIn();
+      allow get: if isSignedIn() && isValidId(nameKey);
+      allow list: if false;
       allow create: if isSignedIn()
-        && request.resource.data.keys().hasOnly(['teamId'])
-        && request.resource.data.teamId is string
-        && getAfter(/databases/$(database)/documents/teams/$(request.resource.data.teamId)).data.teamNameKey == nameKey;
-      allow update, delete: if false;
+        && isValidId(nameKey)
+        && isValidUniqueKeyReservation(incoming())
+        && getAfter(/databases/$(database)/documents/teams/$(incoming().teamId)).data.teamNameKey == nameKey;
+      allow delete: if isSignedIn()
+        && isValidId(nameKey)
+        && isValidSlotId(existing().teamId)
+        && isAdmin()
+        && getAfter(/databases/$(database)/documents/teams/$(existing().teamId)).data.teamNameKey != nameKey;
+      allow update: if false;
     }
 
     match /teamBrands/{brandKey} {
-      allow read: if isSignedIn();
+      allow get: if isSignedIn() && isValidId(brandKey);
+      allow list: if false;
       allow create: if isSignedIn()
-        && request.resource.data.keys().hasOnly(['teamId'])
-        && request.resource.data.teamId is string
-        && getAfter(/databases/$(database)/documents/teams/$(request.resource.data.teamId)).data.brandNameKey == brandKey;
-      allow update, delete: if false;
+        && isValidId(brandKey)
+        && isValidUniqueKeyReservation(incoming())
+        && getAfter(/databases/$(database)/documents/teams/$(incoming().teamId)).data.brandNameKey == brandKey;
+      allow delete: if isSignedIn()
+        && isValidId(brandKey)
+        && isValidSlotId(existing().teamId)
+        && isAdmin()
+        && getAfter(/databases/$(database)/documents/teams/$(existing().teamId)).data.brandNameKey != brandKey;
+      allow update: if false;
     }
 
     match /teamRegistrations/{teamId} {
+      allow get: if isSignedIn()
+        && isValidSlotId(teamId)
+        && (existing().ownerUid == request.auth.uid || isAdmin());
+      allow list: if isSignedIn()
+        && (existing().ownerUid == request.auth.uid || isAdmin());
       allow create: if isSignedIn()
-        && request.resource.data.keys().hasOnly(['teamId', 'captainName', 'captainPhone', 'ownerUid'])
-        && request.resource.data.teamId == teamId
-        && request.resource.data.ownerUid == request.auth.uid
-        && request.resource.data.captainName is string
-        && request.resource.data.captainName.size() > 0
-        && request.resource.data.captainName.size() <= 80
-        && request.resource.data.captainPhone is string
-        && request.resource.data.captainPhone.size() > 0
-        && request.resource.data.captainPhone.size() <= 25
+        && isValidSlotId(teamId)
+        && isValidTeamRegistration(incoming(), teamId)
+        && incoming().ownerUid == request.auth.uid
         && getAfter(/databases/$(database)/documents/teams/$(teamId)).data.slot is int;
-      allow read: if isSignedIn() && resource.data.ownerUid == request.auth.uid;
-      allow update, delete: if false;
+      allow update: if isSignedIn()
+        && isValidSlotId(teamId)
+        && isValidTeamRegistration(incoming(), teamId)
+        && isAdmin()
+        && incoming().diff(existing()).affectedKeys().hasOnly(['captainName', 'captainPhone'])
+        && incoming().teamId == existing().teamId
+        && incoming().ownerUid == existing().ownerUid
+        && getAfter(/databases/$(database)/documents/teams/$(teamId)).data.captainName == incoming().captainName;
+      allow delete: if false;
     }
 
     match /registrationMeta/{metaId} {
-      allow read: if isSignedIn() && metaId == 'sequence';
+      allow get: if isSignedIn() && metaId == 'sequence';
+      allow list: if false;
       allow create: if isSignedIn()
         && metaId == 'sequence'
-        && request.resource.data.keys().hasOnly(['nextSlot'])
-        && request.resource.data.nextSlot == 2
+        && isValidSequence(incoming())
+        && incoming().nextSlot == 2
         && slotExistsAfter(1);
       allow update: if isSignedIn()
         && metaId == 'sequence'
-        && request.resource.data.keys().hasOnly(['nextSlot'])
-        && resource.data.nextSlot is int
-        && resource.data.nextSlot >= 1
-        && resource.data.nextSlot <= 24
-        && request.resource.data.nextSlot == resource.data.nextSlot + 1
-        && slotExistsAfter(resource.data.nextSlot);
+        && isValidSequence(incoming())
+        && incoming().diff(existing()).affectedKeys().hasOnly(['nextSlot'])
+        && existing().nextSlot is int
+        && existing().nextSlot >= 1
+        && existing().nextSlot <= 24
+        && incoming().nextSlot == existing().nextSlot + 1
+        && slotExistsAfter(existing().nextSlot);
       allow delete: if false;
     }
   }
