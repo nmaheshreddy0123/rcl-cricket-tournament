@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RCL 2027 | Reddy's Cricket League • Reddys Association</title>
+
+  <!-- Social / WhatsApp Rich Link Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RCL 2027 | Reddy's Cricket League — Registrations Open!" />
+  <meta property="og:description" content="Register your team for RCL 2027 • 10 Overs/Innings • Entry Fee ₹22,222/- • Last Date: Dec 5th • Book Now: 9790930072" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #05060a;
+      color: #f8fafc;
+    }
+    .font-display {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.05em;
+    }
+    .font-royal {
+      font-family: 'Cinzel', serif;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #fde047 0%, #f59e0b 50%, #b45309 100%);
+    }
+    .crimson-gradient {
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 60%, #7f1d1d 100%);
+    }
+    .gold-text {
+      background: linear-gradient(180deg, #fef08a 0%, #f59e0b 65%, #b45309 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .chrome-text {
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 55%, #64748b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+
+  <!-- Smart Media Auto-Loader + Built-in SVG Backup for RA Logo -->
+  <script>
+    const raLogoSvgFallback = "data:image/svg+xml;utf8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="raGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fef08a"/>
+            <stop offset="50%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#92400e"/>
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="96" fill="#061224" stroke="url(#raGold)" stroke-width="6"/>
+        <path d="M74 42 L82 26 L93 36 L100 22 L107 36 L118 26 L126 42 Z" fill="url(#raGold)"/>
+        <path d="M56 50 H144 V112 C144 142 100 162 100 162 C100 162 56 142 56 112 Z" fill="#090d16" stroke="url(#raGold)" stroke-width="5"/>
+        <text x="100" y="114" text-anchor="middle" font-family="Georgia, serif" font-weight="900" font-size="48" fill="#ffffff">RA</text>
+        <path d="M72 118 Q105 92 132 76" fill="none" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+        <rect x="34" y="128" width="132" height="22" rx="4" fill="url(#raGold)" stroke="#09090b" stroke-width="2"/>
+        <text x="100" y="143" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="9.5" fill="#09090b" letter-spacing="0.8">REDDYS ASSOCIATION</text>
+        <text x="100" y="176" text-anchor="middle" font-size="14" fill="#fbbf24">★ ★ ★</text>
+      </svg>
+    `);
+
+    function buildPhotoCandidates(baseName) {
+      return [
+        `images/${baseName}.jpeg`,
+        `${baseName}.jpeg`,
+        `images/${baseName}.jpg`,
+        `${baseName}.jpg`,
+        `images/${baseName}.png`,
+        `${baseName}.png`,
+        `images/${baseName}.webp`,
+        `${baseName}.webp`
+      ];
+    }
+
+    function handleNamedLogoError(img, baseName, svgFallback) {
+      const candidates = buildPhotoCandidates(baseName);
+      let attempt = parseInt(img.getAttribute("data-attempt") || "0", 10) + 1;
+      if (attempt < candidates.length) {
+        img.setAttribute("data-attempt", attempt);
+        img.src = candidates[attempt];
+      } else {
+        img.onerror = null;
+        img.src = svgFallback;
+      }
+    }
+
+    function handlePhotoError(img, baseName, fallbackId) {
+      const candidates = buildPhotoCandidates(baseName);
+      let attempt = parseInt(img.getAttribute("data-attempt") || "0", 10) + 1;
+      if (attempt < candidates.length) {
+        img.setAttribute("data-attempt", attempt);
+        img.src = candidates[attempt];
+      } else {
+        img.onerror = null;
+        img.style.display = "none";
+        if (fallbackId) {
+          const fb = document.getElementById(fallbackId);
+          if (fb) {
+            fb.classList.remove("hidden");
+            if (fb.getAttribute("data-flex") === "true") {
+              fb.classList.add("flex");
+            }
+          }
+        }
+      }
+    }
+
+  </script>
+</head>
+<body class="antialiased selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- ==================== 1. TOP URGENT REGISTRATION TICKER ==================== -->
+  <div class="crimson-gradient border-b border-amber-500/40 px-3 py-2 text-center text-[11px] font-bold leading-snug text-white sm:px-4 sm:text-sm">
+    🔥 <span id="registered-count-ticker">0</span>/24 Teams Registered! Only <span class="font-extrabold text-amber-300"><span id="open-count-ticker">24</span> Slots Left</span> (First Come, First Served) •
+    Last Date: <span class="font-extrabold text-amber-300 underline">DEC 5th</span> •
+    <a href="#register" class="font-extrabold text-amber-300 hover:underline">Register your team, hurry up!!</a>
+  </div>
+
+  <!-- ==================== 2. NAVBAR ==================== -->
+  <nav class="sticky top-0 z-40 border-b border-amber-500/20 bg-[#05060a]/90 backdrop-blur-md">
+    <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
+      <a href="#" class="flex min-w-0 items-center gap-2">
+        <!-- RA Crest -->
+        <img src="images/RA_Logo.jpeg"
+             alt="Reddys Association RA Logo"
+             data-attempt="0"
+             onerror="handleNamedLogoError(this, 'ra-logo', raLogoSvgFallback)"
+             class="h-10 w-10 shrink-0 rounded-full border border-amber-400 bg-[#061224] object-cover shadow-md sm:h-11 sm:w-11" />
+        <div class="min-w-0 pl-1">
+          <span class="font-royal block truncate text-xs font-extrabold leading-none tracking-wider text-amber-400 sm:text-sm">
+            REDDYS ASSOCIATION
+          </span>
+          <span class="block truncate text-[10px] font-bold uppercase tracking-widest text-slate-200 sm:text-[11px]">
+            RCL 2027 • Reddy's Cricket League
+          </span>
+        </div>
+      </a>
+
+      <div class="hidden items-center gap-5 text-sm font-medium text-slate-300 lg:flex">
+        <a href="#format" class="transition hover:text-amber-400">Format &amp; Fee</a>
+        <a href="#dates" class="transition hover:text-amber-400">Dates</a>
+        <a href="#teams" class="transition hover:text-amber-400">Teams (<span id="nav-team-count">0</span>/24)</a>
+        <a href="#schedule" class="transition hover:text-amber-400">Schedule</a>
+        <a href="#gallery" class="transition hover:text-amber-400">Gallery &amp; Map</a>
+        <a href="#register" class="transition hover:text-amber-400">Book Slot</a>
+      </div>
+
+      <div class="flex shrink-0 items-center gap-2 sm:gap-3">
+        <!-- REPLACE href WITH YOUR RCL CRICHEROES TOURNAMENT SHARE LINK -->
+        <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
+           class="gold-gradient inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-extrabold text-slate-950 shadow-lg shadow-amber-500/25 transition hover:scale-105 sm:px-4 sm:text-sm">
+          <span class="h-2 w-2 animate-ping rounded-full bg-red-600"></span>
+          <span>Live on CricHeroes</span>
+        </a>
+
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu"
+                class="rounded-lg border border-slate-800 bg-slate-900 px-2.5 py-1.5 text-sm font-bold text-slate-300 lg:hidden">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden flex-col gap-3 border-t border-slate-800 bg-[#05060a] px-5 py-4 text-sm font-medium text-slate-300 lg:hidden">
+      <a href="#format" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Format &amp; Entry Fee</a>
+      <a href="#dates" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Registration Deadlines</a>
+      <a href="#teams" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Registered Teams (<span id="mobile-nav-team-count">0</span>/24)</a>
+      <a href="#schedule" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Match Schedule</a>
+      <a href="#gallery" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RCL Posters &amp; Map</a>
+      <a href="#register" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Book Team Slot (9790930072)</a>
+    </div>
+  </nav>
+
+  <!-- ==================== 3. STADIUM HERO ==================== -->
+  <header class="relative overflow-hidden border-b border-amber-500/20 py-10 sm:py-16">
+    <!-- Fire & Ice Stadium Floodlight Glows -->
+    <div class="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-sky-500/20 blur-[120px]"></div>
+    <div class="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-amber-500/25 blur-[120px]"></div>
+    <div class="pointer-events-none absolute bottom-0 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-red-600/15 blur-[120px]"></div>
+
+    <div class="relative mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 text-center sm:px-6 lg:px-8">
+
+      <!-- RA Crest Lockup -->
+      <div class="flex items-center gap-3 rounded-full border border-amber-500/35 bg-slate-950/80 px-4 py-2 shadow-xl backdrop-blur-sm">
+        <img src="images/RA_Logo.jpeg"
+             alt="RA Reddys Association Logo"
+             data-attempt="0"
+             onerror="handleNamedLogoError(this, 'ra-logo', raLogoSvgFallback)"
+             class="h-10 w-10 rounded-full border border-amber-400 bg-[#061224] object-cover sm:h-12 sm:w-12" />
+        <span class="font-royal text-[11px] font-extrabold tracking-[0.2em] text-amber-400 sm:text-sm">
+          REDDYS ASSOCIATION PROUDLY PRESENTS
+        </span>
+      </div>
+
+      <!-- Chrome & Gold Hero Title -->
+      <div>
+        <h1 class="font-display text-5xl leading-none tracking-wider sm:text-7xl lg:text-8xl">
+          <span class="chrome-text">RCL</span> <span class="gold-text">2027</span>
+        </h1>
+        <p class="mt-2 font-royal text-sm font-bold tracking-widest text-white sm:text-xl">
+          REDDY'S CRICKET LEAGUE • <span class="text-red-400">THE BIGGEST CRICKET BATTLE!</span>
+        </p>
+      </div>
+
+      <!-- Featured Official Poster Card (Poster 2: RCL 2027 Details) -->
+      <div class="w-full overflow-hidden rounded-2xl border-2 border-amber-500/40 bg-slate-950 shadow-2xl shadow-red-900/20">
+        <img id="hero-poster-img"
+             src="images/rcl_details.jpeg"
+             alt="RCL 2027 The Biggest Cricket Battle Details"
+             data-attempt="0"
+             onclick="openCardLightbox(this.parentElement, 'RCL 2027 — The Biggest Cricket Battle!')"
+             onerror="handlePhotoError(this, 'rcl_details', 'hero-rcl-fallback')"
+             class="max-h-[540px] w-full cursor-pointer bg-black object-contain" />
+
+        <!-- Coded Fallback for Poster 2 -->
+        <div id="hero-rcl-fallback" data-flex="true" class="hidden flex-col items-center justify-between bg-[radial-gradient(circle_at_top,_#7f1d1d_0%,_#090d16_65%,_#052e16_100%)] p-6 text-white sm:p-8">
+          <div class="mb-4 flex w-full flex-wrap items-center justify-between gap-2">
+            <span class="rounded-full border border-amber-400/40 bg-black/50 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-amber-300">Official Announcement</span>
+            <span class="rounded-full bg-red-600 px-3 py-1 text-[10px] font-extrabold uppercase text-white">Hurry Up!</span>
+          </div>
+          <h2 class="font-display text-4xl text-amber-400 sm:text-6xl">RCL 2027 — THE BIGGEST CRICKET BATTLE!</h2>
+          <div class="my-6 grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+            <div class="rounded-xl border border-red-500/40 bg-black/60 p-4">
+              <p class="text-xs uppercase text-slate-300">Total Teams</p>
+              <p class="font-display text-4xl text-amber-400">24 TEAMS</p>
+            </div>
+            <div class="rounded-xl border border-amber-400 bg-black/70 p-4">
+              <p class="text-xs uppercase text-amber-300">Entry Fee</p>
+              <p class="font-display text-4xl text-white">₹22,222/-</p>
+            </div>
+            <div class="rounded-xl border border-red-500/40 bg-black/60 p-4">
+              <p class="text-xs uppercase text-slate-300">Innings</p>
+              <p class="font-display text-4xl text-amber-400">10 OVERS</p>
+            </div>
+          </div>
+          <p class="text-xs font-bold uppercase tracking-wider text-amber-300">
+            League &amp; Knockout Format • Entry Fee Last Date: DEC 5th
+          </p>
+        </div>
+      </div>
+
+      <!-- Countdown to Entry Fee Last Date: Dec 5th, 2026 -->
+      <div class="w-full rounded-2xl border border-red-500/40 bg-gradient-to-r from-red-950/50 via-slate-950 to-amber-950/30 p-5 shadow-2xl sm:p-6">
+        <span class="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-black/60 px-4 py-1 text-[11px] font-bold uppercase tracking-widest text-amber-300 sm:text-xs">
+          ⏳ Hurry Up! Entry Fee Last Date Countdown • DEC 5th, 2026
+        </span>
+
+        <div class="mx-auto grid max-w-3xl grid-cols-4 gap-2.5 sm:gap-4">
+          <div class="rounded-xl border border-amber-500/40 bg-black/80 px-2 py-3 sm:py-4">
+            <span id="days" class="font-display block text-3xl leading-none text-amber-400 sm:text-5xl">00</span>
+            <p class="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Days</p>
+          </div>
+          <div class="rounded-xl border border-slate-800 bg-black/80 px-2 py-3 sm:py-4">
+            <span id="hours" class="font-display block text-3xl leading-none text-white sm:text-5xl">00</span>
+            <p class="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Hours</p>
+          </div>
+          <div class="rounded-xl border border-slate-800 bg-black/80 px-2 py-3 sm:py-4">
+            <span id="minutes" class="font-display block text-3xl leading-none text-white sm:text-5xl">00</span>
+            <p class="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Minutes</p>
+          </div>
+          <div class="rounded-xl border border-red-500/40 bg-black/80 px-2 py-3 sm:py-4">
+            <span id="seconds" class="font-display block text-3xl leading-none text-red-400 sm:text-5xl">00</span>
+            <p class="mt-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:text-xs">Seconds</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex w-full flex-col gap-4 sm:flex-row">
+        <a href="#register"
+           class="crimson-gradient flex flex-1 items-center justify-center gap-2 rounded-xl border border-amber-400/40 px-6 py-4 text-sm font-extrabold text-white shadow-xl shadow-red-600/20 transition hover:scale-[1.01] sm:text-base">
+          Register your team, hurry up!!
+        </a>
+        <!-- REPLACE href WITH YOUR RCL CRICHEROES TOURNAMENT SHARE LINK -->
+        <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
+           class="gold-gradient flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm font-extrabold text-slate-950 shadow-xl shadow-amber-500/20 transition hover:scale-[1.01] sm:text-base">
+          🏏 Track Live on CricHeroes App ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 4. RCL 2027 BATTLE FORMAT & ENTRY FEE ==================== -->
+  <section id="format" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="mb-10 text-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-red-400">Tournament Specifications</span>
+      <h2 class="font-display mt-1 text-3xl text-white sm:text-5xl">RCL 2027 BATTLE FORMAT &amp; ENTRY FEE</h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-2xl border border-amber-500/30 bg-slate-900/90 p-5 text-center shadow-lg">
+        <span class="mb-2 block text-3xl">👥</span>
+        <p class="text-[11px] uppercase tracking-wider text-slate-400">Teams Status</p>
+        <p class="font-display mt-1 text-4xl text-amber-400"><span id="format-booked-count">0</span> / 24 BOOKED</p>
+        <p class="mt-1 text-xs text-slate-400"><span id="format-open-count">24</span> Slots Remaining</p>
+      </div>
+
+      <div class="rounded-2xl border border-red-500/30 bg-slate-900/90 p-5 text-center shadow-lg">
+        <span class="mb-2 block text-3xl">🏏</span>
+        <p class="text-[11px] uppercase tracking-wider text-slate-400">Match Overs</p>
+        <p class="font-display mt-1 text-4xl text-white">10 OVERS</p>
+        <p class="mt-1 text-xs text-slate-400">Per Innings • Fast-Paced</p>
+      </div>
+
+      <div class="rounded-2xl border border-amber-500/50 bg-gradient-to-b from-amber-500/15 to-slate-900 p-5 text-center shadow-lg">
+        <span class="mb-2 block text-3xl">💰</span>
+        <p class="text-[11px] uppercase tracking-wider text-amber-300">Entry Fee</p>
+        <p class="font-display mt-1 text-4xl text-amber-400">₹22,222/-</p>
+        <p class="mt-1 text-xs text-slate-300">Confirmed on First Payment</p>
+      </div>
+
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 text-center shadow-lg">
+        <span class="mb-2 block text-3xl">🏆</span>
+        <p class="text-[11px] uppercase tracking-wider text-slate-400">Tournament Format</p>
+        <p class="font-display mt-1 text-3xl text-white sm:text-4xl">LEAGUE &amp; KNOCKOUT</p>
+        <p class="mt-1 text-xs text-slate-400">The Biggest Cricket Battle</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. REGISTRATION RULES & IMPORTANT DATES ==================== -->
+  <section id="dates" class="border-y border-slate-800/80 bg-slate-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Secure Your Team Slot</span>
+        <h2 class="font-display mt-1 text-3xl text-white sm:text-5xl">IMPORTANT DATES &amp; REGISTRATION POLICY</h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div class="flex items-center gap-4 rounded-2xl border border-emerald-500/35 bg-slate-950/80 p-5">
+          <div class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-xl bg-emerald-500/15 text-2xl">
+            📢
+          </div>
+          <div>
+            <span class="text-[11px] font-bold uppercase text-emerald-400">✅ <span id="dates-booked-count">0</span> Teams Confirmed</span>
+            <h4 class="text-base font-bold text-white">Registrations Open — First Come, First Served</h4>
+            <p class="text-xs text-slate-400">Teams can register directly from any open slot in the registered teams list.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 rounded-2xl border border-amber-500/40 bg-slate-950/80 p-5">
+          <div class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-xl bg-amber-500/15 text-2xl">
+            💳
+          </div>
+          <div>
+            <span class="text-[11px] font-bold uppercase text-amber-400">Confirmation Rule</span>
+            <h4 class="text-base font-bold text-white">Confirmed on Receipt of First Payment</h4>
+            <p class="text-xs text-slate-400">Kindly complete your ₹22,222/- payment at the earliest to secure your team slot.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 rounded-2xl border border-red-500/50 bg-gradient-to-r from-red-950/50 to-slate-950 p-5">
+          <div class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-xl bg-red-600 text-white">
+            <span class="font-display text-2xl leading-none">05</span>
+            <span class="text-[10px] font-bold uppercase">DEC</span>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold uppercase text-red-400">⏳ Hurry Up! Deadline</span>
+            <h4 class="text-base font-bold text-white">Entry Fee Last Date: December 5th</h4>
+            <p class="text-xs text-slate-300">All 24 team registrations &amp; payments close on Dec 5th.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 rounded-2xl border border-slate-800 bg-slate-950/80 p-5">
+          <div class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-xl bg-amber-500 text-slate-950">
+            <span class="font-display text-xl leading-none">2027</span>
+            <span class="text-[10px] font-bold uppercase">SOON</span>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold uppercase text-amber-400">🔥 Big Update Coming Very Soon!</span>
+            <h4 class="text-base font-bold text-white">Prize Pool, Fixtures &amp; Match Dates</h4>
+            <p class="text-xs text-slate-400">Official prize money reveal and match schedule will be announced shortly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. DYNAMIC REGISTERED TEAMS ==================== -->
+  <section id="teams" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="rounded-3xl border border-amber-500/40 bg-gradient-to-br from-red-950/30 via-slate-950 to-amber-950/20 p-4 shadow-2xl sm:p-8 lg:p-10">
+    <div id="register" class="mb-8 border-b border-amber-500/20 pb-8 text-center sm:mb-10 sm:pb-10">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400"><span id="register-open-count">24</span> Slots Remaining • First Come, First Served</span>
+      <h2 class="font-display mt-2 text-4xl text-white sm:text-5xl">BOOK YOUR TEAM SLOT NOW</h2>
+      <p class="mx-auto mt-2 max-w-xl text-xs text-slate-300 sm:text-sm">
+        Entry Fee: <strong class="text-amber-400">₹22,222/-</strong> • Confirmed on receipt of first payment •
+        Last Date: <strong class="text-red-400">DEC 5th</strong>.
+      </p>
+      <p class="mt-5 text-sm font-bold text-amber-300">Choose any open slot below to register your team.</p>
+      <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
+         class="gold-gradient mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-extrabold text-slate-950 shadow-lg transition hover:scale-[1.01] sm:w-auto sm:text-base">
+        🏏 Follow RCL 2027 on CricHeroes App ↗
+      </a>
+    </div>
+
+    <div class="mb-6 flex flex-col gap-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">First Come, First Served</span>
+        <h2 class="font-display mt-1 whitespace-nowrap text-[clamp(1rem,4.2vw,2.25rem)] leading-tight text-white">RCL 2027 REGISTERED TEAMS (<span id="teams-booked-count">0</span> / 24)</h2>
+        <p class="mt-1 text-xs text-slate-400"><span id="teams-open-count">24</span> slots remain open for registration until Dec 5th</p>
+      </div>
+
+      <div class="flex w-full flex-nowrap items-center gap-2">
+        <label for="team-search" class="sr-only">Search your team</label>
+        <input type="text" id="team-search" oninput="applyTeamFilters()"
+               placeholder="🔍 Search your team"
+               class="min-w-0 flex-1 rounded-xl border border-slate-700 bg-slate-900 px-2 py-2 text-xs text-white placeholder-slate-400 focus:border-amber-400 focus:outline-none sm:px-4 sm:text-sm" />
+        <div class="ml-auto flex shrink-0 justify-end gap-1">
+          <button onclick="setTeamTab('all', this)" class="team-filter-btn flex-1 whitespace-nowrap rounded-lg bg-amber-500 px-1 py-2 text-[10px] font-bold text-slate-950 transition sm:px-3.5 sm:text-xs">All (24)</button>
+          <button onclick="setTeamTab('booked', this)" class="team-filter-btn flex-1 whitespace-nowrap rounded-lg bg-slate-800 px-1 py-2 text-[10px] font-bold text-slate-300 transition hover:bg-slate-700 sm:px-3.5 sm:text-xs">Confirmed (<span id="filter-booked-count">0</span>)</button>
+          <button onclick="setTeamTab('open', this)" class="team-filter-btn flex-1 whitespace-nowrap rounded-lg bg-slate-800 px-1 py-2 text-[10px] font-bold text-slate-300 transition hover:bg-slate-700 sm:px-3.5 sm:text-xs">Remaining (<span id="filter-open-count">24</span>)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Slot Progress Bar -->
+    <div class="mb-8 rounded-2xl border border-slate-800 bg-slate-900/80 p-4">
+      <div class="mb-2 flex items-center justify-between text-xs font-bold">
+        <span class="text-emerald-400">✅ <span id="progress-booked-count">0</span> Teams Registered</span>
+        <span class="text-amber-400">⏳ <span id="progress-open-count">24</span> Slots Remaining</span>
+      </div>
+      <div class="h-3 w-full overflow-hidden rounded-full bg-slate-800">
+        <div id="team-progress-bar" class="gold-gradient h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <p id="team-sync-status" class="hidden mb-4 text-sm text-slate-400" role="status" aria-live="polite"></p>
+    <div id="teams-grid" class="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 7. MATCH SCHEDULE & CRICHEROES ==================== -->
+  <section id="schedule" class="border-y border-slate-800/80 bg-slate-900/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-red-400">10 Overs Per Innings</span>
+          <h2 class="font-display mt-1 text-3xl text-white sm:text-5xl">MATCH SCHEDULE &amp; LIVE SCORES</h2>
+          <p class="mt-1 text-xs text-amber-300">📢 Big Update Coming Very Soon! Fixtures will be synced live on CricHeroes.</p>
+        </div>
+
+        <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
+           class="gold-gradient rounded-xl px-5 py-2.5 text-center text-xs font-extrabold text-slate-950 transition hover:scale-105">
+          Open RCL on CricHeroes ↗
+        </a>
+      </div>
+
+      <div class="space-y-4">
+        <div class="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-950/80 p-5 md:flex-row md:items-center">
+          <div class="flex items-center gap-4">
+            <div class="min-w-[85px] rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-center">
+              <span class="block text-xs font-bold text-amber-400">STAGE 1</span>
+              <span class="block text-[11px] text-slate-400">10 Overs</span>
+            </div>
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">League Stage • 24 Teams</span>
+              <h4 class="text-base font-bold text-white sm:text-lg">Group Fixtures — Coming Very Soon</h4>
+              <p class="text-xs text-slate-400">Ball-by-ball live scorecard on CricHeroes</p>
+            </div>
+          </div>
+          <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
+             class="rounded-xl bg-slate-800 px-5 py-2.5 text-center text-xs font-bold text-amber-400 transition hover:bg-amber-500 hover:text-slate-950">
+            Track on CricHeroes ↗
+          </a>
+        </div>
+
+        <div class="flex flex-col justify-between gap-4 rounded-2xl border border-amber-500/35 bg-gradient-to-r from-red-950/30 to-slate-950 p-5 md:flex-row md:items-center">
+          <div class="flex items-center gap-4">
+            <div class="min-w-[85px] rounded-xl border border-amber-500/40 bg-black px-3 py-2 text-center">
+              <span class="block text-xs font-bold text-amber-400">FINALS</span>
+              <span class="block text-[11px] text-slate-400">Knockouts</span>
+            </div>
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400">🏆 RCL 2027 GRAND FINALE</span>
+              <h4 class="text-base font-bold text-white sm:text-lg">Knockout Rounds &amp; Championship Final</h4>
+              <p class="text-xs text-slate-400">Prize money reveal coming soon!</p>
+            </div>
+          </div>
+          <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
+             class="gold-gradient rounded-xl px-5 py-2.5 text-center text-xs font-bold text-slate-950 transition">
+            Live Final on CricHeroes ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. RCL POSTER GALLERY & GROUND MAP ==================== -->
+  <section id="gallery" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <div class="mb-10 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:items-end sm:text-left">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Official Flyers &amp; Venue</span>
+        <h2 class="font-display mt-1 text-3xl text-white sm:text-5xl">RCL 2027 GALLERY &amp; GROUND LOCATION</h2>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-2">
+        <button onclick="filterMedia('all', this)" class="media-filter-btn rounded-lg bg-amber-500 px-4 py-2 text-xs font-bold text-slate-950 transition">All Media</button>
+        <button onclick="filterMedia('image', this)" class="media-filter-btn rounded-lg bg-slate-800 px-4 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700">📸 Posters</button>
+      </div>
+    </div>
+
+    <div class="space-y-8">
+      <!-- 3 RCL Posters Grid -->
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+        <!-- Poster 1: Registrations Open -->
+        <div class="media-card group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl transition hover:border-amber-500/50" data-type="image">
+          <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'RCL 2027 — Registrations Open! Call 9790930072')">
+            <img id="rcl-img-1"
+                 src="images/rcl_registrations.jpeg"
+                 alt="RCL 2027 Registrations Open"
+                 data-attempt="0"
+                 onerror="handlePhotoError(this, 'rcl_registrations', 'rcl-fb-1')"
+                 class="h-80 w-full bg-black object-cover transition duration-500 group-hover:scale-105" />
+            <div id="rcl-fb-1" data-flex="true" class="hidden relative h-80 flex-col items-center justify-center bg-gradient-to-b from-blue-950 via-slate-950 to-black p-5 text-center">
+              <p class="font-display text-2xl text-amber-400">REGISTRATIONS OPEN</p>
+              <p class="mt-1 text-xs text-white">First Come, First Served</p>
+              <p class="mt-2 rounded-full bg-amber-400 px-3 py-1 text-xs font-extrabold text-slate-950">📞 9790930072</p>
+              <label onclick="event.stopPropagation()" class="mt-3 cursor-pointer text-[10px] font-bold text-sky-300 underline">
+                📂 Load Poster Image
+                <input type="file" accept="image/*" class="hidden" onchange="previewLocalPhoto(this, 'rcl-img-1', 'rcl-fb-1')" />
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between border-t border-slate-800 bg-slate-950 p-3">
+            <span class="text-xs font-bold text-amber-400">📢 Registrations Open</span>
+            <span class="text-[11px] text-slate-400">Tap to zoom 🔍</span>
+          </div>
+        </div>
+
+        <!-- Poster 2: RCL 2027 Details -->
+        <div class="media-card group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl transition hover:border-amber-500/50" data-type="image">
+          <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'RCL 2027 — 24 Teams, 10 Overs, Entry Fee ₹22,222/-, Last Date Dec 5th')">
+            <img id="rcl-img-2"
+                 src="images/rcl_details.jpeg"
+                 alt="RCL 2027 Biggest Cricket Battle Details"
+                 data-attempt="0"
+                 onerror="handlePhotoError(this, 'rcl_details', 'rcl-fb-2')"
+                 class="h-80 w-full bg-black object-cover transition duration-500 group-hover:scale-105" />
+            <div id="rcl-fb-2" data-flex="true" class="hidden relative h-80 flex-col items-center justify-center bg-gradient-to-b from-red-950 via-slate-950 to-black p-5 text-center">
+              <img src="images/RA_Logo.jpeg" data-attempt="0" onerror="handleNamedLogoError(this, 'ra-logo', raLogoSvgFallback)" class="mb-3 h-20 w-20 rounded-full border-2 border-amber-400 bg-black p-0.5" />
+              <p class="font-display text-2xl text-amber-400">THE BIGGEST CRICKET BATTLE</p>
+              <p class="mt-1 text-xs text-white">24 Teams • 10 Overs • ₹22,222/-</p>
+              <p class="mt-2 rounded-full bg-red-600 px-3 py-1 text-xs font-extrabold text-white">Last Date: DEC 5th</p>
+              <label onclick="event.stopPropagation()" class="mt-3 cursor-pointer text-[10px] font-bold text-amber-300 underline">
+                📂 Load Poster Image
+                <input type="file" accept="image/*" class="hidden" onchange="previewLocalPhoto(this, 'rcl-img-2', 'rcl-fb-2')" />
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between border-t border-slate-800 bg-slate-950 p-3">
+            <span class="text-xs font-bold text-red-400">🏆 Tournament Details</span>
+            <span class="text-[11px] text-slate-400">Tap to zoom 🔍</span>
+          </div>
+        </div>
+
+        <!-- Poster 3: RCL IS BACK! -->
+        <div class="media-card group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl transition hover:border-amber-500/50" data-type="image">
+          <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'RCL IS BACK! Big Update Coming Very Soon!')">
+            <img id="rcl-img-3"
+                 src="images/rcl_teaser.jpeg"
+                 alt="RCL Is Back Big Update Coming Very Soon"
+                 data-attempt="0"
+                 onerror="handlePhotoError(this, 'rcl_teaser', 'rcl-fb-3')"
+                 class="h-80 w-full bg-black object-cover transition duration-500 group-hover:scale-105" />
+            <div id="rcl-fb-3" data-flex="true" class="hidden relative h-80 flex-col items-center justify-center bg-gradient-to-b from-slate-900 via-red-950/60 to-black p-5 text-center">
+              <p class="font-display text-3xl text-white">RCL <span class="text-amber-400">IS BACK!</span></p>
+              <p class="mt-2 rounded-full bg-amber-400 px-3 py-1 text-xs font-extrabold text-slate-950">BIG UPDATE COMING VERY SOON!</p>
+              <label onclick="event.stopPropagation()" class="mt-3 cursor-pointer text-[10px] font-bold text-amber-300 underline">
+                📂 Load Poster Image
+                <input type="file" accept="image/*" class="hidden" onchange="previewLocalPhoto(this, 'rcl-img-3', 'rcl-fb-3')" />
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between border-t border-slate-800 bg-slate-950 p-3">
+            <span class="text-xs font-bold text-amber-400">🔥 RCL Is Back!</span>
+            <span class="text-[11px] text-slate-400">Tap to zoom 🔍</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ground Location Map -->
+      <div class="rounded-2xl border border-amber-500/30 bg-slate-900 p-4 shadow-xl sm:p-5">
+        <div class="mb-3 flex flex-col items-start justify-between gap-3 px-1 sm:flex-row sm:items-center">
+          <div>
+            <h3 class="text-base font-bold text-white sm:text-lg">📍 Reddy's Cricket Grounds</h3>
+            <p class="text-xs text-slate-400">Tap Navigate for turn-by-turn Google Maps directions</p>
+          </div>
+          <a href="https://www.google.com/maps/place/Reddy's+Cricket+Grounds/@13.254922,79.2748972,17z/data=!4m14!1m7!3m6!1s0x3bad579269b0abdd:0x48319b64feb3583a!2sMenatam+Palli+Road!8m2!3d13.2549168!4d79.2774721!16s%2Fg%2F11pl78wnyd!3m5!1s0x3bad57f6a7925bed:0xb21b772dbd143703!8m2!3d13.2531443!4d79.2781451!16s%2Fg%2F11ffv3qnb9?entry=ttu&amp;g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D"
+             target="_blank" rel="noopener noreferrer"
+             class="w-full rounded-lg bg-amber-500 px-4 py-2 text-center text-xs font-bold text-slate-950 transition hover:bg-amber-400 sm:w-auto">
+            Navigate ↗
+          </a>
+        </div>
+
+        <div class="relative h-[260px] overflow-hidden rounded-xl border border-slate-800 bg-slate-950 sm:h-[340px] lg:h-[400px]">
+          <iframe title="Reddy's Cricket Grounds Map"
+                  src="https://www.google.com/maps?q=13.2531443,79.2781451&z=17&output=embed"
+                  width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 11. SPONSORS GRATITUDE FOOTER ==================== -->
+  <footer id="sponsors" class="border-t border-amber-500/20 bg-black py-14 text-center sm:py-16">
+    <div class="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">With Deep Gratitude</span>
+      <h2 class="font-display mt-1 text-3xl text-white sm:text-5xl">
+        SPECIAL THANKS TO OUR <span class="gold-text">SPONSORS &amp; SUPPORTERS</span>
+      </h2>
+      <p class="mx-auto mt-4 max-w-3xl text-xs leading-relaxed text-slate-300 sm:text-base">
+        We extend our sincere and heartfelt gratitude to all our esteemed sponsors, team owners,
+        and passionate cricket supporters for making <strong class="text-white">RCL 2027 — Reddy's Cricket League</strong>
+        a grand success under the banner of <strong class="text-amber-400">Reddys Association</strong>.
+      </p>
+
+      <div class="my-8 h-px w-full max-w-md bg-gradient-to-r from-transparent via-amber-500/40 to-transparent sm:my-10"></div>
+
+      <div class="mb-4 flex items-center justify-center gap-4">
+        <img src="images/RA_Logo.jpeg"
+             alt="RA Reddys Association Logo"
+             data-attempt="0"
+             onerror="handleNamedLogoError(this, 'ra-logo', raLogoSvgFallback)"
+             class="h-16 w-16 rounded-full border-2 border-amber-400 bg-black p-0.5 shadow-lg sm:h-20 sm:w-20" />
+      </div>
+
+      <p class="font-royal text-lg font-extrabold tracking-wider text-amber-400 sm:text-xl">REDDYS ASSOCIATION • RCL 2027</p>
+      <p class="mt-1 text-xs text-slate-400">Reddy's Cricket League • The Biggest Cricket Battle!</p>
+      <p class="mt-4 text-xs text-slate-500">Live Scoring Powered by CricHeroes</p>
+    </div>
+  </footer>
+
+  <dialog id="team-registration-dialog" class="w-[min(100%-2rem,34rem)] rounded-2xl border border-amber-500/40 bg-slate-950 p-0 text-white shadow-2xl backdrop:bg-black/80">
+    <form id="team-registration-form" class="space-y-3 p-4 sm:p-5">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p id="registration-slot-label" class="text-[10px] font-bold uppercase tracking-widest text-amber-400">Next slot assigned in registration order</p>
+          <h2 class="font-display mt-1 text-2xl sm:text-3xl">REGISTER YOUR TEAM</h2>
+        </div>
+        <button type="button" id="close-registration-dialog" class="rounded-lg bg-slate-800 px-2.5 py-1.5 text-xs font-bold text-white hover:bg-slate-700" aria-label="Close registration form">✕</button>
+      </div>
+
+      <p class="text-xs text-slate-300">Enter your team details to register this open slot. Team name and brand name must be unique.</p>
+
+      <label class="block text-xs font-semibold text-slate-200">
+        Team name <span class="text-red-400" aria-hidden="true">*</span>
+        <input id="registration-team-name" name="teamName" required maxlength="60" autocomplete="organization"
+               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+               placeholder="Enter your team name" />
+      </label>
+
+      <label class="block text-xs font-semibold text-slate-200">
+        Team brand name <span class="text-red-400" aria-hidden="true">*</span>
+        <input id="registration-brand-name" name="brandName" required maxlength="60"
+               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+               placeholder="Enter your unique brand name" />
+      </label>
+
+      <label class="block text-xs font-semibold text-slate-200">
+        Team logo (JPG, PNG, or WebP; up to 5 MB) <span class="text-red-400" aria-hidden="true">*</span>
+        <input id="registration-team-logo" name="teamLogo" type="file" accept="image/jpeg,image/png,image/webp" required
+               class="mt-1 block w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 file:mr-2 file:rounded-md file:border-0 file:bg-amber-500 file:px-2.5 file:py-1 file:font-bold file:text-slate-950" />
+      </label>
+      <img id="registration-logo-preview" class="hidden h-16 w-16 rounded-lg border border-slate-700 object-cover" alt="Selected team logo preview" />
+
+      <label class="block text-xs font-semibold text-slate-200">
+        Captain name <span class="text-red-400" aria-hidden="true">*</span>
+        <input id="registration-captain-name" name="captainName" required maxlength="80" autocomplete="name"
+               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+               placeholder="Team captain's full name" />
+      </label>
+
+      <label class="block text-xs font-semibold text-slate-200">
+        Captain phone number <span class="text-red-400" aria-hidden="true">*</span>
+        <input id="registration-captain-phone" name="captainPhone" type="tel" required maxlength="25" autocomplete="tel"
+               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+               placeholder="Captain's contact number" />
+      </label>
+
+      <p id="registration-form-status" class="min-h-4 text-xs text-slate-300" role="status" aria-live="polite"></p>
+      <div class="text-center">
+      <button id="submit-team-registration" type="submit" disabled class="gold-gradient rounded-lg px-5 py-2 text-sm font-extrabold text-slate-950 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60">
+        Submit Team Registration
+      </button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-3 backdrop-blur-sm sm:p-6">
+    <div class="relative w-full max-w-4xl text-center" onclick="event.stopPropagation()">
+      <div class="mb-2 flex justify-end">
+        <button onclick="closeLightbox()" class="rounded-full bg-slate-800 px-3.5 py-1.5 text-xs font-bold text-white transition hover:bg-red-600 sm:text-sm">✕ Close</button>
+      </div>
+      <img id="lightbox-img" src="" alt="" class="mx-auto max-h-[78vh] max-w-full rounded-xl border border-amber-500/40 shadow-2xl" />
+      <p id="lightbox-caption" class="mt-3 text-xs text-slate-300 sm:text-sm"></p>
+    </div>
+  </div>
+
+  <!-- Firebase compat SDKs: add your Firebase web app config below to enable shared registration sync. -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById("mobile-menu");
+      const btn = document.getElementById("mobile-menu-btn");
+      const isHidden = menu.classList.contains("hidden");
+      if (isHidden) {
+        menu.classList.remove("hidden");
+        menu.classList.add("flex");
+        btn.innerText = "✕";
+      } else {
+        menu.classList.add("hidden");
+        menu.classList.remove("flex");
+        btn.innerText = "☰";
+      }
+    }
+
+    // Replace these placeholders with the Firebase web app config from Project settings.
+    const firebaseConfig = {
+      apiKey: "YOUR_FIREBASE_API_KEY",
+      authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
+      projectId: "rcl-cricket-tournament",
+      storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET",
+      appId: "YOUR_FIREBASE_APP_ID"
+    };
+
+    const rclTeamSlots = Array.from({ length: 24 }, (_, idx) => {
+      return { slotNumber: idx + 1, name: `Slot #${String(idx + 1).padStart(2, "0")}`, status: "open" };
+    });
+
+    let currentTeamTab = "all";
+    let firebaseAuth;
+    let firebaseDb;
+    let firebaseStorage;
+    let firebaseAuthPromise;
+    let teamLogoPreviewUrl;
+
+    function normalizeUniqueValue(value) {
+      const normalized = value.trim().normalize("NFKC").toLowerCase()
+        .replace(/[^\p{L}\p{N}]+/gu, " ").replace(/\s+/g, " ");
+      return encodeURIComponent(normalized);
+    }
+
+    function updateTeamCounts() {
+      const bookedCount = rclTeamSlots.filter((slot) => slot.status === "booked").length;
+      const openCount = rclTeamSlots.length - bookedCount;
+      const countIds = {
+        "registered-count-ticker": bookedCount,
+        "open-count-ticker": openCount,
+        "nav-team-count": bookedCount,
+        "mobile-nav-team-count": bookedCount,
+        "format-booked-count": bookedCount,
+        "format-open-count": openCount,
+        "dates-booked-count": bookedCount,
+        "honour-team-count": bookedCount,
+        "teams-booked-count": bookedCount,
+        "teams-open-count": openCount,
+        "filter-booked-count": bookedCount,
+        "filter-open-count": openCount,
+        "progress-booked-count": bookedCount,
+        "progress-open-count": openCount,
+        "register-open-count": openCount
+      };
+      Object.entries(countIds).forEach(([id, count]) => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = count;
+      });
+      const progressBar = document.getElementById("team-progress-bar");
+      if (progressBar) progressBar.style.width = `${(bookedCount / rclTeamSlots.length) * 100}%`;
+      document.querySelectorAll(".team-filter-btn").forEach((button) => {
+        const countSpan = button.querySelector("#filter-booked-count, #filter-open-count");
+        if (countSpan) {
+          button.firstChild.textContent = button.dataset.filterType === "booked" ? "Confirmed (" : "Remaining (";
+        }
+      });
+    }
+
+    function setTeamTab(tab, activeBtn) {
+      currentTeamTab = tab;
+      document.querySelectorAll(".team-filter-btn").forEach((btn) => {
+        btn.className = "team-filter-btn rounded-lg bg-slate-800 px-3.5 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700";
+      });
+      activeBtn.className = "team-filter-btn rounded-lg bg-amber-500 px-3.5 py-2 text-xs font-bold text-slate-950 transition";
+      applyTeamFilters();
+    }
+
+    function applyTeamFilters() {
+      const query = (document.getElementById("team-search").value || "").trim().toLowerCase();
+      const teamsGrid = document.getElementById("teams-grid");
+      teamsGrid.replaceChildren();
+
+      rclTeamSlots.forEach((slot) => {
+        if (currentTeamTab !== "all" && slot.status !== currentTeamTab) return;
+        const searchableText = [slot.name, slot.brandName, slot.teamName].filter(Boolean).join(" ").toLowerCase();
+        if (query && !searchableText.includes(query)) return;
+
+        const isBooked = slot.status === "booked";
+        const card = document.createElement(isBooked ? "article" : "button");
+        card.className = isBooked
+          ? "flex h-52 w-full flex-col rounded-xl border border-amber-500/50 bg-gradient-to-b from-amber-500/10 to-slate-900 p-3.5 text-left shadow-md transition hover:border-amber-400"
+          : "flex h-52 w-full flex-col rounded-xl border border-dashed border-slate-700 bg-slate-950/70 p-3.5 text-left shadow-md transition hover:border-amber-400 hover:bg-slate-900";
+        if (!isBooked) {
+          card.type = "button";
+          card.setAttribute("aria-label", `Register for ${slot.name}`);
+          card.addEventListener("click", () => openTeamRegistration(slot.slotNumber));
+        }
+
+        const header = document.createElement("div");
+        header.className = "mb-2 flex items-center justify-between";
+        const slotNumber = document.createElement("span");
+        slotNumber.className = isBooked
+          ? "rounded bg-amber-500 px-2 py-0.5 text-xs font-extrabold text-slate-950"
+          : "rounded bg-slate-800 px-2 py-0.5 text-xs font-bold text-slate-400";
+        slotNumber.textContent = `#${String(slot.slotNumber).padStart(2, "0")}`;
+        const indicator = document.createElement("span");
+        indicator.className = isBooked ? "h-2 w-2 rounded-full bg-emerald-400" : "h-2 w-2 animate-pulse rounded-full bg-red-500";
+        indicator.title = isBooked ? "Registered Team" : "Available Slot";
+        header.append(slotNumber, indicator);
+        card.append(header);
+
+        const logoContainer = document.createElement("div");
+        logoContainer.className = "mb-2 flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-700 bg-slate-950";
+        if (isBooked && slot.logoUrl) {
+          const logo = document.createElement("img");
+          logo.src = slot.logoUrl;
+          logo.alt = `${slot.teamName || slot.name} logo`;
+          logo.className = "h-full w-full object-cover";
+          logoContainer.append(logo);
+        } else if (!isBooked) {
+          const logoPlaceholder = document.createElement("span");
+          logoPlaceholder.className = "text-xl text-slate-500";
+          logoPlaceholder.setAttribute("aria-hidden", "true");
+          logoPlaceholder.textContent = "🏏";
+          logoContainer.append(logoPlaceholder);
+        }
+        card.append(logoContainer);
+
+        const teamName = document.createElement("p");
+        teamName.className = `truncate text-xs leading-snug ${isBooked ? "text-white" : "text-slate-300"}`;
+        const teamNameLabel = document.createElement("span");
+        teamNameLabel.className = "font-bold";
+        teamNameLabel.textContent = "Team name: ";
+        teamName.append(teamNameLabel, document.createTextNode(isBooked ? (slot.teamName || slot.name) : slot.name));
+        card.append(teamName);
+
+        const brandName = document.createElement("p");
+        brandName.className = "truncate text-[11px] text-slate-300";
+        const brandNameLabel = document.createElement("span");
+        brandNameLabel.className = "font-semibold";
+        brandNameLabel.textContent = "Team brand name: ";
+        brandName.append(brandNameLabel, document.createTextNode(isBooked ? (slot.brandName || "") : "—"));
+        card.append(brandName);
+
+        const captainName = document.createElement("p");
+        captainName.className = "truncate text-[11px] text-slate-400";
+        const captainNameLabel = document.createElement("span");
+        captainNameLabel.className = "font-semibold";
+        captainNameLabel.textContent = "Team captain: ";
+        captainName.append(captainNameLabel, document.createTextNode(isBooked ? (slot.captainName || "") : "—"));
+        card.append(captainName);
+
+        const captainPhone = document.createElement("p");
+        captainPhone.className = "truncate text-[11px] text-slate-400";
+        const captainPhoneLabel = document.createElement("span");
+        captainPhoneLabel.className = "font-semibold";
+        captainPhoneLabel.textContent = "Captain Mobile No: ";
+        captainPhone.append(captainPhoneLabel, document.createTextNode(isBooked ? (slot.captainPhone || "—") : "—"));
+        card.append(captainPhone);
+
+        const cardStatus = document.createElement("p");
+        cardStatus.className = `mt-auto pt-1 text-[11px] font-semibold ${isBooked ? "text-emerald-400" : "text-amber-400"}`;
+        cardStatus.textContent = isBooked ? "Registered" : "Click here to register";
+        card.append(cardStatus);
+        teamsGrid.append(card);
+      });
+
+      if (!teamsGrid.children.length) {
+        const emptyState = document.createElement("p");
+        emptyState.className = "col-span-full py-6 text-center text-sm text-slate-400";
+        emptyState.textContent = "No matching team slots found.";
+        teamsGrid.append(emptyState);
+      }
+    }
+
+    function openTeamRegistration(slotNumber) {
+      const slot = rclTeamSlots[slotNumber - 1];
+      if (!slot || slot.status !== "open") return;
+      const nextSlot = rclTeamSlots.find((teamSlot) => teamSlot.status === "open");
+      if (!nextSlot) return;
+      if (slotNumber !== nextSlot.slotNumber) {
+        window.alert(
+          `Please register your team in Slot #${String(nextSlot.slotNumber).padStart(2, "0")} first. Teams must register in sequential order.`
+        );
+        return;
+      }
+      document.getElementById("registration-slot-label").textContent =
+        `Next in order: Slot #${String(nextSlot.slotNumber).padStart(2, "0")}`;
+      document.getElementById("registration-form-status").textContent = firebaseAuth
+        ? "Your slot is assigned automatically in registration order. Fill in your team details to continue."
+        : "Firebase is not configured yet. Add the web config and enable Firestore, Storage, and anonymous sign-in to submit.";
+      updateRegistrationSubmitState();
+      document.getElementById("team-registration-dialog").showModal();
+    }
+
+    function updateRegistrationSubmitState() {
+      const teamName = document.getElementById("registration-team-name").value.trim();
+      const brandName = document.getElementById("registration-brand-name").value.trim();
+      const captainName = document.getElementById("registration-captain-name").value.trim();
+      const captainPhone = document.getElementById("registration-captain-phone").value.trim();
+      const logoFile = document.getElementById("registration-team-logo").files[0];
+      const validLogo = logoFile
+        && ["image/jpeg", "image/png", "image/webp"].includes(logoFile.type)
+        && logoFile.size <= 5 * 1024 * 1024;
+      document.getElementById("submit-team-registration").disabled =
+        !(teamName && brandName && captainName && captainPhone && validLogo);
+    }
+
+    function setTeamSyncStatus(message, isError = false) {
+      const status = document.getElementById("team-sync-status");
+      if (!message) {
+        status.classList.add("hidden");
+        return;
+      }
+      status.classList.remove("hidden");
+      status.textContent = message;
+      status.className = `mb-4 text-sm ${isError ? "text-red-400" : "text-slate-400"}`;
+    }
+
+    function startTeamSync() {
+      const configIsReady = firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY"
+        && firebaseConfig.authDomain !== "YOUR_FIREBASE_AUTH_DOMAIN"
+        && firebaseConfig.storageBucket !== "YOUR_FIREBASE_STORAGE_BUCKET"
+        && firebaseConfig.appId !== "YOUR_FIREBASE_APP_ID";
+      if (!configIsReady || !window.firebase) {
+        updateTeamCounts();
+        applyTeamFilters();
+        return;
+      }
+
+      try {
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        firebaseAuth = firebase.auth();
+        firebaseDb = firebase.firestore();
+        firebaseStorage = firebase.storage();
+
+        firebaseAuthPromise = new Promise((resolve, reject) => {
+          let signInStarted = false;
+          const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
+            if (user) {
+              unsubscribe();
+              resolve(user);
+              firebaseDb.collection("teams").onSnapshot((snapshot) => {
+                rclTeamSlots.forEach((slot, index) => {
+                  rclTeamSlots[index] = {
+                    slotNumber: index + 1,
+                    name: `Slot #${String(index + 1).padStart(2, "0")}`,
+                    status: "open"
+                  };
+                });
+                snapshot.forEach((teamDoc) => {
+                  const data = teamDoc.data();
+                  const index = Number(data.slot) - 1;
+                  if (index < 0 || index > 23) return;
+                  rclTeamSlots[index] = {
+                    slotNumber: index + 1,
+                    status: "booked",
+                    name: data.teamName,
+                    teamName: data.teamName,
+                    brandName: data.brandName,
+                    logoUrl: data.logoUrl,
+                    captainName: data.captainName,
+                    captainPhone: data.captainPhone
+                  };
+                });
+                updateTeamCounts();
+                applyTeamFilters();
+                setTeamSyncStatus("Live team list connected. New registrations appear automatically.");
+              }, (error) => {
+                setTeamSyncStatus(`Could not sync teams: ${error.message}`, true);
+              });
+            } else if (!signInStarted) {
+              signInStarted = true;
+              firebaseAuth.signInAnonymously().catch((error) => {
+                unsubscribe();
+                reject(error);
+              });
+            }
+          }, (error) => {
+            unsubscribe();
+            reject(error);
+          });
+        });
+
+        firebaseAuthPromise.catch((error) => {
+          setTeamSyncStatus(`Firebase sign-in failed: ${error.message}`, true);
+        });
+      } catch (error) {
+        setTeamSyncStatus(`Firebase could not start: ${error.message}`, true);
+      }
+      updateTeamCounts();
+      applyTeamFilters();
+    }
+
+    async function submitTeamRegistration(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const status = document.getElementById("registration-form-status");
+      const submitButton = document.getElementById("submit-team-registration");
+      const teamName = document.getElementById("registration-team-name").value.trim();
+      const brandName = document.getElementById("registration-brand-name").value.trim();
+      const captainName = document.getElementById("registration-captain-name").value.trim();
+      const captainPhone = document.getElementById("registration-captain-phone").value.trim();
+      const logoFile = document.getElementById("registration-team-logo").files[0];
+      const teamNameKey = normalizeUniqueValue(teamName);
+      const brandNameKey = normalizeUniqueValue(brandName);
+
+      if (!firebaseAuth || !firebaseDb || !firebaseStorage) {
+        status.textContent = "Registration was not saved. Configure Firebase in index.html and enable Firestore, Storage, and anonymous sign-in.";
+        return;
+      }
+      if (!teamNameKey || !brandNameKey) {
+        status.textContent = "Team name and brand name must contain letters or numbers.";
+        return;
+      }
+      if (!logoFile || !["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) || logoFile.size > 5 * 1024 * 1024) {
+        status.textContent = "Choose a JPG, PNG, or WebP logo smaller than 5 MB.";
+        return;
+      }
+
+      submitButton.disabled = true;
+      status.textContent = "Uploading logo and saving registration...";
+      let uploadedLogoRef;
+      let registrationSaved = false;
+      try {
+        const user = await firebaseAuthPromise;
+        const sequenceRef = firebaseDb.collection("registrationMeta").doc("sequence");
+        const sequenceSnapshot = await sequenceRef.get();
+        const slotNumber = sequenceSnapshot.exists ? Number(sequenceSnapshot.data().nextSlot) : 1;
+        if (!Number.isInteger(slotNumber) || slotNumber < 1 || slotNumber > 24) {
+          throw new Error("All 24 team slots have already been registered.");
+        }
+        const slotId = `slot-${slotNumber}`;
+        const logoFileName = `${Date.now()}-${crypto.randomUUID()}.${logoFile.type.split("/")[1]}`;
+        const logoRef = firebaseStorage.ref(`team-logos/${slotId}/${logoFileName}`);
+        await logoRef.put(logoFile, {
+          contentType: logoFile.type,
+          customMetadata: { ownerUid: user.uid }
+        });
+        uploadedLogoRef = logoRef;
+        const logoUrl = await uploadedLogoRef.getDownloadURL();
+        const slotRef = firebaseDb.collection("teams").doc(slotId);
+        const teamNameRef = firebaseDb.collection("teamNames").doc(teamNameKey);
+        const brandNameRef = firebaseDb.collection("teamBrands").doc(brandNameKey);
+        const registrationRef = firebaseDb.collection("teamRegistrations").doc(slotId);
+
+        await firebaseDb.runTransaction(async (transaction) => {
+          const [sequenceDoc, slotDoc, teamNameDoc, brandNameDoc] = await Promise.all([
+            transaction.get(sequenceRef),
+            transaction.get(slotRef),
+            transaction.get(teamNameRef),
+            transaction.get(brandNameRef)
+          ]);
+          const nextSlot = sequenceDoc.exists ? Number(sequenceDoc.data().nextSlot) : 1;
+          if (nextSlot !== slotNumber) {
+            throw new Error("Another team just registered first. Submit again to take the next available slot.");
+          }
+          if (slotDoc.exists) throw new Error("This slot is already registered. Reload the page and try again.");
+          if (teamNameDoc.exists) throw new Error("That team name is already registered. Please choose another.");
+          if (brandNameDoc.exists) throw new Error("That team brand name is already registered. Please choose another.");
+
+          transaction.set(slotRef, {
+            slot: slotNumber,
+            teamName,
+            teamNameKey,
+            brandName,
+            brandNameKey,
+            logoUrl,
+            captainName,
+            captainPhone,
+            registeredAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          transaction.set(teamNameRef, { teamId: slotId });
+          transaction.set(brandNameRef, { teamId: slotId });
+          transaction.set(registrationRef, {
+            teamId: slotId,
+            captainName,
+            captainPhone,
+            ownerUid: user.uid
+          });
+          transaction.set(sequenceRef, { nextSlot: slotNumber + 1 });
+        });
+        registrationSaved = true;
+
+        document.getElementById("team-registration-dialog").close();
+        form.reset();
+        updateRegistrationSubmitState();
+        if (teamLogoPreviewUrl) URL.revokeObjectURL(teamLogoPreviewUrl);
+        teamLogoPreviewUrl = null;
+        document.getElementById("registration-logo-preview").classList.add("hidden");
+        setTeamSyncStatus("Registration saved successfully. The registered team is syncing to the list.", false);
+      } catch (error) {
+        let errorMessage = error.message;
+        if (!registrationSaved && uploadedLogoRef) {
+          try {
+            await uploadedLogoRef.delete();
+          } catch (cleanupError) {
+            errorMessage += ` Logo cleanup also failed: ${cleanupError.message}`;
+          }
+        }
+        status.textContent = registrationSaved
+          ? `Registration saved, but the form could not close: ${errorMessage}`
+          : `Registration was not saved: ${errorMessage}`;
+      } finally {
+        submitButton.disabled = false;
+      }
+    }
+
+    document.getElementById("team-registration-form").addEventListener("submit", submitTeamRegistration);
+    document.getElementById("close-registration-dialog").addEventListener("click", () => {
+      document.getElementById("team-registration-dialog").close();
+    });
+    ["registration-team-name", "registration-brand-name", "registration-captain-name"].forEach((id) => {
+      document.getElementById(id).addEventListener("input", updateRegistrationSubmitState);
+    });
+    document.getElementById("registration-captain-phone").addEventListener("input", updateRegistrationSubmitState);
+    document.getElementById("registration-team-logo").addEventListener("change", (event) => {
+      const file = event.currentTarget.files[0];
+      const preview = document.getElementById("registration-logo-preview");
+      if (teamLogoPreviewUrl) URL.revokeObjectURL(teamLogoPreviewUrl);
+      if (!file) {
+        teamLogoPreviewUrl = null;
+        preview.classList.add("hidden");
+        updateRegistrationSubmitState();
+        return;
+      }
+      teamLogoPreviewUrl = URL.createObjectURL(file);
+      preview.src = teamLogoPreviewUrl;
+      preview.classList.remove("hidden");
+      updateRegistrationSubmitState();
+    });
+    updateRegistrationSubmitState();
+
+    document.querySelectorAll(".team-filter-btn").forEach((button, index) => {
+      button.dataset.filterType = ["all", "booked", "open"][index];
+    });
+    updateTeamCounts();
+    applyTeamFilters();
+    startTeamSync();
+
+    // Countdown to Entry Fee Last Date: Dec 5, 2026
+    const deadlineDate = new Date("Dec 5, 2026 23:59:59").getTime();
+    function updateCountdown() {
+      const diff = deadlineDate - Date.now();
+      if (diff <= 0) return;
+      document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    function filterMedia(type, activeBtn) {
+      document.querySelectorAll(".media-filter-btn").forEach((btn) => {
+        btn.className = "media-filter-btn rounded-lg bg-slate-800 px-4 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700";
+      });
+      activeBtn.className = "media-filter-btn rounded-lg bg-amber-500 px-4 py-2 text-xs font-bold text-slate-950 transition";
+
+      document.querySelectorAll(".media-card").forEach((card) => {
+        card.style.display = type === "all" || card.getAttribute("data-type") === type ? "block" : "none";
+      });
+    }
+
+    function previewLocalPhoto(input, imgId, fbId) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      const imgEl = document.getElementById(imgId);
+      const fbEl = document.getElementById(fbId);
+      if (imgEl) {
+        imgEl.onerror = null;
+        imgEl.src = URL.createObjectURL(file);
+        imgEl.style.display = "block";
+      }
+      if (fbEl) {
+        fbEl.classList.add("hidden");
+        fbEl.classList.remove("flex");
+      }
+    }
+
+    function openCardLightbox(cardEl, caption) {
+      const img = cardEl.querySelector("img");
+      if (!img || img.style.display === "none") return;
+      document.getElementById("lightbox-img").src = img.currentSrc || img.src;
+      document.getElementById("lightbox-caption").innerText = caption;
+      const modal = document.getElementById("lightbox");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById("lightbox");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+  </script>
+</body>
+</html>

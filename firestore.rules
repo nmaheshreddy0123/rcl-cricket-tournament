@@ -1,0 +1,151 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function slotIsNext(slot) {
+      return (!exists(/databases/$(database)/documents/registrationMeta/sequence) && slot == 1)
+        || (exists(/databases/$(database)/documents/registrationMeta/sequence)
+          && get(/databases/$(database)/documents/registrationMeta/sequence).data.nextSlot == slot);
+    }
+
+    function slotExistsAfter(slot) {
+      return (slot == 1 && getAfter(/databases/$(database)/documents/teams/slot-1).data.slot == 1)
+        || (slot == 2 && getAfter(/databases/$(database)/documents/teams/slot-2).data.slot == 2)
+        || (slot == 3 && getAfter(/databases/$(database)/documents/teams/slot-3).data.slot == 3)
+        || (slot == 4 && getAfter(/databases/$(database)/documents/teams/slot-4).data.slot == 4)
+        || (slot == 5 && getAfter(/databases/$(database)/documents/teams/slot-5).data.slot == 5)
+        || (slot == 6 && getAfter(/databases/$(database)/documents/teams/slot-6).data.slot == 6)
+        || (slot == 7 && getAfter(/databases/$(database)/documents/teams/slot-7).data.slot == 7)
+        || (slot == 8 && getAfter(/databases/$(database)/documents/teams/slot-8).data.slot == 8)
+        || (slot == 9 && getAfter(/databases/$(database)/documents/teams/slot-9).data.slot == 9)
+        || (slot == 10 && getAfter(/databases/$(database)/documents/teams/slot-10).data.slot == 10)
+        || (slot == 11 && getAfter(/databases/$(database)/documents/teams/slot-11).data.slot == 11)
+        || (slot == 12 && getAfter(/databases/$(database)/documents/teams/slot-12).data.slot == 12)
+        || (slot == 13 && getAfter(/databases/$(database)/documents/teams/slot-13).data.slot == 13)
+        || (slot == 14 && getAfter(/databases/$(database)/documents/teams/slot-14).data.slot == 14)
+        || (slot == 15 && getAfter(/databases/$(database)/documents/teams/slot-15).data.slot == 15)
+        || (slot == 16 && getAfter(/databases/$(database)/documents/teams/slot-16).data.slot == 16)
+        || (slot == 17 && getAfter(/databases/$(database)/documents/teams/slot-17).data.slot == 17)
+        || (slot == 18 && getAfter(/databases/$(database)/documents/teams/slot-18).data.slot == 18)
+        || (slot == 19 && getAfter(/databases/$(database)/documents/teams/slot-19).data.slot == 19)
+        || (slot == 20 && getAfter(/databases/$(database)/documents/teams/slot-20).data.slot == 20)
+        || (slot == 21 && getAfter(/databases/$(database)/documents/teams/slot-21).data.slot == 21)
+        || (slot == 22 && getAfter(/databases/$(database)/documents/teams/slot-22).data.slot == 22)
+        || (slot == 23 && getAfter(/databases/$(database)/documents/teams/slot-23).data.slot == 23)
+        || (slot == 24 && getAfter(/databases/$(database)/documents/teams/slot-24).data.slot == 24);
+    }
+
+    function slotMatchesId(teamId, slot) {
+      return (slot == 1 && teamId == 'slot-1')
+        || (slot == 2 && teamId == 'slot-2')
+        || (slot == 3 && teamId == 'slot-3')
+        || (slot == 4 && teamId == 'slot-4')
+        || (slot == 5 && teamId == 'slot-5')
+        || (slot == 6 && teamId == 'slot-6')
+        || (slot == 7 && teamId == 'slot-7')
+        || (slot == 8 && teamId == 'slot-8')
+        || (slot == 9 && teamId == 'slot-9')
+        || (slot == 10 && teamId == 'slot-10')
+        || (slot == 11 && teamId == 'slot-11')
+        || (slot == 12 && teamId == 'slot-12')
+        || (slot == 13 && teamId == 'slot-13')
+        || (slot == 14 && teamId == 'slot-14')
+        || (slot == 15 && teamId == 'slot-15')
+        || (slot == 16 && teamId == 'slot-16')
+        || (slot == 17 && teamId == 'slot-17')
+        || (slot == 18 && teamId == 'slot-18')
+        || (slot == 19 && teamId == 'slot-19')
+        || (slot == 20 && teamId == 'slot-20')
+        || (slot == 21 && teamId == 'slot-21')
+        || (slot == 22 && teamId == 'slot-22')
+        || (slot == 23 && teamId == 'slot-23')
+        || (slot == 24 && teamId == 'slot-24');
+    }
+
+    match /teams/{teamId} {
+      allow read: if true;
+      allow create: if isSignedIn()
+        && request.resource.data.keys().hasOnly([
+          'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'captainPhone', 'registeredAt'
+        ])
+        && request.resource.data.slot is int
+        && slotMatchesId(teamId, request.resource.data.slot)
+        && slotIsNext(request.resource.data.slot)
+        && getAfter(/databases/$(database)/documents/registrationMeta/sequence).data.nextSlot == request.resource.data.slot + 1
+        && request.resource.data.teamName is string
+        && request.resource.data.teamNameKey is string
+        && request.resource.data.teamName.size() > 0
+        && request.resource.data.teamName.size() <= 60
+        && request.resource.data.brandName is string
+        && request.resource.data.brandNameKey is string
+        && request.resource.data.brandName.size() > 0
+        && request.resource.data.brandName.size() <= 60
+        && request.resource.data.captainName is string
+        && request.resource.data.captainName.size() > 0
+        && request.resource.data.captainName.size() <= 80
+        && request.resource.data.captainPhone is string
+        && request.resource.data.captainPhone.size() > 0
+        && request.resource.data.captainPhone.size() <= 25
+        && getAfter(/databases/$(database)/documents/teamNames/$(request.resource.data.teamNameKey)).data.teamId == teamId
+        && getAfter(/databases/$(database)/documents/teamBrands/$(request.resource.data.brandNameKey)).data.teamId == teamId
+        && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.teamId == teamId;
+      allow update, delete: if false;
+    }
+
+    match /teamNames/{nameKey} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn()
+        && request.resource.data.keys().hasOnly(['teamId'])
+        && request.resource.data.teamId is string
+        && getAfter(/databases/$(database)/documents/teams/$(request.resource.data.teamId)).data.teamNameKey == nameKey;
+      allow update, delete: if false;
+    }
+
+    match /teamBrands/{brandKey} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn()
+        && request.resource.data.keys().hasOnly(['teamId'])
+        && request.resource.data.teamId is string
+        && getAfter(/databases/$(database)/documents/teams/$(request.resource.data.teamId)).data.brandNameKey == brandKey;
+      allow update, delete: if false;
+    }
+
+    match /teamRegistrations/{teamId} {
+      allow create: if isSignedIn()
+        && request.resource.data.keys().hasOnly(['teamId', 'captainName', 'captainPhone', 'ownerUid'])
+        && request.resource.data.teamId == teamId
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.captainName is string
+        && request.resource.data.captainName.size() > 0
+        && request.resource.data.captainName.size() <= 80
+        && request.resource.data.captainPhone is string
+        && request.resource.data.captainPhone.size() > 0
+        && request.resource.data.captainPhone.size() <= 25
+        && getAfter(/databases/$(database)/documents/teams/$(teamId)).data.slot is int;
+      allow read: if isSignedIn() && resource.data.ownerUid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    match /registrationMeta/{metaId} {
+      allow read: if isSignedIn() && metaId == 'sequence';
+      allow create: if isSignedIn()
+        && metaId == 'sequence'
+        && request.resource.data.keys().hasOnly(['nextSlot'])
+        && request.resource.data.nextSlot == 2
+        && slotExistsAfter(1);
+      allow update: if isSignedIn()
+        && metaId == 'sequence'
+        && request.resource.data.keys().hasOnly(['nextSlot'])
+        && resource.data.nextSlot is int
+        && resource.data.nextSlot >= 1
+        && resource.data.nextSlot <= 24
+        && request.resource.data.nextSlot == resource.data.nextSlot + 1
+        && slotExistsAfter(resource.data.nextSlot);
+      allow delete: if false;
+    }
+  }
+}
