@@ -47,6 +47,12 @@
           "maxLength": 80,
           "description": "Captain's display name."
         },
+        "captainPhone": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 25,
+          "description": "Captain's 10-digit contact mobile number displayed on the team card."
+        },
         "registeredAt": {
           "type": "string",
           "format": "date-time",
@@ -61,6 +67,12 @@
           "type": "string",
           "enum": ["pending", "paid"],
           "description": "Fee payment status for the registered team (defaults to pending)."
+        },
+        "paymentScreenshotUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536,
+          "description": "Download URL or compact compressed image Data URL for the team payment screenshot."
         }
       },
       "required": [
