@@ -1,3 +1,3 @@
-# Published images
+# Images
 
-The build script creates `dist/images/` from image files in `public/assets/aistudio/`, removes those image files from the published `dist/assets/aistudio/` directory, and writes `dist/images/manifest.json`. The page uses that manifest to resolve its image references. Source media remains in `public/assets/aistudio/` so it can be tracked and included in future builds.
+This folder is the source for site images and media. The local Express server serves it at `/images/`, and `npm run build` copies it to `dist/images/` for deployment.

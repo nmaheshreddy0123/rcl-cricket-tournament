@@ -5,7 +5,6 @@ const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = '0.0.0.0';
 
-app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'ignore' }));
 app.use(express.static(__dirname, { index: 'index.html', dotfiles: 'ignore' }));
 
 app.use((_req, res) => {
