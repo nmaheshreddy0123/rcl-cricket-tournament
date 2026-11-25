@@ -98,7 +98,7 @@ service cloud.firestore {
           'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'registeredAt'
         ])
         && data.keys().hasOnly([
-          'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'registeredAt', 'updatedAt', 'paymentStatus'
+          'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'registeredAt', 'updatedAt', 'paymentStatus', 'paymentScreenshotUrl'
         ])
         && data.slot is int
         && data.slot >= 1
@@ -120,7 +120,12 @@ service cloud.firestore {
         && data.captainName.size() <= 80
         && data.registeredAt is timestamp
         && (!('updatedAt' in data) || data.updatedAt is timestamp)
-        && (!('paymentStatus' in data) || data.paymentStatus in ['pending', 'paid']);
+        && (!('paymentStatus' in data) || data.paymentStatus in ['pending', 'paid'])
+        && (!('paymentScreenshotUrl' in data) || (
+          data.paymentScreenshotUrl is string
+          && data.paymentScreenshotUrl.size() <= 2048
+          && data.paymentScreenshotUrl.matches('^https://firebasestorage\\.googleapis\\.com/v0/b/[^/]+/o/payment-screenshots%2Fslot-([1-9]|1[0-9]|2[0-4])%2F[A-Za-z0-9_-]+%2F[A-Za-z0-9_.-]+\\?alt=media&token=[A-Za-z0-9_-]+$')
+        ));
     }
 
     function isValidUniqueKeyReservation(data) {
@@ -177,40 +182,57 @@ service cloud.firestore {
       allow update: if isSignedIn()
         && isValidSlotId(teamId)
         && isValidTeamSlot(incoming())
-        && isAdmin()
         && incoming().slot == existing().slot
         && incoming().registeredAt == existing().registeredAt
         && incoming().updatedAt is timestamp
         && incoming().updatedAt == request.time
         && (
           (
-            incoming().diff(existing()).affectedKeys().hasOnly(['paymentStatus', 'updatedAt'])
-            && 'paymentStatus' in incoming()
-            && incoming().paymentStatus in ['pending', 'paid']
+            isAdmin()
+            && (
+              (
+                incoming().diff(existing()).affectedKeys().hasOnly(['paymentStatus', 'updatedAt'])
+                && 'paymentStatus' in incoming()
+                && incoming().paymentStatus in ['pending', 'paid']
+              )
+              || (
+                incoming().diff(existing()).affectedKeys().hasOnly([
+                  'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'updatedAt', 'paymentStatus'
+                ])
+                && (
+                  (!('paymentStatus' in existing()) && 'paymentStatus' in incoming() && incoming().paymentStatus == 'pending')
+                  || ('paymentStatus' in existing() && 'paymentStatus' in incoming() && incoming().paymentStatus in ['pending', 'paid'])
+                )
+                && (
+                  incoming().teamNameKey == existing().teamNameKey
+                  || (
+                    !existsAfter(/databases/$(database)/documents/teamNames/$(existing().teamNameKey))
+                    && getAfter(/databases/$(database)/documents/teamNames/$(incoming().teamNameKey)).data.teamId == teamId
+                  )
+                )
+                && (
+                  incoming().brandNameKey == existing().brandNameKey
+                  || (
+                    !existsAfter(/databases/$(database)/documents/teamBrands/$(existing().brandNameKey))
+                    && getAfter(/databases/$(database)/documents/teamBrands/$(incoming().brandNameKey)).data.teamId == teamId
+                  )
+                )
+                && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.captainName == incoming().captainName
+              )
+            )
           )
           || (
-            incoming().diff(existing()).affectedKeys().hasOnly([
-              'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'updatedAt', 'paymentStatus'
+            ( !('paymentStatus' in existing()) || existing().paymentStatus == 'pending' )
+            && incoming().paymentStatus == 'paid'
+            && 'paymentScreenshotUrl' in incoming()
+            && (
+              !('paymentScreenshotUrl' in existing())
+              || incoming().paymentScreenshotUrl != existing().paymentScreenshotUrl
+            )
+            && incoming().diff(existing()).affectedKeys().hasOnly([
+              'paymentStatus', 'paymentScreenshotUrl', 'updatedAt'
             ])
-            && (
-              (!('paymentStatus' in existing()) && 'paymentStatus' in incoming() && incoming().paymentStatus == 'pending')
-              || ('paymentStatus' in existing() && 'paymentStatus' in incoming() && incoming().paymentStatus in ['pending', 'paid'])
-            )
-            && (
-              incoming().teamNameKey == existing().teamNameKey
-              || (
-                !existsAfter(/databases/$(database)/documents/teamNames/$(existing().teamNameKey))
-                && getAfter(/databases/$(database)/documents/teamNames/$(incoming().teamNameKey)).data.teamId == teamId
-              )
-            )
-            && (
-              incoming().brandNameKey == existing().brandNameKey
-              || (
-                !existsAfter(/databases/$(database)/documents/teamBrands/$(existing().brandNameKey))
-                && getAfter(/databases/$(database)/documents/teamBrands/$(incoming().brandNameKey)).data.teamId == teamId
-              )
-            )
-            && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.captainName == incoming().captainName
+            && get(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.ownerUid == request.auth.uid
           )
         );
       allow delete: if false;
