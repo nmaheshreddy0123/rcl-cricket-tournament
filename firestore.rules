@@ -95,7 +95,7 @@ service cloud.firestore {
 
     function isValidTeamSlot(data) {
       return data.keys().hasAll([
-          'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'registeredAt'
+          'slot', 'teamName', 'teamNameKey', 'logoUrl', 'captainName', 'registeredAt'
         ])
         && data.keys().hasOnly([
           'slot', 'teamName', 'teamNameKey', 'brandName', 'brandNameKey', 'logoUrl', 'captainName', 'captainPhone', 'registeredAt', 'updatedAt', 'paymentStatus', 'paymentScreenshotUrl'
@@ -107,10 +107,15 @@ service cloud.firestore {
         && data.teamName.size() > 0
         && data.teamName.size() <= 60
         && isValidId(data.teamNameKey)
-        && data.brandName is string
-        && data.brandName.size() > 0
-        && data.brandName.size() <= 60
-        && isValidId(data.brandNameKey)
+        && (!('brandName' in data) || (
+          data.brandName is string
+          && data.brandName.size() <= 500
+        ))
+        && (!('brandNameKey' in data) || (
+          data.brandNameKey is string
+          && data.brandNameKey.size() <= 128
+          && (data.brandNameKey == '' || isValidId(data.brandNameKey))
+        ))
         && data.logoUrl is string
         && data.logoUrl.size() > 0
         && data.logoUrl.size() <= 65536
@@ -177,7 +182,8 @@ service cloud.firestore {
       allow create: if isSignedIn()
         && isValidSlotId(teamId)
         && isValidTeamSlot(incoming())
-        && incoming().brandName.size() == 3
+        && 'brandName' in incoming()
+        && incoming().brandName.size() > 0
         && 'captainPhone' in incoming()
         && incoming().captainPhone.matches('^[0-9]{10}$')
         && !('updatedAt' in incoming())
@@ -188,7 +194,6 @@ service cloud.firestore {
         && slotIsNext(incoming().slot)
         && getAfter(/databases/$(database)/documents/registrationMeta/sequence).data.nextSlot == incoming().slot + 1
         && getAfter(/databases/$(database)/documents/teamNames/$(incoming().teamNameKey)).data.teamId == teamId
-        && getAfter(/databases/$(database)/documents/teamBrands/$(incoming().brandNameKey)).data.teamId == teamId
         && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.teamId == teamId
         && getAfter(/databases/$(database)/documents/teamRegistrations/$(teamId)).data.ownerUid == request.auth.uid;
       allow update: if isSignedIn()
@@ -223,9 +228,11 @@ service cloud.firestore {
                   )
                 )
                 && (
-                  incoming().brandNameKey == existing().brandNameKey
+                  !('brandNameKey' in incoming())
+                  || incoming().brandNameKey == ''
+                  || ('brandNameKey' in existing() && incoming().brandNameKey == existing().brandNameKey)
                   || (
-                    !existsAfter(/databases/$(database)/documents/teamBrands/$(existing().brandNameKey))
+                    (!('brandNameKey' in existing()) || !existsAfter(/databases/$(database)/documents/teamBrands/$(existing().brandNameKey)))
                     && getAfter(/databases/$(database)/documents/teamBrands/$(incoming().brandNameKey)).data.teamId == teamId
                   )
                 )
