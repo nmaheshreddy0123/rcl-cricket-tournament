@@ -26,14 +26,14 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 500,
-          "description": "Required team title or tagline without length/uniqueness restrictions."
+          "description": "Required unique team title or tagline."
         },
         "brandNameKey": {
           "type": "string",
-          "minLength": 0,
+          "minLength": 1,
           "maxLength": 128,
           "pattern": "^[a-zA-Z0-9_\\-]+$",
-          "description": "Legacy normalized key for the team title/brand name."
+          "description": "Normalized unique key for the team title (case-insensitive, spaces and punctuation ignored)."
         },
         "logoUrl": {
           "type": "string",
@@ -50,8 +50,9 @@
         "captainPhone": {
           "type": "string",
           "minLength": 10,
-          "maxLength": 25,
-          "description": "Captain's 10-digit contact mobile number displayed on the team card."
+          "maxLength": 10,
+          "pattern": "^[0-9]{10}$",
+          "description": "Captain's unique 10-digit contact mobile number displayed on the team card."
         },
         "registeredAt": {
           "type": "string",
@@ -79,6 +80,8 @@
         "slot",
         "teamName",
         "teamNameKey",
+        "brandName",
+        "brandNameKey",
         "logoUrl",
         "captainName",
         "registeredAt"
@@ -156,7 +159,11 @@
     },
     "/teamBrands/{brandKey}": {
       "schema": { "$ref": "#/entities/UniqueKeyReservation" },
-      "description": "Uniqueness reservation documents for team brand names."
+      "description": "Uniqueness reservation documents for team titles."
+    },
+    "/captainPhones/{phoneKey}": {
+      "schema": { "$ref": "#/entities/UniqueKeyReservation" },
+      "description": "Uniqueness reservation documents for captain 10-digit mobile numbers."
     },
     "/teamRegistrations/{teamId}": {
       "schema": { "$ref": "#/entities/TeamRegistrationPrivate" },

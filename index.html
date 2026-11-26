@@ -244,14 +244,15 @@
         </div>
       </a>
 
-      <div class="hidden items-center gap-3 text-xs font-medium text-slate-300 xl:gap-4 xl:text-sm lg:flex">
+      <div class="hidden flex-wrap items-center justify-end gap-x-3 gap-y-1 text-xs font-medium text-slate-300 xl:gap-x-3.5 xl:text-[13px] lg:flex">
         <a href="#banner" class="whitespace-nowrap transition hover:text-amber-400">RA/RCL Banner</a>
         <a href="#dates" class="whitespace-nowrap transition hover:text-amber-400">Registration Deadlines</a>
         <a href="#format" class="whitespace-nowrap transition hover:text-amber-400">RCL Tournament Battleship</a>
         <a href="#teams" class="whitespace-nowrap transition hover:text-amber-400">Registration (<span id="nav-team-count">0</span>/24 teams)</a>
         <a href="#schedule" class="whitespace-nowrap transition hover:text-amber-400">Match Schedule</a>
-        <a href="#gallery" class="whitespace-nowrap transition hover:text-amber-400">RCL posters and map</a>
-        <a href="#sponsors" class="whitespace-nowrap transition hover:text-amber-400">Sponsors</a>
+        <a href="#gallery" class="whitespace-nowrap transition hover:text-amber-400">RCL Posters &amp; Map</a>
+        <a href="#organisers" class="whitespace-nowrap transition hover:text-amber-400">Founders &amp; Organisers</a>
+        <a href="#sponsors" class="whitespace-nowrap transition hover:text-amber-400">Sponsors &amp; Supporters</a>
       </div>
 
       <div class="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -264,13 +265,14 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden flex-col gap-3 border-t border-slate-800 bg-[#05060a] px-5 py-4 text-sm font-medium text-slate-300 lg:hidden">
-      <a href="#banner" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Banner section</a>
+      <a href="#banner" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RA/RCL Banner</a>
       <a href="#dates" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Registration Deadlines</a>
       <a href="#format" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RCL Tournament Battleship</a>
       <a href="#teams" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Registration (<span id="mobile-nav-team-count">0</span>/24 teams)</a>
       <a href="#schedule" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Match Schedule</a>
-      <a href="#gallery" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RCL posters and map</a>
-      <a href="#sponsors" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Sponsors</a>
+      <a href="#gallery" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RCL Posters &amp; Map</a>
+      <a href="#organisers" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Founders &amp; Organisers</a>
+      <a href="#sponsors" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Sponsors &amp; Supporters</a>
     </div>
   </nav>
 
@@ -289,7 +291,7 @@
           <div class="hero-3d-sheen pointer-events-none absolute inset-y-0 left-0 z-10 w-1/3 bg-gradient-to-r from-transparent via-amber-200/25 to-transparent"></div>
           <div class="p-2 sm:p-3">
             <img src="./images/RCL_Tournament_Poster.jpeg"
-                 alt="RCL 2027 Tournament Poster"
+                 alt="RCL-2027 Tournament Poster"
                  onclick="openCardLightbox(this, 'RCL 2027 Tournament Poster')"
                  class="mx-auto block max-h-[78vh] w-full cursor-pointer rounded-xl object-contain" />
           </div>
@@ -561,7 +563,7 @@
     </div>
 
     <div class="space-y-8">
-      <!-- 3 RCL Posters Grid -->
+      <!-- RCL Posters, Logos & Video Grid -->
       <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
         <div class="media-card group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl transition hover:border-amber-500/50" data-type="image">
           <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'RCL 2027 — Registrations Open! Call 9790930072')">
@@ -611,18 +613,62 @@
         </div>
 
         <div class="media-card group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl transition hover:border-amber-500/50" data-type="image">
-          <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'RCL 2027 Official League Logo')">
+          <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'RCL 2027 — Official Prize List (₹2,22,222/-)')">
             <img id="rcl-img-3"
+                 src="./images/RCL_prizelist.png"
+                 alt="RCL 2027 Official Prize List"
+                 onerror="handlePhotoError(this, 'rcl-fb-3')"
+                 class="h-80 w-full bg-black object-contain transition duration-500 group-hover:scale-105" />
+            <div id="rcl-fb-3" data-flex="true" class="hidden relative h-80 flex-col items-center justify-center bg-gradient-to-b from-amber-950/70 via-slate-950 to-black p-5 text-center">
+              <p class="font-display text-2xl text-amber-400">PRIZE POOL ₹2,22,222/-</p>
+              <p class="mt-1 text-xs text-white">Winners ₹1,11,111/- • Runners-Up ₹66,666/-</p>
+              <label onclick="event.stopPropagation()" class="mt-3 cursor-pointer text-[10px] font-bold text-amber-300 underline">
+                📂 Load Prize List Image
+                <input type="file" accept="image/*" class="hidden" onchange="previewLocalPhoto(this, 'rcl-img-3', 'rcl-fb-3')" />
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between border-t border-slate-800 bg-slate-950 p-3">
+            <span class="text-xs font-bold text-amber-400">💰 RCL Prize List</span>
+            <span class="text-[11px] text-slate-400">Tap to zoom 🔍</span>
+          </div>
+        </div>
+
+        <div class="media-card group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl transition hover:border-amber-500/50" data-type="image">
+          <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'Reddy\'s Association Official Logo')">
+            <img id="rcl-img-4"
+                 src="./images/RA_Logo.jpeg"
+                 alt="Reddy's Association Official Logo"
+                 onerror="handlePhotoError(this, 'rcl-fb-4')"
+                 class="h-80 w-full bg-black object-contain transition duration-500 group-hover:scale-105" />
+            <div id="rcl-fb-4" data-flex="true" class="hidden relative h-80 flex-col items-center justify-center bg-gradient-to-b from-slate-900 via-amber-950/40 to-black p-5 text-center">
+              <p class="font-display text-3xl text-amber-400">RA</p>
+              <p class="mt-2 rounded-full bg-amber-400 px-3 py-1 text-xs font-extrabold text-slate-950">REDDY'S ASSOCIATION</p>
+              <label onclick="event.stopPropagation()" class="mt-3 cursor-pointer text-[10px] font-bold text-amber-300 underline">
+                📂 Load RA Logo Image
+                <input type="file" accept="image/*" class="hidden" onchange="previewLocalPhoto(this, 'rcl-img-4', 'rcl-fb-4')" />
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center justify-between border-t border-slate-800 bg-slate-950 p-3">
+            <span class="text-xs font-bold text-amber-400">🛡️ RA Official Logo</span>
+            <span class="text-[11px] text-slate-400">Tap to zoom 🔍</span>
+          </div>
+        </div>
+
+        <div class="media-card group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl transition hover:border-amber-500/50" data-type="image">
+          <div class="relative cursor-pointer overflow-hidden" onclick="openCardLightbox(this, 'RCL 2027 Official League Logo')">
+            <img id="rcl-img-5"
                  src="./images/RCL_Logo.jpeg"
                  alt="RCL 2027 Official League Logo"
-                 onerror="handlePhotoError(this, 'rcl-fb-3')"
-                 class="max-h-[70vh] min-h-80 w-full bg-black object-contain transition duration-500" />
-            <div id="rcl-fb-3" data-flex="true" class="hidden relative h-80 flex-col items-center justify-center bg-gradient-to-b from-slate-900 via-red-950/60 to-black p-5 text-center">
+                 onerror="handlePhotoError(this, 'rcl-fb-5')"
+                 class="h-80 w-full bg-black object-contain transition duration-500 group-hover:scale-105" />
+            <div id="rcl-fb-5" data-flex="true" class="hidden relative h-80 flex-col items-center justify-center bg-gradient-to-b from-slate-900 via-red-950/60 to-black p-5 text-center">
               <p class="font-display text-3xl text-white">RCL <span class="text-amber-400">2027</span></p>
               <p class="mt-2 rounded-full bg-amber-400 px-3 py-1 text-xs font-extrabold text-slate-950">REDDY'S CRICKET LEAGUE</p>
               <label onclick="event.stopPropagation()" class="mt-3 cursor-pointer text-[10px] font-bold text-amber-300 underline">
                 📂 Load Poster Image
-                <input type="file" accept="image/*" class="hidden" onchange="previewLocalPhoto(this, 'rcl-img-3', 'rcl-fb-3')" />
+                <input type="file" accept="image/*" class="hidden" onchange="previewLocalPhoto(this, 'rcl-img-5', 'rcl-fb-5')" />
               </label>
             </div>
           </div>
@@ -669,6 +715,189 @@
     </div>
   </section>
 
+  <!-- ==================== 10B. RA FOUNDERS & ORGANISERS ==================== -->
+  <section id="organisers" class="relative scroll-mt-20 overflow-hidden border-t border-amber-500/20 bg-gradient-to-b from-[#070911] via-[#0b0f1b] to-black py-14 sm:py-20">
+    <div class="pointer-events-none absolute -left-20 top-10 h-64 w-64 rounded-full bg-amber-500/10 blur-[110px]"></div>
+    <div class="pointer-events-none absolute -right-20 bottom-10 h-64 w-64 rounded-full bg-red-600/10 blur-[110px]"></div>
+
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-500/10 px-3.5 py-1 text-[10px] font-extrabold uppercase tracking-widest text-amber-300 sm:text-xs">
+          <span>👑</span>
+          <span>Pillars of Reddy's Association • Heartfelt Gratitude</span>
+        </span>
+        <h2 class="font-display mt-3 text-3xl text-white sm:text-5xl">
+          RA FOUNDERS &amp; <span class="gold-text">ORGANISERS</span>
+        </h2>
+        <p class="mt-3 text-xs leading-relaxed text-slate-300 sm:text-base">
+          We proudly appreciate and salute the visionary <strong class="text-white">RA Founders &amp; Organisers</strong>
+          for building, shaping, and relentlessly evolving this <strong class="text-amber-400">RCL Tournament</strong> into a grand cricketing legacy.
+        </p>
+        <p class="font-royal mt-3 inline-block border-y border-amber-500/30 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-amber-300 sm:text-xs">
+          Built with Passion • Driven by Pride • Played for Glory
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Naresh -->
+        <article class="group relative overflow-hidden rounded-2xl border border-amber-500/35 bg-gradient-to-br from-slate-900 via-slate-950 to-black p-4 shadow-xl transition hover:-translate-y-0.5 hover:border-amber-400/80 sm:p-5">
+          <div class="flex items-center gap-3.5">
+            <div class="gold-gradient flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-slate-950 shadow-md">
+              N
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Naresh</h3>
+              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 9845332293</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            <a href="tel:+919845332293"
+               aria-label="Call Naresh at +91 9845332293"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-500 hover:text-slate-950">
+              <span>📞</span>
+              <span>Call</span>
+            </a>
+            <a href="https://wa.me/919845332293" target="_blank" rel="noopener noreferrer"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300 transition hover:bg-[#25D366] hover:text-slate-950">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.12c-.24.68-1.41 1.3-1.95 1.38-.51.08-1.15.11-1.85-.11-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.29-5.06-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.37.79-.37.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.47.12.65-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.96.3.15.5.22.57.34.08.13.08.73-.16 1.41z" /></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Sudhakar -->
+        <article class="group relative overflow-hidden rounded-2xl border border-amber-500/35 bg-gradient-to-br from-slate-900 via-slate-950 to-black p-4 shadow-xl transition hover:-translate-y-0.5 hover:border-amber-400/80 sm:p-5">
+          <div class="flex items-center gap-3.5">
+            <div class="gold-gradient flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-slate-950 shadow-md">
+              S
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Sudhakar</h3>
+              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 8220298526</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            <a href="tel:+918220298526"
+               aria-label="Call Sudhakar at +91 8220298526"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-500 hover:text-slate-950">
+              <span>📞</span>
+              <span>Call</span>
+            </a>
+            <a href="https://wa.me/918220298526" target="_blank" rel="noopener noreferrer"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300 transition hover:bg-[#25D366] hover:text-slate-950">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.12c-.24.68-1.41 1.3-1.95 1.38-.51.08-1.15.11-1.85-.11-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.29-5.06-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.37.79-.37.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.47.12.65-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.96.3.15.5.22.57.34.08.13.08.73-.16 1.41z" /></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Rupachandra -->
+        <article class="group relative overflow-hidden rounded-2xl border border-amber-500/35 bg-gradient-to-br from-slate-900 via-slate-950 to-black p-4 shadow-xl transition hover:-translate-y-0.5 hover:border-amber-400/80 sm:p-5">
+          <div class="flex items-center gap-3.5">
+            <div class="gold-gradient flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-slate-950 shadow-md">
+              R
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Rupachandra</h3>
+              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 9790930072</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            <a href="tel:+919790930072"
+               aria-label="Call Rupachandra at +91 9790930072"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-500 hover:text-slate-950">
+              <span>📞</span>
+              <span>Call</span>
+            </a>
+            <a href="https://wa.me/919790930072" target="_blank" rel="noopener noreferrer"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300 transition hover:bg-[#25D366] hover:text-slate-950">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.12c-.24.68-1.41 1.3-1.95 1.38-.51.08-1.15.11-1.85-.11-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.29-5.06-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.37.79-.37.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.47.12.65-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.96.3.15.5.22.57.34.08.13.08.73-.16 1.41z" /></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Nagesh -->
+        <article class="group relative overflow-hidden rounded-2xl border border-amber-500/35 bg-gradient-to-br from-slate-900 via-slate-950 to-black p-4 shadow-xl transition hover:-translate-y-0.5 hover:border-amber-400/80 sm:p-5">
+          <div class="flex items-center gap-3.5">
+            <div class="gold-gradient flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-slate-950 shadow-md">
+              N
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Nagesh</h3>
+              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 9738449989</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            <a href="tel:+919738449989"
+               aria-label="Call Nagesh at +91 9738449989"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-500 hover:text-slate-950">
+              <span>📞</span>
+              <span>Call</span>
+            </a>
+            <a href="https://wa.me/919738449989" target="_blank" rel="noopener noreferrer"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300 transition hover:bg-[#25D366] hover:text-slate-950">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.12c-.24.68-1.41 1.3-1.95 1.38-.51.08-1.15.11-1.85-.11-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.29-5.06-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.37.79-.37.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.47.12.65-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.96.3.15.5.22.57.34.08.13.08.73-.16 1.41z" /></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Bhaskar -->
+        <article class="group relative overflow-hidden rounded-2xl border border-amber-500/35 bg-gradient-to-br from-slate-900 via-slate-950 to-black p-4 shadow-xl transition hover:-translate-y-0.5 hover:border-amber-400/80 sm:p-5">
+          <div class="flex items-center gap-3.5">
+            <div class="gold-gradient flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-slate-950 shadow-md">
+              B
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Bhaskar</h3>
+              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 9866528853</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            <a href="tel:+919866528853"
+               aria-label="Call Bhaskar at +91 9866528853"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-500 hover:text-slate-950">
+              <span>📞</span>
+              <span>Call</span>
+            </a>
+            <a href="https://wa.me/919866528853" target="_blank" rel="noopener noreferrer"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300 transition hover:bg-[#25D366] hover:text-slate-950">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.12c-.24.68-1.41 1.3-1.95 1.38-.51.08-1.15.11-1.85-.11-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.29-5.06-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.37.79-.37.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.47.12.65-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.96.3.15.5.22.57.34.08.13.08.73-.16 1.41z" /></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Kiran -->
+        <article class="group relative overflow-hidden rounded-2xl border border-amber-500/35 bg-gradient-to-br from-slate-900 via-slate-950 to-black p-4 shadow-xl transition hover:-translate-y-0.5 hover:border-amber-400/80 sm:p-5">
+          <div class="flex items-center gap-3.5">
+            <div class="gold-gradient flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-slate-950 shadow-md">
+              K
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Kiran</h3>
+              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 9014322370</p>
+            </div>
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            <a href="tel:+919014322370"
+               aria-label="Call Kiran at +91 9014322370"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-500 hover:text-slate-950">
+              <span>📞</span>
+              <span>Call</span>
+            </a>
+            <a href="https://wa.me/919014322370" target="_blank" rel="noopener noreferrer"
+               class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300 transition hover:bg-[#25D366] hover:text-slate-950">
+              <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.12c-.24.68-1.41 1.3-1.95 1.38-.51.08-1.15.11-1.85-.11-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.29-5.06-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.37.79-.37.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.47.12.65-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.96.3.15.5.22.57.34.08.13.08.73-.16 1.41z" /></svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== 11. SPONSORS GRATITUDE FOOTER ==================== -->
   <footer id="sponsors" class="scroll-mt-20 border-t border-amber-500/20 bg-black py-14 text-center sm:py-16">
     <div class="mx-auto flex max-w-6xl flex-col items-center px-4 sm:px-6 lg:px-8">
@@ -691,9 +920,12 @@
              class="h-16 w-16 rounded-full border-2 border-amber-400 bg-black p-0.5 shadow-lg sm:h-20 sm:w-20" />
       </div>
 
-      <p class="font-royal text-lg font-extrabold tracking-wider text-amber-400 sm:text-xl">REDDY'S ASSOCIATION • RCL 2027</p>
+      <p class="font-royal text-lg font-extrabold tracking-wider text-amber-400 sm:text-xl">REDDY'S ASSOCIATION • RCL-2027</p>
       <p class="mt-1 text-xs text-slate-400">Reddy's Cricket League • The Biggest Cricket Battle!</p>
-      <p class="mt-4 text-xs text-slate-500">Live Scoring Powered by CricHeroes</p>
+      <p class="mt-5 inline-flex items-center gap-1.5 rounded-full border border-amber-400/50 bg-amber-500/15 px-3 py-1 text-[10px] font-extrabold tracking-wide text-amber-200 shadow-[0_0_18px_rgba(245,158,11,0.28)] sm:text-xs">
+        <span aria-hidden="true">✨</span>
+        <span>Website developed by <span class="gold-text font-royal tracking-wider">N MAHESH REDDY</span> from GDP</span>
+      </p>
     </div>
   </footer>
 
@@ -707,42 +939,62 @@
         <button type="button" id="close-registration-dialog" class="rounded-lg bg-slate-800 px-2.5 py-1.5 text-xs font-bold text-white hover:bg-slate-700" aria-label="Close registration form">✕</button>
       </div>
 
-      <p id="registration-dialog-subtitle" class="text-xs text-slate-300">Enter your team details to register this open slot. Team name must be unique.</p>
+      <p id="registration-dialog-subtitle" class="text-xs text-slate-300">Enter your team details to register this open slot. Team name, Team Title, and captain mobile number must each be unique.</p>
 
-      <label class="block text-xs font-semibold text-slate-200">
-        Team name <span class="text-red-400" aria-hidden="true">*</span>
-        <input id="registration-team-name" name="teamName" required maxlength="60" autocomplete="off"
-               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
-               placeholder="Enter your team name or village name" />
-      </label>
+      <div class="space-y-1">
+        <label class="block text-xs font-semibold text-slate-200">
+          Team name <span class="text-red-400" aria-hidden="true">*</span>
+          <input id="registration-team-name" name="teamName" required maxlength="60" autocomplete="off"
+                 aria-describedby="registration-team-name-error"
+                 class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                 placeholder="Enter your team name or village name" />
+        </label>
+        <p id="registration-team-name-error" class="hidden mt-1 text-xs font-medium text-red-400" role="alert" aria-live="polite"></p>
+      </div>
 
-      <label class="block text-xs font-semibold text-slate-200">
-        Team Title <span class="text-red-400" aria-hidden="true">*</span>
-        <input id="registration-brand-name" name="brandName" required autocomplete="off"
-               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
-               placeholder="Enter Team Title (e.g: GDP Tigers)" />
-      </label>
+      <div class="space-y-1">
+        <label class="block text-xs font-semibold text-slate-200">
+          Team Title <span class="text-red-400" aria-hidden="true">*</span>
+          <input id="registration-brand-name" name="brandName" required autocomplete="off"
+                 aria-describedby="registration-brand-name-error"
+                 class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                 placeholder="Enter Team Title (e.g: GDP Tigers)" />
+        </label>
+        <p id="registration-brand-name-error" class="hidden mt-1 text-xs font-medium text-red-400" role="alert" aria-live="polite"></p>
+      </div>
 
-      <label class="block text-xs font-semibold text-slate-200">
-        <span id="registration-logo-label">Team logo (JPG, PNG, or WebP; up to 5 MB)</span> <span id="registration-logo-required" class="text-red-400" aria-hidden="true">*</span>
-        <input id="registration-team-logo" name="teamLogo" type="file" accept="image/jpeg,image/png,image/webp" required
-               class="mt-1 block w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 focus:border-amber-400 focus:outline-none file:mr-2 file:rounded-md file:border-0 file:bg-amber-500 file:px-2.5 file:py-1 file:font-bold file:text-slate-950" />
-      </label>
+      <div class="space-y-1">
+        <label class="block text-xs font-semibold text-slate-200">
+          <span id="registration-logo-label">Team logo (JPG, PNG, or WebP; up to 5 MB)</span> <span id="registration-logo-required" class="text-red-400" aria-hidden="true">*</span>
+          <input id="registration-team-logo" name="teamLogo" type="file" accept="image/jpeg,image/png,image/webp" required
+                 aria-describedby="registration-team-logo-error"
+                 class="mt-1 block w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 focus:border-amber-400 focus:outline-none file:mr-2 file:rounded-md file:border-0 file:bg-amber-500 file:px-2.5 file:py-1 file:font-bold file:text-slate-950" />
+        </label>
+        <p id="registration-team-logo-error" class="hidden mt-1 text-xs font-medium text-red-400" role="alert" aria-live="polite"></p>
+      </div>
       <img id="registration-logo-preview" class="hidden h-16 w-16 rounded-lg border border-slate-700 object-cover" alt="Selected team logo preview" />
 
-      <label class="block text-xs font-semibold text-slate-200">
-        Captain name <span class="text-red-400" aria-hidden="true">*</span>
-        <input id="registration-captain-name" name="captainName" required maxlength="80" autocomplete="off"
-               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
-               placeholder="Team captain's full name" />
-      </label>
+      <div class="space-y-1">
+        <label class="block text-xs font-semibold text-slate-200">
+          Captain name <span class="text-red-400" aria-hidden="true">*</span>
+          <input id="registration-captain-name" name="captainName" required maxlength="80" autocomplete="off"
+                 aria-describedby="registration-captain-name-error"
+                 class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                 placeholder="Team captain's full name" />
+        </label>
+        <p id="registration-captain-name-error" class="hidden mt-1 text-xs font-medium text-red-400" role="alert" aria-live="polite"></p>
+      </div>
 
-      <label class="block text-xs font-semibold text-slate-200">
-        Captain phone number (10 digits) <span class="text-red-400" aria-hidden="true">*</span>
-        <input id="registration-captain-phone" name="captainPhone" type="tel" required minlength="10" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" autocomplete="off"
-               class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
-               placeholder="10-digit mobile number" />
-      </label>
+      <div class="space-y-1">
+        <label class="block text-xs font-semibold text-slate-200">
+          Captain phone number (10 digits) <span class="text-red-400" aria-hidden="true">*</span>
+          <input id="registration-captain-phone" name="captainPhone" type="tel" required minlength="10" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" autocomplete="off"
+                 aria-describedby="registration-captain-phone-error"
+                 class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
+                 placeholder="10-digit mobile number" />
+        </label>
+        <p id="registration-captain-phone-error" class="hidden mt-1 text-xs font-medium text-red-400" role="alert" aria-live="polite"></p>
+      </div>
 
       <p id="registration-form-status" class="min-h-4 text-xs text-slate-300" role="status" aria-live="polite"></p>
       <div class="text-center">
@@ -771,7 +1023,7 @@
         </div>
         <p class="text-xl font-extrabold text-white">₹22,222 <span class="text-xs font-medium text-purple-100">Tournament Entry Fee</span></p>
         <div class="flex flex-wrap items-center gap-2">
-          <p class="text-xs text-purple-100">UPI ID: <span id="payment-upi-id-text" class="font-mono font-semibold text-white select-all">nmaheshreddy01232@ybl</span></p>
+          <p class="text-xs text-purple-100">UPI ID: <span id="payment-upi-id-text" class="font-mono font-semibold text-white select-all">9845332293-4@axl</span></p>
           <button type="button" id="copy-upi-id-btn"
                   class="inline-flex items-center gap-1 rounded-md border border-white/35 bg-white/15 px-2.5 py-1 text-[11px] font-bold text-white transition hover:bg-white/25"
                   aria-label="Copy UPI ID">
@@ -866,6 +1118,7 @@
       collection,
       doc,
       getDoc,
+      getDocs,
       getDocFromServer,
       onSnapshot,
       query,
@@ -911,10 +1164,10 @@
     });
 
     const ORGANISER_EMAIL = "nmaheshreddy0123@gmail.com";
-    const PAYMENT_UPI_NUMBER = "8951067228";
-    const PAYMENT_UPI_ID = "nmaheshreddy01232@ybl";
+    const PAYMENT_UPI_NUMBER = "9845332293";
+    const PAYMENT_UPI_ID = "9845332293-4@axl";
     const PAYMENT_AMOUNT = 22222;
-    const UPI_OWNER_WHATSAPP_NUMBER = "918618848630";
+    const UPI_OWNER_WHATSAPP_NUMBER = "919845332293";
     const PAYMENT_SCREENSHOT_MAX_BYTES = 5 * 1024 * 1024;
 
     const ownedCaptainPhones = new Map();
@@ -954,16 +1207,38 @@
       throw new Error(JSON.stringify(errInfo));
     }
 
+    function canonicalTeamValue(value) {
+      return String(value || "")
+        .normalize("NFKC")
+        .toLowerCase()
+        .replace(/palle(?![a-z])/g, "palli")
+        .replace(/[^\p{L}\p{N}]+/gu, "");
+    }
+
     function normalizeUniqueValue(value) {
-      const normalized = value.trim().normalize("NFKC").toLowerCase()
-        .replace(/[^\p{L}\p{N}]+/gu, " ").trim().replace(/\s+/g, " ");
-      if (!normalized) return "";
-      const asciiSlug = normalized.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-      const bytes = Array.from(new TextEncoder().encode(normalized))
+      const compact = canonicalTeamValue(value);
+      if (!compact) return "";
+      const asciiSlug = compact.replace(/[^a-z0-9]+/g, "");
+      const bytes = Array.from(new TextEncoder().encode(compact))
         .map((b) => b.toString(16).padStart(2, "0"))
         .join("");
+      let h1 = 0x811c9dc5;
+      let h2 = 0x01000193;
+      for (let i = 0; i < compact.length; i += 1) {
+        const code = compact.charCodeAt(i);
+        h1 = Math.imul(h1 ^ code, 0x01000193) >>> 0;
+        h2 = Math.imul(h2 ^ (code + i), 0x85ebca6b) >>> 0;
+      }
+      const suffixHash = `${h1.toString(16).padStart(8, "0")}${h2.toString(16).padStart(8, "0")}`;
       const prefix = asciiSlug ? `${asciiSlug.slice(0, 48)}-` : "k-";
-      return `${prefix}${bytes.slice(0, 64)}`;
+      const encodedPart = bytes.length <= 56 ? bytes : `${bytes.slice(0, 40)}-${suffixHash}`;
+      return `${prefix}${encodedPart}`;
+    }
+
+    function normalizeCaptainPhone(value) {
+      const digits = String(value || "").replace(/\D/g, "");
+      if (digits.length > 10) return digits.slice(-10);
+      return digits;
     }
 
     function updateTeamCounts() {
@@ -1276,7 +1551,7 @@
       document.getElementById("registration-logo-label").textContent = "Team logo (JPG, PNG, or WebP; up to 5 MB)";
       document.getElementById("registration-dialog-title").textContent = "REGISTER YOUR TEAM";
       document.getElementById("registration-dialog-subtitle").textContent =
-        "Enter your team details to register this open slot. Team name must be unique.";
+        "Enter your team details to register this open slot. Team name, Team Title, and captain mobile number must each be unique.";
       document.getElementById("submit-team-registration").textContent = "Submit Team Registration";
       document.getElementById("registration-slot-label").textContent =
         `Next in order: Slot #${String(nextSlot.slotNumber).padStart(2, "0")}`;
@@ -1314,7 +1589,7 @@
       document.getElementById("registration-team-name").value = slot.teamName || "";
       document.getElementById("registration-brand-name").value = slot.brandName || "";
       document.getElementById("registration-captain-name").value = slot.captainName || "";
-      document.getElementById("registration-captain-phone").value = slot.captainPhone || ownedPhone || "";
+      document.getElementById("registration-captain-phone").value = normalizeCaptainPhone(slot.captainPhone || ownedPhone || "");
 
       const preview = document.getElementById("registration-logo-preview");
       if (slot.logoUrl) {
@@ -1329,7 +1604,7 @@
       document.getElementById("registration-logo-label").textContent = "Change team logo (optional; JPG, PNG, or WebP up to 5 MB)";
       document.getElementById("registration-dialog-title").textContent = "ADMIN: UPDATE TEAM";
       document.getElementById("registration-dialog-subtitle").textContent =
-        "Admin-only edit mode. Team name must remain unique.";
+        "Admin-only edit mode. Team name, Team Title, and captain mobile number must each remain unique.";
       document.getElementById("submit-team-registration").textContent = "Update Team Details";
       document.getElementById("registration-slot-label").textContent =
         `Admin Editing Slot #${String(slotNumber).padStart(2, "0")}`;
@@ -1338,28 +1613,96 @@
       document.getElementById("team-registration-dialog").showModal();
     }
 
+    function setFieldInlineError(inputId, errorId, message) {
+      const input = document.getElementById(inputId);
+      const errorEl = document.getElementById(errorId);
+      if (errorEl) {
+        if (message) {
+          errorEl.textContent = message;
+          errorEl.classList.remove("hidden");
+        } else {
+          errorEl.textContent = "";
+          errorEl.classList.add("hidden");
+        }
+      }
+      if (input) {
+        input.setAttribute("aria-invalid", message ? "true" : "false");
+        input.classList.toggle("border-red-500", Boolean(message));
+        input.classList.toggle("focus:border-red-400", Boolean(message));
+        input.classList.toggle("border-slate-700", !message);
+        input.classList.toggle("focus:border-amber-400", !message);
+      }
+    }
+
     function setRegistrationFormStatus(message, isError = false) {
       const status = document.getElementById("registration-form-status");
       status.textContent = message || "";
       if (isError) {
         status.setAttribute("role", "alert");
-        status.className = "rounded-lg border border-red-500/70 bg-red-950/80 px-3 py-2 text-xs font-bold text-red-300";
+        status.className = "min-h-4 text-xs font-medium text-red-400";
       } else {
         status.setAttribute("role", "status");
         status.className = "min-h-4 text-xs text-slate-300";
       }
     }
 
-    function findDuplicateTeamField(teamNameKey, _brandNameKey = "", excludeSlotNumber = null) {
-      for (const slot of rclTeamSlots) {
+    function checkDuplicateTeamFields(teamNameValue, brandNameValue = "", captainPhoneValue = "", excludeSlotNumber = null, slotsSource = rclTeamSlots) {
+      const targetNameCanonical = canonicalTeamValue(teamNameValue);
+      const targetBrandCanonical = canonicalTeamValue(brandNameValue);
+      const targetNameKey = targetNameCanonical ? normalizeUniqueValue(teamNameValue) : "";
+      const targetBrandKey = targetBrandCanonical ? normalizeUniqueValue(brandNameValue) : "";
+      const targetPhone = normalizeCaptainPhone(captainPhoneValue);
+
+      let duplicateName = false;
+      let duplicateTitle = false;
+      let duplicatePhone = false;
+
+      for (const slot of slotsSource) {
         if (slot.status !== "booked") continue;
         if (excludeSlotNumber !== null && slot.slotNumber === excludeSlotNumber) continue;
-        const existingNameKey = slot.teamNameKey || normalizeUniqueValue(slot.teamName || "");
-        if (teamNameKey && existingNameKey === teamNameKey) {
-          return "That team name is already registered. Please enter a unique team name.";
+
+        const existingNameCanonical = canonicalTeamValue(slot.teamName || "");
+        const existingBrandCanonical = canonicalTeamValue(slot.brandName || "");
+        const existingPhone = normalizeCaptainPhone(slot.captainPhone || ownedCaptainPhones.get(`slot-${slot.slotNumber}`) || "");
+
+        if (
+          targetNameCanonical
+          && ((existingNameCanonical && existingNameCanonical === targetNameCanonical)
+            || (targetNameKey && slot.teamNameKey === targetNameKey))
+        ) {
+          duplicateName = true;
+        }
+        if (
+          targetBrandCanonical
+          && ((existingBrandCanonical && existingBrandCanonical === targetBrandCanonical)
+            || (targetBrandKey && slot.brandNameKey === targetBrandKey))
+        ) {
+          duplicateTitle = true;
+        }
+        if (targetPhone.length === 10 && existingPhone.length === 10 && existingPhone === targetPhone) {
+          duplicatePhone = true;
         }
       }
-      return "";
+
+      const nameError = duplicateName
+        ? "That team name is already registered. Please enter a unique team name."
+        : "";
+      const titleError = duplicateTitle
+        ? "That Team Title is already registered. Please enter a unique Team Title."
+        : "";
+      const phoneError = duplicatePhone
+        ? "That captain mobile number is already registered. Please enter a unique mobile number."
+        : "";
+      const messages = [nameError, titleError, phoneError].filter(Boolean);
+      const message = messages.length > 1
+        ? "Duplicate registration details found. Please enter unique values for highlighted fields."
+        : (messages[0] || "");
+
+      return { duplicateName, duplicateTitle, duplicatePhone, nameError, titleError, phoneError, message };
+    }
+
+    function findDuplicateTeamField(teamNameValue, brandNameValue = "", captainPhoneValue = "", excludeSlotNumber = null, slotsSource = rclTeamSlots) {
+      return checkDuplicateTeamFields(teamNameValue, brandNameValue, captainPhoneValue, excludeSlotNumber, slotsSource).message;
     }
 
     function updateRegistrationSubmitState() {
@@ -1377,19 +1720,36 @@
         ? (!logoFile || (["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) && logoFile.size <= 5 * 1024 * 1024))
         : (logoFile && ["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) && logoFile.size <= 5 * 1024 * 1024);
       const validPhoneDigits = /^\d{10}$/.test(captainPhone);
-      const teamNameKey = teamName ? normalizeUniqueValue(teamName) : "";
-      const duplicateError = findDuplicateTeamField(teamNameKey, "", editingSlotNumber);
+      const hasValidTeamName = Boolean(canonicalTeamValue(teamName));
+      const hasValidBrandName = Boolean(canonicalTeamValue(brandName));
+      const duplicateCheck = checkDuplicateTeamFields(teamName, brandName, captainPhone, editingSlotNumber);
+      const duplicateError = duplicateCheck.message;
 
-      if (duplicateError) {
-        setRegistrationFormStatus(duplicateError, true);
-      } else if (captainPhone && !validPhoneDigits) {
-        setRegistrationFormStatus("Captain phone number must be exactly 10 digits.", true);
-      } else if (document.getElementById("registration-form-status").getAttribute("role") === "alert") {
+      const inlineTeamNameError = (teamName && !hasValidTeamName)
+        ? "Team name must contain letters or numbers."
+        : duplicateCheck.nameError;
+      const inlineBrandNameError = (brandName && !hasValidBrandName)
+        ? "Team Title must contain letters or numbers."
+        : duplicateCheck.titleError;
+      const inlineLogoError = (logoFile && !(["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) && logoFile.size <= 5 * 1024 * 1024))
+        ? "Choose a JPG, PNG, or WebP logo smaller than 5 MB."
+        : "";
+      const inlinePhoneError = (captainPhone && !validPhoneDigits)
+        ? "Captain phone number must be exactly 10 digits."
+        : duplicateCheck.phoneError;
+
+      setFieldInlineError("registration-team-name", "registration-team-name-error", inlineTeamNameError);
+      setFieldInlineError("registration-brand-name", "registration-brand-name-error", inlineBrandNameError);
+      setFieldInlineError("registration-team-logo", "registration-team-logo-error", inlineLogoError);
+      setFieldInlineError("registration-captain-name", "registration-captain-name-error", "");
+      setFieldInlineError("registration-captain-phone", "registration-captain-phone-error", inlinePhoneError);
+
+      if (document.getElementById("registration-form-status").getAttribute("role") === "alert") {
         setRegistrationFormStatus("", false);
       }
 
       document.getElementById("submit-team-registration").disabled =
-        !(teamName && brandName && captainName && validPhoneDigits && validLogo && !duplicateError);
+        !(hasValidTeamName && hasValidBrandName && captainName && validPhoneDigits && validLogo && !duplicateError);
     }
 
     function setTeamSyncStatus(message, isError = false) {
@@ -1681,7 +2041,7 @@
       const status = document.getElementById("payment-action-status");
       if (!status) return;
       status.textContent = message;
-      status.className = `min-h-4 text-center text-[11px] ${isError ? "text-red-300" : "text-amber-300"}`;
+      status.className = `min-h-4 text-center text-[11px] ${isError ? "font-medium text-red-400" : "text-amber-300"}`;
     }
 
     function compressScreenshotToDataUrl(file) {
@@ -1918,6 +2278,7 @@
       const captainPhone = document.getElementById("registration-captain-phone").value.trim();
       const logoFile = document.getElementById("registration-team-logo").files[0];
       const teamNameKey = normalizeUniqueValue(teamName);
+      const brandNameKey = normalizeUniqueValue(brandName);
       const isEditMode = editingSlotNumber !== null;
 
       if (!firebaseReady || !firebaseAuth || !firebaseDb || !firebaseStorage) {
@@ -1925,32 +2286,57 @@
         return;
       }
       if (!teamNameKey) {
-        setRegistrationFormStatus("Team name must contain letters or numbers.", true);
+        setFieldInlineError("registration-team-name", "registration-team-name-error", "Team name must contain letters or numbers.");
+        document.getElementById("registration-team-name").focus();
         return;
       }
-      if (!brandName) {
-        setRegistrationFormStatus("Please enter a team title.", true);
+      if (!brandNameKey) {
+        setFieldInlineError("registration-brand-name", "registration-brand-name-error", "Team Title must contain letters or numbers.");
+        document.getElementById("registration-brand-name").focus();
         return;
       }
-      if (teamName.length > 60 || brandName.length > 500 || captainName.length > 80) {
-        setRegistrationFormStatus("One or more fields exceed the allowed character limit.", true);
+      if (teamName.length > 60) {
+        setFieldInlineError("registration-team-name", "registration-team-name-error", "Team name must be 60 characters or fewer.");
+        document.getElementById("registration-team-name").focus();
+        return;
+      }
+      if (brandName.length > 500) {
+        setFieldInlineError("registration-brand-name", "registration-brand-name-error", "Team Title must be 500 characters or fewer.");
+        document.getElementById("registration-brand-name").focus();
+        return;
+      }
+      if (!captainName || captainName.length > 80) {
+        setFieldInlineError("registration-captain-name", "registration-captain-name-error", "Enter a valid captain name (up to 80 characters).");
+        document.getElementById("registration-captain-name").focus();
         return;
       }
       if (!/^\d{10}$/.test(captainPhone)) {
-        setRegistrationFormStatus("Captain phone number must be exactly 10 digits.", true);
+        setFieldInlineError("registration-captain-phone", "registration-captain-phone-error", "Captain phone number must be exactly 10 digits.");
+        document.getElementById("registration-captain-phone").focus();
         return;
       }
-      const duplicateError = findDuplicateTeamField(teamNameKey, "", editingSlotNumber);
-      if (duplicateError) {
-        setRegistrationFormStatus(duplicateError, true);
+      const duplicateCheck = checkDuplicateTeamFields(teamName, brandName, captainPhone, editingSlotNumber);
+      if (duplicateCheck.message) {
+        setFieldInlineError("registration-team-name", "registration-team-name-error", duplicateCheck.nameError);
+        setFieldInlineError("registration-brand-name", "registration-brand-name-error", duplicateCheck.titleError);
+        setFieldInlineError("registration-captain-phone", "registration-captain-phone-error", duplicateCheck.phoneError);
+        if (duplicateCheck.nameError) {
+          document.getElementById("registration-team-name").focus();
+        } else if (duplicateCheck.titleError) {
+          document.getElementById("registration-brand-name").focus();
+        } else if (duplicateCheck.phoneError) {
+          document.getElementById("registration-captain-phone").focus();
+        }
         return;
       }
       if (logoFile && (!["image/jpeg", "image/png", "image/webp"].includes(logoFile.type) || logoFile.size > 5 * 1024 * 1024)) {
-        setRegistrationFormStatus("Choose a JPG, PNG, or WebP logo smaller than 5 MB.", true);
+        setFieldInlineError("registration-team-logo", "registration-team-logo-error", "Choose a JPG, PNG, or WebP logo smaller than 5 MB.");
+        document.getElementById("registration-team-logo").focus();
         return;
       }
       if (!isEditMode && !logoFile) {
-        setRegistrationFormStatus("Choose a JPG, PNG, or WebP logo smaller than 5 MB.", true);
+        setFieldInlineError("registration-team-logo", "registration-team-logo-error", "Choose a JPG, PNG, or WebP logo smaller than 5 MB.");
+        document.getElementById("registration-team-logo").focus();
         return;
       }
 
@@ -1963,6 +2349,27 @@
         const user = await ensureAuthenticatedUser();
         if (!user) {
           throw new Error("Could not initialize registration session. Please refresh and try again.");
+        }
+
+        const liveTeamsSnap = await getDocs(collection(firebaseDb, "teams"));
+        const liveSlots = liveTeamsSnap.docs.map((d) => {
+          const data = d.data();
+          return {
+            status: "booked",
+            slotNumber: Number(data.slot || d.id.replace("slot-", "")),
+            teamName: data.teamName || "",
+            teamNameKey: data.teamNameKey || "",
+            brandName: data.brandName || "",
+            brandNameKey: data.brandNameKey || "",
+            captainPhone: data.captainPhone || ""
+          };
+        });
+        const liveDuplicateCheck = checkDuplicateTeamFields(teamName, brandName, captainPhone, editingSlotNumber, liveSlots);
+        if (liveDuplicateCheck.message) {
+          setFieldInlineError("registration-team-name", "registration-team-name-error", liveDuplicateCheck.nameError);
+          setFieldInlineError("registration-brand-name", "registration-brand-name-error", liveDuplicateCheck.titleError);
+          setFieldInlineError("registration-captain-phone", "registration-captain-phone-error", liveDuplicateCheck.phoneError);
+          throw new Error(liveDuplicateCheck.message);
         }
 
         if (isEditMode) {
@@ -1996,34 +2403,69 @@
                 throw new Error("Team registration record could not be found.");
               }
               const oldData = slotDoc.data();
-              const oldTeamNameKey = oldData.teamNameKey;
+              const oldTeamNameKey = oldData.teamNameKey || "";
+              const oldBrandNameKey = oldData.brandNameKey || "";
+              const oldCaptainPhone = normalizeCaptainPhone(oldData.captainPhone || "");
               const nameChanged = teamNameKey !== oldTeamNameKey;
+              const brandChanged = brandNameKey !== oldBrandNameKey;
+              const phoneChanged = captainPhone !== oldCaptainPhone;
 
               const newTeamNameRef = doc(firebaseDb, "teamNames", teamNameKey);
-              const newTeamNameDoc = nameChanged ? await transaction.get(newTeamNameRef) : null;
+              const oldTeamNameRef = oldTeamNameKey ? doc(firebaseDb, "teamNames", oldTeamNameKey) : null;
+              const newBrandRef = doc(firebaseDb, "teamBrands", brandNameKey);
+              const oldBrandRef = oldBrandNameKey ? doc(firebaseDb, "teamBrands", oldBrandNameKey) : null;
+              const newPhoneRef = doc(firebaseDb, "captainPhones", captainPhone);
+              const oldPhoneRef = /^\d{10}$/.test(oldCaptainPhone) ? doc(firebaseDb, "captainPhones", oldCaptainPhone) : null;
+
+              const [newTeamNameDoc, oldTeamNameDoc, newBrandDoc, oldBrandDoc, newPhoneDoc, oldPhoneDoc] = await Promise.all([
+                nameChanged ? transaction.get(newTeamNameRef) : Promise.resolve(null),
+                nameChanged && oldTeamNameRef ? transaction.get(oldTeamNameRef) : Promise.resolve(null),
+                brandChanged ? transaction.get(newBrandRef) : Promise.resolve(null),
+                brandChanged && oldBrandRef ? transaction.get(oldBrandRef) : Promise.resolve(null),
+                phoneChanged ? transaction.get(newPhoneRef) : Promise.resolve(null),
+                phoneChanged && oldPhoneRef ? transaction.get(oldPhoneRef) : Promise.resolve(null)
+              ]);
 
               if (nameChanged && newTeamNameDoc && newTeamNameDoc.exists()) {
                 throw new Error("That team name is already registered. Please choose another.");
               }
+              if (brandChanged && newBrandDoc && newBrandDoc.exists()) {
+                throw new Error("That Team Title is already registered. Please choose another.");
+              }
+              if (phoneChanged && newPhoneDoc && newPhoneDoc.exists()) {
+                throw new Error("That captain mobile number is already registered. Please choose another.");
+              }
 
               if (nameChanged) {
-                transaction.delete(doc(firebaseDb, "teamNames", oldTeamNameKey));
+                if (oldTeamNameDoc && oldTeamNameDoc.exists()) {
+                  transaction.delete(oldTeamNameRef);
+                }
                 transaction.set(newTeamNameRef, { teamId: slotId });
+              }
+              if (brandChanged) {
+                if (oldBrandDoc && oldBrandDoc.exists()) {
+                  transaction.delete(oldBrandRef);
+                }
+                transaction.set(newBrandRef, { teamId: slotId });
+              }
+              if (phoneChanged) {
+                if (oldPhoneDoc && oldPhoneDoc.exists()) {
+                  transaction.delete(oldPhoneRef);
+                }
+                transaction.set(newPhoneRef, { teamId: slotId });
               }
 
               const updatePayload = {
                 teamName,
                 teamNameKey,
                 brandName,
+                brandNameKey,
                 logoUrl,
                 captainName,
                 captainPhone,
                 paymentStatus: oldData.paymentStatus === "paid" ? "paid" : "pending",
                 updatedAt: serverTimestamp()
               };
-              if (oldData.brandNameKey) {
-                updatePayload.brandNameKey = oldData.brandNameKey;
-              }
               transaction.update(slotRef, updatePayload);
               transaction.update(registrationRef, {
                 captainName,
@@ -2071,14 +2513,18 @@
         setRegistrationFormStatus(`Saving Slot #${String(slotNumber).padStart(2, "0")} to Firestore...`, false);
         const slotRef = doc(firebaseDb, "teams", slotId);
         const teamNameRef = doc(firebaseDb, "teamNames", teamNameKey);
+        const brandNameRef = doc(firebaseDb, "teamBrands", brandNameKey);
+        const captainPhoneRef = doc(firebaseDb, "captainPhones", captainPhone);
         const registrationRef = doc(firebaseDb, "teamRegistrations", slotId);
 
         try {
           await runTransaction(firebaseDb, async (transaction) => {
-            const [sequenceDoc, slotDoc, teamNameDoc] = await Promise.all([
+            const [sequenceDoc, slotDoc, teamNameDoc, brandNameDoc, captainPhoneDoc] = await Promise.all([
               transaction.get(sequenceRef),
               transaction.get(slotRef),
-              transaction.get(teamNameRef)
+              transaction.get(teamNameRef),
+              transaction.get(brandNameRef),
+              transaction.get(captainPhoneRef)
             ]);
             const nextSlot = sequenceDoc.exists() ? Number(sequenceDoc.data().nextSlot) : 1;
             if (nextSlot !== slotNumber) {
@@ -2086,12 +2532,15 @@
             }
             if (slotDoc.exists()) throw new Error("This slot is already registered. Reload the page and try again.");
             if (teamNameDoc.exists()) throw new Error("That team name is already registered. Please choose another.");
+            if (brandNameDoc.exists()) throw new Error("That Team Title is already registered. Please choose another.");
+            if (captainPhoneDoc.exists()) throw new Error("That captain mobile number is already registered. Please choose another.");
 
             transaction.set(slotRef, {
               slot: slotNumber,
               teamName,
               teamNameKey,
               brandName,
+              brandNameKey,
               logoUrl,
               captainName,
               captainPhone,
@@ -2099,6 +2548,8 @@
               registeredAt: serverTimestamp()
             });
             transaction.set(teamNameRef, { teamId: slotId });
+            transaction.set(brandNameRef, { teamId: slotId });
+            transaction.set(captainPhoneRef, { teamId: slotId });
             transaction.set(registrationRef, {
               teamId: slotId,
               captainName,
@@ -2137,12 +2588,40 @@
             errorMessage += ` Logo cleanup also failed: ${cleanupError.message}`;
           }
         }
-        setRegistrationFormStatus(
-          registrationSaved
-            ? `Registration saved, but the form could not close: ${errorMessage}`
-            : `Registration was not saved: ${errorMessage}`,
-          true
-        );
+        if (!registrationSaved && /team name is already registered/i.test(errorMessage)) {
+          setFieldInlineError(
+            "registration-team-name",
+            "registration-team-name-error",
+            "That team name is already registered. Please enter a unique team name."
+          );
+          setRegistrationFormStatus("", false);
+          document.getElementById("registration-team-name")?.focus();
+        } else if (!registrationSaved && /Team Title is already registered/i.test(errorMessage)) {
+          setFieldInlineError(
+            "registration-brand-name",
+            "registration-brand-name-error",
+            "That Team Title is already registered. Please enter a unique Team Title."
+          );
+          setRegistrationFormStatus("", false);
+          document.getElementById("registration-brand-name")?.focus();
+        } else if (!registrationSaved && /captain mobile number is already registered/i.test(errorMessage)) {
+          setFieldInlineError(
+            "registration-captain-phone",
+            "registration-captain-phone-error",
+            "That captain mobile number is already registered. Please enter a unique mobile number."
+          );
+          setRegistrationFormStatus("", false);
+          document.getElementById("registration-captain-phone")?.focus();
+        } else if (!registrationSaved && /Duplicate registration details found/i.test(errorMessage)) {
+          setRegistrationFormStatus("", false);
+        } else {
+          setRegistrationFormStatus(
+            registrationSaved
+              ? `Registration saved, but the form could not close: ${errorMessage}`
+              : `Registration was not saved: ${errorMessage}`,
+            true
+          );
+        }
       } finally {
         submitButton.disabled = false;
       }
@@ -2251,7 +2730,9 @@
       }
     });
     ["registration-team-name", "registration-brand-name", "registration-captain-name"].forEach((id) => {
-      document.getElementById(id).addEventListener("input", updateRegistrationSubmitState);
+      const el = document.getElementById(id);
+      el.addEventListener("input", updateRegistrationSubmitState);
+      el.addEventListener("change", updateRegistrationSubmitState);
     });
     document.getElementById("registration-captain-phone").addEventListener("input", updateRegistrationSubmitState);
     document.getElementById("registration-team-logo").addEventListener("change", (event) => {
