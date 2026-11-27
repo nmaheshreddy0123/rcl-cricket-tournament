@@ -219,7 +219,7 @@
 <body class="antialiased selection:bg-amber-400 selection:text-slate-950">
 
   <!-- ==================== 1. TOP URGENT REGISTRATION TICKER ==================== -->
-  <div class="crimson-gradient border-b border-amber-500/40 px-3 py-2 text-center text-[11px] font-bold leading-snug text-white sm:px-4 sm:text-sm">
+  <div id="top-registration-alert" class="crimson-gradient border-b border-amber-500/40 px-3 py-2 text-center text-[11px] font-bold leading-snug text-white sm:px-4 sm:text-sm">
     🔥 <span id="registered-count-ticker">0</span>/24 Teams Registered! Only <span class="font-extrabold text-amber-300"><span id="open-count-ticker">24</span> Slots Left</span> (First Come, First Served) •
     Last Date: <span class="font-extrabold text-amber-300 underline">DEC 5th</span> •
     <a href="#register" class="font-extrabold text-amber-300 underline decoration-amber-300 underline-offset-2 transition hover:text-white">Register your team, hurry up!!</a>
@@ -227,7 +227,7 @@
 
   <!-- ==================== 2. NAVBAR ==================== -->
   <nav class="sticky top-0 z-40 border-b border-amber-500/20 bg-[#05060a]/90 backdrop-blur-md">
-    <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
+    <div class="relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
       <a href="#banner" class="flex min-w-0 items-center gap-2">
         <!-- RA Crest -->
         <img src="./images/RA_Logo.jpeg"
@@ -244,35 +244,30 @@
         </div>
       </a>
 
-      <div class="hidden flex-wrap items-center justify-end gap-x-3 gap-y-1 text-xs font-medium text-slate-300 xl:gap-x-3.5 xl:text-[13px] lg:flex">
-        <a href="#banner" class="whitespace-nowrap transition hover:text-amber-400">RA/RCL Banner</a>
-        <a href="#dates" class="whitespace-nowrap transition hover:text-amber-400">Registration Deadlines</a>
-        <a href="#format" class="whitespace-nowrap transition hover:text-amber-400">RCL Tournament Battleship</a>
-        <a href="#teams" class="whitespace-nowrap transition hover:text-amber-400">Registration (<span id="nav-team-count">0</span>/24 teams)</a>
-        <a href="#schedule" class="whitespace-nowrap transition hover:text-amber-400">Match Schedule</a>
-        <a href="#gallery" class="whitespace-nowrap transition hover:text-amber-400">RCL Posters &amp; Map</a>
-        <a href="#organisers" class="whitespace-nowrap transition hover:text-amber-400">Founders &amp; Organisers</a>
-        <a href="#sponsors" class="whitespace-nowrap transition hover:text-amber-400">Sponsors &amp; Supporters</a>
-      </div>
-
       <div class="flex shrink-0 items-center gap-2 sm:gap-3">
-        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu"
-                class="rounded-lg border border-slate-800 bg-slate-900 px-2.5 py-1.5 text-sm font-bold text-slate-300 lg:hidden">
-          ☰
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu" aria-expanded="false" title="Menu"
+                class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-500/40 bg-slate-900/90 text-base font-bold text-amber-300 shadow-sm transition hover:border-amber-400 hover:bg-slate-800 hover:text-amber-200">
+          <span id="mobile-menu-icon" aria-hidden="true">☰</span>
         </button>
       </div>
-    </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden flex-col gap-3 border-t border-slate-800 bg-[#05060a] px-5 py-4 text-sm font-medium text-slate-300 lg:hidden">
-      <a href="#banner" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RA/RCL Banner</a>
-      <a href="#dates" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Registration Deadlines</a>
-      <a href="#format" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RCL Tournament Battleship</a>
-      <a href="#teams" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Registration (<span id="mobile-nav-team-count">0</span>/24 teams)</a>
-      <a href="#schedule" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Match Schedule</a>
-      <a href="#gallery" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">RCL Posters &amp; Map</a>
-      <a href="#organisers" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Founders &amp; Organisers</a>
-      <a href="#sponsors" onclick="toggleMobileMenu()" class="block py-1 hover:text-amber-400">Sponsors &amp; Supporters</a>
+      <!-- Smart Navigation Menu -->
+      <div id="mobile-menu" class="hidden absolute right-3 top-full mt-2 w-[calc(100%-1.5rem)] flex-col gap-1 rounded-2xl border border-amber-500/30 bg-[#070911]/95 p-3 text-sm font-medium text-slate-200 shadow-[0_20px_50px_rgba(0,0,0,0.85)] backdrop-blur-xl sm:right-6 sm:w-80 lg:right-8">
+        <a href="#banner" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">RA/RCL Banner</a>
+        <a id="mobile-nav-dates-link" href="#dates" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">Registration Deadlines</a>
+        <a href="#format" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">RCL Tournament Battleship</a>
+        <a href="#teams" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">Registration (<span id="mobile-nav-team-count">0</span>/24 teams)</a>
+        <a href="#schedule" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">Match Schedule</a>
+        <a href="#gallery" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">RCL Posters &amp; Map</a>
+        <a href="#organisers" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">Founders &amp; Organisers</a>
+        <a href="#sponsors" onclick="toggleMobileMenu()" class="block rounded-lg px-3 py-2 transition hover:bg-amber-500/15 hover:text-amber-300">Sponsors &amp; Supporters</a>
+        <div class="mt-1 border-t border-slate-800 pt-2">
+          <button type="button" id="organiser-auth-menu-btn"
+                  class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-xs font-bold text-amber-300 transition hover:bg-amber-500/15 hover:text-amber-200">
+            <span id="organiser-auth-menu-label">🔐 Admin . Log In</span>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
 
@@ -326,7 +321,7 @@
 
       <!-- Action Buttons -->
       <div class="flex w-full flex-col gap-4 sm:flex-row">
-        <a href="#register"
+        <a id="hero-register-btn" href="#register"
            class="crimson-gradient flex flex-1 items-center justify-center gap-2 rounded-xl border border-amber-400/40 px-6 py-4 text-sm font-extrabold text-white shadow-xl shadow-red-600/20 transition hover:scale-[1.01] sm:text-base">
           Register your team, hurry up!!
         </a>
@@ -454,10 +449,22 @@
     </div>
 
     <div class="mb-6 flex flex-col gap-4">
-      <div>
-        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">First Come, First Served</span>
-        <h2 class="font-display mt-1 whitespace-nowrap text-[clamp(1rem,4.2vw,2.25rem)] leading-tight text-white">RCL 2027 REGISTERED TEAMS (<span id="teams-booked-count">0</span> / 24)</h2>
-        <p class="mt-1 text-xs text-slate-400"><span id="teams-open-count">24</span> slots remain open for registration until Dec 5th</p>
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-400">First Come, First Served</span>
+          <h2 class="font-display mt-1 whitespace-nowrap text-[clamp(1rem,4.2vw,2.25rem)] leading-tight text-white">RCL 2027 REGISTERED TEAMS (<span id="teams-booked-count">0</span> / 24)</h2>
+          <p class="mt-1 text-xs text-slate-400"><span id="teams-open-count">24</span> slots remain open for registration until Dec 5th</p>
+        </div>
+        <button type="button" id="open-export-teams-btn"
+                class="gold-gradient inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-xl border border-amber-300/60 px-4 py-2.5 text-xs font-extrabold uppercase tracking-wider text-slate-950 shadow-lg shadow-amber-500/20 transition hover:scale-[1.02] hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-amber-300 sm:self-auto sm:text-xs">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span id="export-teams-btn-label">Export All Teams</span>
+          <span id="export-teams-btn-count" class="rounded-md bg-slate-950/85 px-1.5 py-0.5 text-[10px] font-extrabold text-amber-300">0</span>
+        </button>
       </div>
 
       <div class="flex w-full flex-col gap-2.5">
@@ -498,7 +505,7 @@
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-red-400">10 Overs Per Innings</span>
           <h2 class="font-display mt-1 text-3xl text-white sm:text-5xl">MATCH SCHEDULE &amp; LIVE SCORES</h2>
-          <p class="mt-1 text-xs text-amber-300">📢 Big Update Coming Very Soon! Fixtures will be synced live on CricHeroes.</p>
+          <p class="mt-1.5 text-xs text-amber-300/95 sm:text-sm">Official match fixtures and schedule will be released soon!</p>
         </div>
 
         <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
@@ -508,7 +515,7 @@
       </div>
 
       <div class="space-y-4">
-        <div class="flex flex-col justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-950/80 p-5 md:flex-row md:items-center">
+        <div class="rounded-2xl border border-slate-800 bg-slate-950/80 p-5">
           <div class="flex items-center gap-4">
             <div class="min-w-[85px] rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-center">
               <span class="block text-xs font-bold text-amber-400">STAGE 1</span>
@@ -520,13 +527,9 @@
               <p class="text-xs text-slate-400">Ball-by-ball live scorecard on CricHeroes</p>
             </div>
           </div>
-          <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
-             class="rounded-xl bg-slate-800 px-5 py-2.5 text-center text-xs font-bold text-amber-400 transition hover:bg-amber-500 hover:text-slate-950">
-            Track on CricHeroes ↗
-          </a>
         </div>
 
-        <div class="flex flex-col justify-between gap-4 rounded-2xl border border-amber-500/35 bg-gradient-to-r from-red-950/30 to-slate-950 p-5 md:flex-row md:items-center">
+        <div class="rounded-2xl border border-amber-500/35 bg-gradient-to-r from-red-950/30 to-slate-950 p-5">
           <div class="flex items-center gap-4">
             <div class="min-w-[85px] rounded-xl border border-amber-500/40 bg-black px-3 py-2 text-center">
               <span class="block text-xs font-bold text-amber-400">FINALS</span>
@@ -538,10 +541,6 @@
               <p class="text-xs text-slate-400">Team Schedule coming soon!</p>
             </div>
           </div>
-          <a href="https://cricheroes.com/" target="_blank" rel="noopener noreferrer"
-             class="gold-gradient rounded-xl px-5 py-2.5 text-center text-xs font-bold text-slate-950 transition">
-            Live Final on CricHeroes ↗
-          </a>
         </div>
       </div>
     </div>
@@ -724,7 +723,7 @@
       <div class="mx-auto max-w-3xl text-center">
         <span class="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-500/10 px-3.5 py-1 text-[10px] font-extrabold uppercase tracking-widest text-amber-300 sm:text-xs">
           <span>👑</span>
-          <span>Pillars of Reddy's Association • Heartfelt Gratitude</span>
+          <span>Pillars of Reddy's Association</span>
         </span>
         <h2 class="font-display mt-3 text-3xl text-white sm:text-5xl">
           RA FOUNDERS &amp; <span class="gold-text">ORGANISERS</span>
@@ -734,7 +733,7 @@
           for building, shaping, and relentlessly evolving this <strong class="text-amber-400">RCL Tournament</strong> into a grand cricketing legacy.
         </p>
         <p class="font-royal mt-3 inline-block border-y border-amber-500/30 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-amber-300 sm:text-xs">
-          Built with Passion • Driven by Pride • Played for Glory
+          Built with Passion • Driven by Pride
         </p>
       </div>
 
@@ -869,25 +868,25 @@
           </div>
         </article>
 
-        <!-- Kiran -->
+        <!-- Ramesh -->
         <article class="group relative overflow-hidden rounded-2xl border border-amber-500/35 bg-gradient-to-br from-slate-900 via-slate-950 to-black p-4 shadow-xl transition hover:-translate-y-0.5 hover:border-amber-400/80 sm:p-5">
           <div class="flex items-center gap-3.5">
             <div class="gold-gradient flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-slate-950 shadow-md">
-              K
+              R
             </div>
             <div class="min-w-0 flex-1">
-              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Kiran</h3>
-              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 9014322370</p>
+              <h3 class="font-royal truncate text-base font-extrabold text-white sm:text-lg">Ramesh</h3>
+              <p class="mt-0.5 font-mono text-xs font-semibold text-slate-300">📱 +91 9347930395</p>
             </div>
           </div>
           <div class="mt-4 flex items-center gap-2">
-            <a href="tel:+919014322370"
-               aria-label="Call Kiran at +91 9014322370"
+            <a href="tel:+919347930395"
+               aria-label="Call Ramesh at +91 9347930395"
                class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-amber-400/50 bg-amber-500/15 px-3 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-500 hover:text-slate-950">
               <span>📞</span>
               <span>Call</span>
             </a>
-            <a href="https://wa.me/919014322370" target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/919347930395" target="_blank" rel="noopener noreferrer"
                class="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-3 py-2 text-xs font-bold text-emerald-300 transition hover:bg-[#25D366] hover:text-slate-950">
               <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.79 14.12c-.24.68-1.41 1.3-1.95 1.38-.51.08-1.15.11-1.85-.11-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.29-5.06-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.76-2.18 1.03-2.48.27-.3.59-.37.79-.37.2 0 .39.01.56.01.18 0 .42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.45.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.37 1.46.3.15.47.12.65-.08.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.96.3.15.5.22.57.34.08.13.08.73-.16 1.41z" /></svg>
               <span>WhatsApp</span>
@@ -922,9 +921,9 @@
 
       <p class="font-royal text-lg font-extrabold tracking-wider text-amber-400 sm:text-xl">REDDY'S ASSOCIATION • RCL-2027</p>
       <p class="mt-1 text-xs text-slate-400">Reddy's Cricket League • The Biggest Cricket Battle!</p>
-      <p class="mt-5 inline-flex items-center gap-1.5 rounded-full border border-amber-400/50 bg-amber-500/15 px-3 py-1 text-[10px] font-extrabold tracking-wide text-amber-200 shadow-[0_0_18px_rgba(245,158,11,0.28)] sm:text-xs">
+      <p class="mt-5 inline-flex flex-wrap items-center justify-center gap-1.5 rounded-full border border-amber-400/50 bg-amber-500/15 px-3 py-1 text-[10px] font-extrabold tracking-wide text-amber-200 shadow-[0_0_18px_rgba(245,158,11,0.28)] sm:text-xs">
         <span aria-hidden="true">✨</span>
-        <span>Website developed by <span class="gold-text font-royal tracking-wider">N MAHESH REDDY</span> from GDP</span>
+        <span>Website powered by <span class="gold-text font-royal tracking-wider">N MAHESH REDDY</span> from GDP</span>
       </p>
     </div>
   </footer>
@@ -943,7 +942,7 @@
 
       <div class="space-y-1">
         <label class="block text-xs font-semibold text-slate-200">
-          Team name <span class="text-red-400" aria-hidden="true">*</span>
+          Team Name : <span class="text-red-400" aria-hidden="true">*</span>
           <input id="registration-team-name" name="teamName" required maxlength="60" autocomplete="off"
                  aria-describedby="registration-team-name-error"
                  class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
@@ -954,7 +953,7 @@
 
       <div class="space-y-1">
         <label class="block text-xs font-semibold text-slate-200">
-          Team Title <span class="text-red-400" aria-hidden="true">*</span>
+          Team Title: <span class="text-red-400" aria-hidden="true">*</span>
           <input id="registration-brand-name" name="brandName" required autocomplete="off"
                  aria-describedby="registration-brand-name-error"
                  class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
@@ -965,7 +964,7 @@
 
       <div class="space-y-1">
         <label class="block text-xs font-semibold text-slate-200">
-          <span id="registration-logo-label">Team logo (JPG, PNG, or WebP; up to 5 MB)</span> <span id="registration-logo-required" class="text-red-400" aria-hidden="true">*</span>
+          <span id="registration-logo-label">Team Logo:</span> <span id="registration-logo-required" class="text-red-400" aria-hidden="true">*</span>
           <input id="registration-team-logo" name="teamLogo" type="file" accept="image/jpeg,image/png,image/webp" required
                  aria-describedby="registration-team-logo-error"
                  class="mt-1 block w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 focus:border-amber-400 focus:outline-none file:mr-2 file:rounded-md file:border-0 file:bg-amber-500 file:px-2.5 file:py-1 file:font-bold file:text-slate-950" />
@@ -976,7 +975,7 @@
 
       <div class="space-y-1">
         <label class="block text-xs font-semibold text-slate-200">
-          Captain name <span class="text-red-400" aria-hidden="true">*</span>
+          Captain Name : <span class="text-red-400" aria-hidden="true">*</span>
           <input id="registration-captain-name" name="captainName" required maxlength="80" autocomplete="off"
                  aria-describedby="registration-captain-name-error"
                  class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
@@ -987,7 +986,7 @@
 
       <div class="space-y-1">
         <label class="block text-xs font-semibold text-slate-200">
-          Captain phone number (10 digits) <span class="text-red-400" aria-hidden="true">*</span>
+          Captain Phone Number : <span class="text-red-400" aria-hidden="true">*</span>
           <input id="registration-captain-phone" name="captainPhone" type="tel" required minlength="10" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" autocomplete="off"
                  aria-describedby="registration-captain-phone-error"
                  class="mt-1 w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"
@@ -1021,15 +1020,19 @@
           </span>
           <p class="text-[11px] font-extrabold uppercase tracking-wider text-purple-100">PhonePe / UPI Payment Details</p>
         </div>
-        <p class="text-xl font-extrabold text-white">₹22,222 <span class="text-xs font-medium text-purple-100">Tournament Entry Fee</span></p>
-        <div class="flex flex-wrap items-center gap-2">
-          <p class="text-xs text-purple-100">UPI ID: <span id="payment-upi-id-text" class="font-mono font-semibold text-white select-all">9845332293-4@axl</span></p>
+        <div>
+          <p class="text-xl font-extrabold text-white">₹22,222 <span class="text-xs font-semibold text-purple-100">Tournament Entry Fee</span></p>
+          <p class="mt-0.5 text-xs font-medium text-purple-100">Copy below UPI ID &amp; Pay on PhonePe app</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-4 pt-0.5">
+          <p class="text-xs text-purple-100">UPI ID : <span id="payment-upi-id-text" class="font-mono font-semibold text-white select-all">9845332293-4@axl</span></p>
           <button type="button" id="copy-upi-id-btn"
-                  class="inline-flex items-center gap-1 rounded-md border border-white/35 bg-white/15 px-2.5 py-1 text-[11px] font-bold text-white transition hover:bg-white/25"
+                  class="inline-flex items-center gap-1 rounded-md border border-white/35 bg-white/15 px-3 py-1 text-[11px] font-bold text-white transition hover:bg-white/25"
                   aria-label="Copy UPI ID">
             Copy UPI ID
           </button>
         </div>
+        <p class="text-xs text-purple-100">Banking Name : <span class="font-bold tracking-wide text-white">C NARESH</span></p>
       </div>
 
       <div class="space-y-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4">
@@ -1046,14 +1049,14 @@
         <div id="payment-screenshot-preview-wrap" class="hidden items-center gap-2.5 rounded-lg border border-amber-400/50 bg-amber-500/10 p-2.5 shadow-[0_0_14px_rgba(251,191,36,0.18)]">
           <img id="payment-screenshot-preview" alt="Attached payment screenshot preview" class="h-12 w-12 shrink-0 rounded-md border border-slate-700 object-cover" />
           <p class="min-w-0 flex-1 rounded-md border border-amber-300/40 bg-amber-400/15 px-2.5 py-1.5 text-[11px] font-bold leading-snug text-amber-200">
-            Screenshot attached! Click &ldquo;Update Payment Status as Paid&rdquo; below to save your payment.
+            Screenshot attached. Click below button to confirm your payment.
           </p>
         </div>
 
         <div class="space-y-2 pt-1">
           <button type="button" id="done-payment-dialog" disabled
                   class="inline-flex w-full cursor-not-allowed items-center justify-center whitespace-nowrap rounded-lg bg-emerald-500/40 px-3 py-2.5 text-center text-xs font-extrabold text-slate-950/70 opacity-60 transition disabled:cursor-not-allowed">
-            Update Payment Status as Paid
+            Update Payment as Paid
           </button>
           <p id="payment-action-status" class="min-h-4 text-center text-[11px] text-amber-300" role="status" aria-live="polite"></p>
         </div>
@@ -1098,8 +1101,8 @@
           type="button"
           aria-label="Scroll to top"
           title="Back to top"
-          class="gold-gradient pointer-events-none fixed bottom-5 right-4 z-40 flex h-11 w-11 translate-y-3 items-center justify-center rounded-full border border-amber-200/70 text-slate-950 opacity-0 shadow-[0_6px_22px_rgba(245,158,11,0.45)] transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-300 sm:bottom-6 sm:right-6 sm:h-12 sm:w-12">
-    <svg viewBox="0 0 24 24" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          class="gold-gradient pointer-events-none fixed bottom-5 right-4 z-40 flex h-9 w-9 translate-y-3 items-center justify-center rounded-full border border-amber-200/70 text-slate-950 opacity-0 shadow-[0_6px_22px_rgba(245,158,11,0.45)] transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-300 sm:bottom-6 sm:right-6 sm:h-10 sm:w-10">
+    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M12 19V5" />
       <path d="M5 12l7-7 7 7" />
     </svg>
@@ -1110,8 +1113,11 @@
     import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
       getAuth,
+      GoogleAuthProvider,
       onAuthStateChanged,
-      signInAnonymously
+      signInAnonymously,
+      signInWithPopup,
+      signOut
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import {
       getFirestore,
@@ -1144,20 +1150,39 @@
       WRITE: "write"
     };
 
-    window.toggleMobileMenu = function toggleMobileMenu() {
+    window.toggleMobileMenu = function toggleMobileMenu(forceClose = false) {
       const menu = document.getElementById("mobile-menu");
       const btn = document.getElementById("mobile-menu-btn");
+      const icon = document.getElementById("mobile-menu-icon");
       const isHidden = menu.classList.contains("hidden");
-      if (isHidden) {
+      const shouldOpen = forceClose === true ? false : isHidden;
+      if (shouldOpen) {
         menu.classList.remove("hidden");
         menu.classList.add("flex");
-        btn.innerText = "✕";
+        if (icon) icon.textContent = "✕";
+        btn.setAttribute("aria-expanded", "true");
       } else {
         menu.classList.add("hidden");
         menu.classList.remove("flex");
-        btn.innerText = "☰";
+        if (icon) icon.textContent = "☰";
+        btn.setAttribute("aria-expanded", "false");
       }
     };
+
+    document.addEventListener("click", (event) => {
+      const menu = document.getElementById("mobile-menu");
+      const btn = document.getElementById("mobile-menu-btn");
+      if (!menu || !btn || menu.classList.contains("hidden")) return;
+      if (!menu.contains(event.target) && !btn.contains(event.target)) {
+        window.toggleMobileMenu(true);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        window.toggleMobileMenu(true);
+      }
+    });
 
     const rclTeamSlots = Array.from({ length: 24 }, (_, idx) => {
       return { slotNumber: idx + 1, name: `Slot #${String(idx + 1).padStart(2, "0")}`, status: "open" };
@@ -1273,6 +1298,38 @@
           button.firstChild.textContent = button.dataset.filterType === "booked" ? "Confirmed (" : "Remaining (";
         }
       });
+
+      const exportBtnCount = document.getElementById("export-teams-btn-count");
+      if (exportBtnCount) exportBtnCount.textContent = bookedCount;
+
+      const allTeamsRegistered = rclTeamSlots.length > 0 && bookedCount >= rclTeamSlots.length;
+      const topRegistrationAlert = document.getElementById("top-registration-alert");
+      if (topRegistrationAlert) {
+        topRegistrationAlert.classList.toggle("hidden", allTeamsRegistered);
+      }
+
+      const heroRegisterBtn = document.getElementById("hero-register-btn");
+      if (heroRegisterBtn) {
+        heroRegisterBtn.textContent = allTeamsRegistered
+          ? `Registered all teams (${bookedCount}/${rclTeamSlots.length})`
+          : "Register your team, hurry up!!";
+        heroRegisterBtn.setAttribute("href", allTeamsRegistered ? "#teams" : "#register");
+      }
+
+      const datesSection = document.getElementById("dates");
+      if (datesSection) {
+        datesSection.classList.toggle("hidden", allTeamsRegistered);
+      }
+
+      const mobileNavDatesLink = document.getElementById("mobile-nav-dates-link");
+      if (mobileNavDatesLink) {
+        mobileNavDatesLink.classList.toggle("hidden", allTeamsRegistered);
+      }
+
+      const registerSection = document.getElementById("register");
+      if (registerSection) {
+        registerSection.classList.toggle("hidden", allTeamsRegistered);
+      }
     }
 
     window.setTeamTab = function setTeamTab(tab, activeBtn) {
@@ -1320,12 +1377,12 @@
         }
 
         const header = document.createElement("div");
-        header.className = "mb-2 flex items-center justify-between";
+        header.className = "mb-1.5 flex items-center justify-between gap-1";
         const slotNumber = document.createElement("span");
         slotNumber.className = isBooked
-          ? "rounded bg-amber-500 px-2 py-0.5 text-xs font-extrabold text-slate-950"
-          : "rounded bg-slate-800 px-2 py-0.5 text-xs font-bold text-slate-400";
-        slotNumber.textContent = `#${String(slot.slotNumber).padStart(2, "0")}`;
+          ? "rounded bg-amber-500 px-1.5 py-px text-[10px] font-extrabold leading-tight tracking-wide text-slate-950"
+          : "rounded bg-slate-800 px-1.5 py-px text-[10px] font-bold leading-tight tracking-wide text-slate-400";
+        slotNumber.textContent = `SLOT#${String(slot.slotNumber).padStart(2, "0")}`;
         if (isBooked) {
           const isPaid = slot.paymentStatus === "paid";
           const slotDigits = String(slot.slotNumber).padStart(2, "0");
@@ -1365,13 +1422,13 @@
         card.append(header);
 
         const logoContainer = document.createElement("div");
-        logoContainer.className = "mb-2 flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-700 bg-slate-950";
+        logoContainer.className = "mb-2 flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-700 bg-slate-950";
         if (isBooked && slot.logoUrl && (/^https:\/\/.+/i.test(slot.logoUrl) || /^data:image\/(jpeg|png|webp);base64,/i.test(slot.logoUrl))) {
           const logo = document.createElement("img");
           logo.src = slot.logoUrl;
           logo.alt = `${slot.teamName || slot.name} logo`;
           logo.title = "Tap to view team logo";
-          logo.className = "h-full w-full cursor-pointer object-cover transition hover:scale-105";
+          logo.className = "h-full w-full cursor-pointer object-contain transition hover:scale-105";
           logo.addEventListener("click", (event) => {
             event.stopPropagation();
             openImageInLightbox(slot.logoUrl, `${slot.teamName || slot.name} — Team Logo`);
@@ -1388,7 +1445,7 @@
 
         const teamHeading = document.createElement("p");
         teamHeading.className = "w-full text-[10px] font-extrabold uppercase tracking-wider text-amber-400";
-        teamHeading.textContent = "Team:";
+        teamHeading.textContent = "TEAM CARD:";
         card.append(teamHeading);
 
         const teamName = document.createElement("p");
@@ -1472,10 +1529,10 @@
           } else if (!isPaid && !isOrganiserAdmin) {
             const payNowBtn = document.createElement("button");
             payNowBtn.type = "button";
-            payNowBtn.className = "phonepe-blink flex h-12 w-12 shrink-0 flex-col items-center justify-center gap-0.5 rounded-lg border border-purple-300/70 bg-[#5F259F] text-white shadow transition hover:scale-105 hover:bg-[#7030B8] focus:outline-none focus:ring-2 focus:ring-purple-300";
+            payNowBtn.className = "phonepe-blink flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-0.5 rounded-lg border border-purple-300/70 bg-[#5F259F] text-white shadow transition hover:scale-105 hover:bg-[#7030B8] focus:outline-none focus:ring-2 focus:ring-purple-300";
             payNowBtn.title = "Pay Entry Fee : ₹22,222 via PhonePe / UPI";
             payNowBtn.setAttribute("aria-label", "Pay Entry Fee ₹22,222 with PhonePe");
-            payNowBtn.innerHTML = `<svg viewBox="0 0 48 48" class="h-6 w-6 shrink-0" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#FFFFFF"/><path d="M13 16H35M29 16V35M18 16V22.5C18 26.5 21.5 28.5 29 27M29 16C28 11.5 24.5 9.5 20.5 9.5" stroke="#5F259F" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-[9px] font-extrabold leading-none tracking-wide uppercase">Pay</span>`;
+            payNowBtn.innerHTML = `<svg viewBox="0 0 48 48" class="h-4 w-4 shrink-0" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#FFFFFF"/><path d="M13 16H35M29 16V35M18 16V22.5C18 26.5 21.5 28.5 29 27M29 16C28 11.5 24.5 9.5 20.5 9.5" stroke="#5F259F" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-[8px] font-extrabold leading-none tracking-wide uppercase">Pay</span>`;
             payNowBtn.addEventListener("click", (event) => {
               event.stopPropagation();
               openPaymentConfirmationModal({
@@ -1492,23 +1549,37 @@
 
           if (isOrganiserAdmin) {
             const adminActions = document.createElement("div");
-            adminActions.className = "mt-2 flex gap-1.5";
+            adminActions.className = "mt-1.5 flex items-center gap-1";
 
             const adminToggleBtn = document.createElement("button");
             adminToggleBtn.type = "button";
             adminToggleBtn.className = isPaid
-              ? "flex-1 rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-[10px] font-bold text-slate-300 transition hover:border-amber-400 hover:text-amber-300"
-              : "flex-1 rounded-md bg-emerald-500 px-2 py-1 text-[10px] font-extrabold text-slate-950 transition hover:bg-emerald-400";
-            adminToggleBtn.textContent = isPaid ? "Mark Pending" : "Mark Fee Paid";
+              ? "inline-flex min-w-0 flex-1 items-center justify-center whitespace-nowrap rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[9.5px] font-bold text-slate-300 transition hover:border-amber-400 hover:text-amber-300"
+              : "inline-flex min-w-0 flex-1 items-center justify-center gap-0.5 whitespace-nowrap rounded bg-emerald-500 px-1.5 py-0.5 text-[9.5px] font-extrabold text-slate-950 transition hover:bg-emerald-400";
+            if (isPaid) {
+              adminToggleBtn.textContent = "Mark Pending";
+            } else {
+              adminToggleBtn.innerHTML = `<svg viewBox="0 0 20 20" class="h-2.5 w-2.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5a2.121 2.121 0 0 1 3 3L6.5 16.5l-4 1 1-4 10-10z"/></svg><span>Payment</span>`;
+            }
             adminToggleBtn.addEventListener("click", (event) => {
               event.stopPropagation();
-              toggleTeamPaymentStatus(slot.slotNumber, isPaid ? "pending" : "paid", adminToggleBtn);
+              if (isPaid) {
+                toggleTeamPaymentStatus(slot.slotNumber, "pending", adminToggleBtn);
+              } else {
+                openPaymentConfirmationModal({
+                  slotNumber: slot.slotNumber,
+                  teamName: slot.teamName || slot.name,
+                  brandName: slot.brandName || "",
+                  captainName: slot.captainName || "",
+                  captainPhone: slot.captainPhone || ownedPhone || ""
+                });
+              }
             });
 
             const adminEditBtn = document.createElement("button");
             adminEditBtn.type = "button";
-            adminEditBtn.className = "rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-[10px] font-bold text-amber-300 transition hover:border-amber-400 hover:bg-slate-700";
-            adminEditBtn.textContent = "Edit";
+            adminEditBtn.className = "inline-flex shrink-0 items-center justify-center gap-0.5 whitespace-nowrap rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[9.5px] font-bold text-amber-300 transition hover:border-amber-400 hover:bg-slate-700";
+            adminEditBtn.innerHTML = `<svg viewBox="0 0 20 20" class="h-2.5 w-2.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5a2.121 2.121 0 0 1 3 3L6.5 16.5l-4 1 1-4 10-10z"/></svg><span>Team</span>`;
             adminEditBtn.addEventListener("click", (event) => {
               event.stopPropagation();
               openTeamEdit(slot.slotNumber);
@@ -1548,7 +1619,7 @@
       document.getElementById("registration-logo-preview").classList.add("hidden");
       document.getElementById("registration-team-logo").required = true;
       document.getElementById("registration-logo-required").classList.remove("hidden");
-      document.getElementById("registration-logo-label").textContent = "Team logo (JPG, PNG, or WebP; up to 5 MB)";
+      document.getElementById("registration-logo-label").textContent = "Team Logo:";
       document.getElementById("registration-dialog-title").textContent = "REGISTER YOUR TEAM";
       document.getElementById("registration-dialog-subtitle").textContent =
         "Enter your team details to register this open slot. Team name, Team Title, and captain mobile number must each be unique.";
@@ -1563,17 +1634,14 @@
           true
         );
       } else {
-        setRegistrationFormStatus(
-          "Your slot is assigned automatically in registration order. Fill in your team details to continue.",
-          false
-        );
+        setRegistrationFormStatus("", false);
       }
       updateRegistrationSubmitState();
       document.getElementById("team-registration-dialog").showModal();
     }
 
     function openTeamEdit(slotNumber) {
-      if (!isOrganiserAdmin) return;
+      if (!isOrganiserAdmin || !isVerifiedWebsiteOwner(firebaseAuth?.currentUser)) return;
       const slot = rclTeamSlots[slotNumber - 1];
       const slotId = `slot-${slotNumber}`;
       const ownedPhone = ownedCaptainPhones.get(slotId) || "";
@@ -1586,9 +1654,9 @@
         URL.revokeObjectURL(teamLogoPreviewUrl);
         teamLogoPreviewUrl = null;
       }
-      document.getElementById("registration-team-name").value = slot.teamName || "";
-      document.getElementById("registration-brand-name").value = slot.brandName || "";
-      document.getElementById("registration-captain-name").value = slot.captainName || "";
+      document.getElementById("registration-team-name").value = (slot.teamName || "").toUpperCase();
+      document.getElementById("registration-brand-name").value = (slot.brandName || "").toUpperCase();
+      document.getElementById("registration-captain-name").value = (slot.captainName || "").toUpperCase();
       document.getElementById("registration-captain-phone").value = normalizeCaptainPhone(slot.captainPhone || ownedPhone || "");
 
       const preview = document.getElementById("registration-logo-preview");
@@ -1601,14 +1669,14 @@
 
       document.getElementById("registration-team-logo").required = false;
       document.getElementById("registration-logo-required").classList.add("hidden");
-      document.getElementById("registration-logo-label").textContent = "Change team logo (optional; JPG, PNG, or WebP up to 5 MB)";
+      document.getElementById("registration-logo-label").textContent = "Team Logo:";
       document.getElementById("registration-dialog-title").textContent = "ADMIN: UPDATE TEAM";
       document.getElementById("registration-dialog-subtitle").textContent =
         "Admin-only edit mode. Team name, Team Title, and captain mobile number must each remain unique.";
       document.getElementById("submit-team-registration").textContent = "Update Team Details";
       document.getElementById("registration-slot-label").textContent =
         `Admin Editing Slot #${String(slotNumber).padStart(2, "0")}`;
-      setRegistrationFormStatus("Edit any field and click Update Team Details to save.", false);
+      setRegistrationFormStatus("", false);
       updateRegistrationSubmitState();
       document.getElementById("team-registration-dialog").showModal();
     }
@@ -1904,7 +1972,22 @@
         });
 
         let initialAuthChecked = false;
+        let unauthorizedSignOutInProgress = false;
         onAuthStateChanged(firebaseAuth, async (user) => {
+          if (user && !user.isAnonymous && !isVerifiedWebsiteOwner(user)) {
+            currentUser = null;
+            updateOrganiserAuthUI(null);
+            subscribeOwnedRegistrations(null);
+            if (!unauthorizedSignOutInProgress) {
+              unauthorizedSignOutInProgress = true;
+              try {
+                await signOut(firebaseAuth);
+              } finally {
+                unauthorizedSignOutInProgress = false;
+              }
+            }
+            return;
+          }
           currentUser = user;
           updateOrganiserAuthUI(user);
           subscribeOwnedRegistrations(user);
@@ -1932,14 +2015,79 @@
       window.applyTeamFilters();
     }
 
+    function isVerifiedWebsiteOwner(user) {
+      if (!user || user.isAnonymous) return false;
+      const email = (user.email || "").trim().toLowerCase();
+      return Boolean(email === ORGANISER_EMAIL && user.emailVerified === true);
+    }
+
     function updateOrganiserAuthUI(user) {
-      const email = user && !user.isAnonymous ? (user.email || "").toLowerCase() : "";
-      isOrganiserAdmin = Boolean(email && email === ORGANISER_EMAIL && user.emailVerified);
+      isOrganiserAdmin = isVerifiedWebsiteOwner(user);
+
+      const authMenuBtn = document.getElementById("organiser-auth-menu-btn");
+      const authMenuLabel = document.getElementById("organiser-auth-menu-label");
+
+      if (isOrganiserAdmin) {
+        if (authMenuLabel) authMenuLabel.textContent = "✓ Admin . Log Out";
+        if (authMenuBtn) authMenuBtn.title = `Signed in as ${user.email} — Click to Admin . Log Out`;
+      } else {
+        if (authMenuLabel) authMenuLabel.textContent = "🔐 Admin . Log In";
+        if (authMenuBtn) authMenuBtn.title = `Website Owner only (${ORGANISER_EMAIL})`;
+      }
+
       window.applyTeamFilters();
     }
 
+    async function handleOrganiserAuthAction() {
+      if (!firebaseReady || !firebaseAuth) {
+        setTeamSyncStatus("Firebase is still initializing. Please try again in a moment.", true);
+        return;
+      }
+      const user = firebaseAuth.currentUser;
+      if (isVerifiedWebsiteOwner(user)) {
+        try {
+          await signOut(firebaseAuth);
+          window.toggleMobileMenu(true);
+          setTeamSyncStatus("");
+        } catch (error) {
+          setTeamSyncStatus(`Could not log out: ${error.message}`, true);
+        }
+        return;
+      }
+
+      try {
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({
+          prompt: "select_account",
+          login_hint: ORGANISER_EMAIL
+        });
+        const result = await signInWithPopup(firebaseAuth, provider);
+        window.toggleMobileMenu(true);
+        if (isVerifiedWebsiteOwner(result.user)) {
+          setTeamSyncStatus("");
+        } else {
+          const attemptedEmail = result.user?.email || "this account";
+          await signOut(firebaseAuth);
+          updateOrganiserAuthUI(null);
+          subscribeOwnedRegistrations(null);
+          setTeamSyncStatus(
+            `Access denied: "${attemptedEmail}" is not allowed to log in. Only Website Owner (${ORGANISER_EMAIL}) is permitted.`,
+            true
+          );
+        }
+        document.getElementById("teams")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (error) {
+        if (error?.code === "auth/popup-closed-by-user" || error?.code === "auth/cancelled-popup-request") {
+          return;
+        }
+        window.toggleMobileMenu(true);
+        setTeamSyncStatus(`Admin login failed: ${error?.message || String(error)}`, true);
+        document.getElementById("teams")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
     async function toggleTeamPaymentStatus(slotNumber, nextStatus, buttonEl) {
-      if (!firebaseDb || !isOrganiserAdmin) return;
+      if (!firebaseDb || !isOrganiserAdmin || !isVerifiedWebsiteOwner(firebaseAuth?.currentUser)) return;
       const slotId = `slot-${slotNumber}`;
       const originalText = buttonEl.textContent;
       buttonEl.disabled = true;
@@ -1996,7 +2144,7 @@
       if (actionStatus) actionStatus.textContent = "";
       if (doneButton) {
         doneButton.disabled = true;
-        doneButton.textContent = "Update Payment Status as Paid";
+        doneButton.textContent = "Update Payment as Paid";
         doneButton.className = "inline-flex w-full cursor-not-allowed items-center justify-center whitespace-nowrap rounded-lg bg-emerald-500/40 px-3 py-2.5 text-center text-xs font-extrabold text-slate-950/70 opacity-60 transition disabled:cursor-not-allowed";
       }
 
@@ -2202,7 +2350,7 @@
           : "";
         setPaymentActionStatus(`Could not save payment while ${saveStage}: ${detail}${detail.endsWith(".") ? "" : "."}${rulesHint}${uploadNotice}`, true);
         doneButton.disabled = false;
-        doneButton.textContent = "Update Payment Status as Paid";
+        doneButton.textContent = "Update Payment as Paid";
         doneButton.className = "inline-flex w-full items-center justify-center whitespace-nowrap rounded-lg bg-emerald-500 px-3 py-2.5 text-center text-xs font-extrabold text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed";
       } finally {
         paymentSubmissionInProgress = false;
@@ -2272,10 +2420,10 @@
       const form = event.currentTarget;
       const status = document.getElementById("registration-form-status");
       const submitButton = document.getElementById("submit-team-registration");
-      const teamName = document.getElementById("registration-team-name").value.trim();
-      const brandName = document.getElementById("registration-brand-name").value.trim();
-      const captainName = document.getElementById("registration-captain-name").value.trim();
-      const captainPhone = document.getElementById("registration-captain-phone").value.trim();
+      const teamName = document.getElementById("registration-team-name").value.trim().toUpperCase();
+      const brandName = document.getElementById("registration-brand-name").value.trim().toUpperCase();
+      const captainName = document.getElementById("registration-captain-name").value.trim().toUpperCase();
+      const captainPhone = document.getElementById("registration-captain-phone").value.trim().toUpperCase();
       const logoFile = document.getElementById("registration-team-logo").files[0];
       const teamNameKey = normalizeUniqueValue(teamName);
       const brandNameKey = normalizeUniqueValue(brandName);
@@ -2373,8 +2521,8 @@
         }
 
         if (isEditMode) {
-          if (!isOrganiserAdmin) {
-            throw new Error("Only the tournament admin can edit registered teams.");
+          if (!isOrganiserAdmin || !isVerifiedWebsiteOwner(user)) {
+            throw new Error("Only the Website Owner (nmaheshreddy0123@gmail.com) can edit registered teams.");
           }
           const slotNumber = editingSlotNumber;
           const slotId = `slot-${slotNumber}`;
@@ -2405,10 +2553,12 @@
               const oldData = slotDoc.data();
               const oldTeamNameKey = oldData.teamNameKey || "";
               const oldBrandNameKey = oldData.brandNameKey || "";
-              const oldCaptainPhone = normalizeCaptainPhone(oldData.captainPhone || "");
+              const rawOldCaptainPhone = String(oldData.captainPhone || "");
+              const oldCaptainPhone = normalizeCaptainPhone(rawOldCaptainPhone);
               const nameChanged = teamNameKey !== oldTeamNameKey;
               const brandChanged = brandNameKey !== oldBrandNameKey;
               const phoneChanged = captainPhone !== oldCaptainPhone;
+              const rawPhoneChanged = captainPhone !== rawOldCaptainPhone;
 
               const newTeamNameRef = doc(firebaseDb, "teamNames", teamNameKey);
               const oldTeamNameRef = oldTeamNameKey ? doc(firebaseDb, "teamNames", oldTeamNameKey) : null;
@@ -2422,7 +2572,7 @@
                 nameChanged && oldTeamNameRef ? transaction.get(oldTeamNameRef) : Promise.resolve(null),
                 brandChanged ? transaction.get(newBrandRef) : Promise.resolve(null),
                 brandChanged && oldBrandRef ? transaction.get(oldBrandRef) : Promise.resolve(null),
-                phoneChanged ? transaction.get(newPhoneRef) : Promise.resolve(null),
+                (phoneChanged || rawPhoneChanged) ? transaction.get(newPhoneRef) : Promise.resolve(null),
                 phoneChanged && oldPhoneRef ? transaction.get(oldPhoneRef) : Promise.resolve(null)
               ]);
 
@@ -2432,7 +2582,7 @@
               if (brandChanged && newBrandDoc && newBrandDoc.exists()) {
                 throw new Error("That Team Title is already registered. Please choose another.");
               }
-              if (phoneChanged && newPhoneDoc && newPhoneDoc.exists()) {
+              if ((phoneChanged || rawPhoneChanged) && newPhoneDoc && newPhoneDoc.exists() && newPhoneDoc.data()?.teamId !== slotId) {
                 throw new Error("That captain mobile number is already registered. Please choose another.");
               }
 
@@ -2448,11 +2598,13 @@
                 }
                 transaction.set(newBrandRef, { teamId: slotId });
               }
-              if (phoneChanged) {
-                if (oldPhoneDoc && oldPhoneDoc.exists()) {
+              if (phoneChanged || rawPhoneChanged) {
+                if (phoneChanged && oldPhoneDoc && oldPhoneDoc.exists() && oldPhoneDoc.data()?.teamId === slotId) {
                   transaction.delete(oldPhoneRef);
                 }
-                transaction.set(newPhoneRef, { teamId: slotId });
+                if (!newPhoneDoc || !newPhoneDoc.exists()) {
+                  transaction.set(newPhoneRef, { teamId: slotId });
+                }
               }
 
               const updatePayload = {
@@ -2628,6 +2780,7 @@
     }
 
     document.getElementById("team-registration-form").addEventListener("submit", submitTeamRegistration);
+    document.getElementById("organiser-auth-menu-btn")?.addEventListener("click", handleOrganiserAuthAction);
     document.getElementById("team-registration-dialog").addEventListener("close", () => {
       editingSlotNumber = null;
     });
@@ -2729,12 +2882,31 @@
         event.currentTarget.close();
       }
     });
-    ["registration-team-name", "registration-brand-name", "registration-captain-name"].forEach((id) => {
+    ["registration-team-name", "registration-brand-name", "registration-captain-name", "registration-captain-phone"].forEach((id) => {
       const el = document.getElementById(id);
-      el.addEventListener("input", updateRegistrationSubmitState);
-      el.addEventListener("change", updateRegistrationSubmitState);
+      if (!el) return;
+      el.addEventListener("input", () => {
+        const start = el.selectionStart;
+        const end = el.selectionEnd;
+        const upper = el.value.toUpperCase();
+        if (el.value !== upper) {
+          el.value = upper;
+          try {
+            if (start !== null && end !== null) {
+              el.setSelectionRange(start, end);
+            }
+          } catch (_) {
+            // Selection range unsupported on input type
+          }
+        }
+        updateRegistrationSubmitState();
+      });
+      el.addEventListener("change", () => {
+        const upper = el.value.toUpperCase();
+        if (el.value !== upper) el.value = upper;
+        updateRegistrationSubmitState();
+      });
     });
-    document.getElementById("registration-captain-phone").addEventListener("input", updateRegistrationSubmitState);
     document.getElementById("registration-team-logo").addEventListener("change", (event) => {
       const file = event.currentTarget.files[0];
       const preview = document.getElementById("registration-logo-preview");
@@ -2842,6 +3014,403 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     }
+
+    // ==================== DIRECT PDF EXPORT FOR ALL TEAMS ====================
+    function isValidExportLogoUrl(url) {
+      return typeof url === "string" && (
+        /^https:\/\/.+/i.test(url)
+        || /^data:image\/(jpeg|png|webp);base64,/i.test(url)
+      );
+    }
+
+    function getAllBookedTeamRows() {
+      return rclTeamSlots
+        .filter((slot) => slot.status === "booked")
+        .map((slot) => {
+          const slotId = `slot-${slot.slotNumber}`;
+          const ownedPhone = ownedCaptainPhones.get(slotId) || "";
+          const mobileNo = String(slot.captainPhone || ownedPhone || "—").trim() || "—";
+          const teamTitle = String(slot.brandName || "—").trim() || "—";
+          const teamName = String(slot.teamName || slot.name || "—").trim() || "—";
+          const teamCaptain = String(slot.captainName || "—").trim() || "—";
+          const isPaid = slot.paymentStatus === "paid";
+          const logoUrl = isValidExportLogoUrl(slot.logoUrl) ? slot.logoUrl : "";
+          return {
+            slotNumber: slot.slotNumber,
+            logoUrl,
+            teamTitle,
+            teamName,
+            teamCaptain,
+            mobileNo,
+            isPaid,
+            paymentLabel: isPaid ? "Paid" : "Pending"
+          };
+        });
+    }
+
+    function triggerBlobDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }
+
+    function getExportDateStamp() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    }
+
+    async function resolveInlineImageDataUrl(url) {
+      if (!url) return "";
+      if (/^data:image\/(jpeg|png|webp);base64,/i.test(url)) return url;
+      if (!/^https:\/\/.+/i.test(url)) return "";
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 2500);
+        const res = await fetch(url, { mode: "cors", signal: controller.signal });
+        clearTimeout(timer);
+        if (!res.ok) return url;
+        const blob = await res.blob();
+        return await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(typeof reader.result === "string" ? reader.result : url);
+          reader.onerror = () => resolve(url);
+          reader.readAsDataURL(blob);
+        });
+      } catch (_err) {
+        return url;
+      }
+    }
+
+    function loadCanvasSafeImage(url) {
+      return new Promise((resolve) => {
+        if (!url) {
+          resolve(null);
+          return;
+        }
+        const img = new Image();
+        let settled = false;
+        const finish = (result) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          resolve(result);
+        };
+        const timer = setTimeout(() => finish(null), 2600);
+        if (/^https:\/\//i.test(url)) {
+          img.crossOrigin = "anonymous";
+        }
+        img.onload = () => finish(img);
+        img.onerror = () => finish(null);
+        img.src = url;
+      });
+    }
+
+    function drawRoundedRectPath(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
+    }
+
+    function truncateCanvasText(ctx, text, maxWidth) {
+      const str = String(text ?? "");
+      if (ctx.measureText(str).width <= maxWidth) return str;
+      let trimmed = str;
+      while (trimmed.length > 1 && ctx.measureText(`${trimmed}…`).width > maxWidth) {
+        trimmed = trimmed.slice(0, -1);
+      }
+      return `${trimmed}…`;
+    }
+
+    async function renderRosterPdfPages(rows) {
+      const maxRowsPerPage = 12;
+      const loadedLogos = await Promise.all(
+        rows.map(async (row) => {
+          const inlineUrl = await resolveInlineImageDataUrl(row.logoUrl);
+          return loadCanvasSafeImage(inlineUrl);
+        })
+      );
+
+      const width = 1684;
+      const headerHeight = 190;
+      const tableHeaderHeight = 56;
+      const rowHeight = 76;
+      const bottomPadding = 52;
+      const padX = 52;
+      const tableWidth = width - padX * 2;
+      const colWidths = [470, 390, 320, 230, 170];
+      const pages = [];
+      const paidTotal = rows.filter((r) => r.isPaid).length;
+      const pendingTotal = rows.length - paidTotal;
+
+      for (let start = 0; start < rows.length; start += maxRowsPerPage) {
+        const chunk = rows.slice(start, start + maxRowsPerPage);
+        const chunkLogos = loadedLogos.slice(start, start + maxRowsPerPage);
+        const height = headerHeight + tableHeaderHeight + chunk.length * rowHeight + bottomPadding;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+
+        const bgGrad = ctx.createLinearGradient(0, 0, width, height);
+        bgGrad.addColorStop(0, "#090d16");
+        bgGrad.addColorStop(0.5, "#0f172a");
+        bgGrad.addColorStop(1, "#1e1b2e");
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, width, height);
+
+        const goldGrad = ctx.createLinearGradient(0, 0, width, 0);
+        goldGrad.addColorStop(0, "#f59e0b");
+        goldGrad.addColorStop(0.5, "#fde68a");
+        goldGrad.addColorStop(1, "#f59e0b");
+        ctx.fillStyle = goldGrad;
+        ctx.fillRect(0, 0, width, 10);
+
+        ctx.fillStyle = "#f59e0b";
+        ctx.font = "bold 20px Inter, Arial, sans-serif";
+        ctx.fillText("RCL 2027 • REDDY'S CRICKET LEAGUE • REGISTERED TEAMS", padX, 58);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 46px Inter, Arial, sans-serif";
+        ctx.fillText(`RCL 2027 REGISTERED TEAMS (${rows.length} / 24)`, padX, 112);
+
+        const pageNumber = Math.floor(start / maxRowsPerPage) + 1;
+        const totalPages = Math.ceil(rows.length / maxRowsPerPage);
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "600 20px Inter, Arial, sans-serif";
+        ctx.fillText(
+          `Paid: ${paidTotal}   •   Pending: ${pendingTotal}   •   Exported: ${getExportDateStamp()}${totalPages > 1 ? `   •   Page ${pageNumber}/${totalPages}` : ""}`,
+          padX,
+          152
+        );
+
+        const tableY = headerHeight;
+        drawRoundedRectPath(ctx, padX, tableY, tableWidth, tableHeaderHeight, 12);
+        ctx.fillStyle = "#f59e0b";
+        ctx.fill();
+
+        const headers = ["TEAM TITLE", "TEAM NAME", "TEAM CAPTAIN", "MOBILE NO", "PAYMENT"];
+        ctx.fillStyle = "#090d16";
+        ctx.font = "bold 20px Inter, Arial, sans-serif";
+        let colX = padX;
+        headers.forEach((heading, idx) => {
+          const textX = idx === 4 ? colX + colWidths[idx] / 2 : colX + 18;
+          ctx.textAlign = idx === 4 ? "center" : "left";
+          ctx.fillText(heading, textX, tableY + 35);
+          colX += colWidths[idx];
+        });
+        ctx.textAlign = "left";
+
+        chunk.forEach((row, idx) => {
+          const y = tableY + tableHeaderHeight + idx * rowHeight;
+          ctx.fillStyle = idx % 2 === 0 ? "rgba(15, 23, 42, 0.92)" : "rgba(30, 41, 59, 0.72)";
+          ctx.fillRect(padX, y, tableWidth, rowHeight);
+
+          ctx.strokeStyle = "rgba(148, 163, 184, 0.18)";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(padX, y + rowHeight);
+          ctx.lineTo(padX + tableWidth, y + rowHeight);
+          ctx.stroke();
+
+          let x = padX;
+
+          // Team Title: Team Logo + Team Title concatenated together
+          const logoBoxX = x + 16;
+          const logoBoxY = y + 11;
+          const logoSize = 54;
+          drawRoundedRectPath(ctx, logoBoxX, logoBoxY, logoSize, logoSize, 10);
+          ctx.fillStyle = "#020617";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(245, 158, 11, 0.55)";
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          const img = chunkLogos[idx];
+          if (img) {
+            ctx.save();
+            drawRoundedRectPath(ctx, logoBoxX + 2, logoBoxY + 2, logoSize - 4, logoSize - 4, 8);
+            ctx.clip();
+            const scale = Math.min((logoSize - 6) / img.width, (logoSize - 6) / img.height);
+            const drawW = img.width * scale;
+            const drawH = img.height * scale;
+            ctx.drawImage(img, logoBoxX + (logoSize - drawW) / 2, logoBoxY + (logoSize - drawH) / 2, drawW, drawH);
+            ctx.restore();
+          } else {
+            ctx.fillStyle = "#fbbf24";
+            ctx.font = "bold 20px Inter, Arial, sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText(row.teamTitle.slice(0, 2).toUpperCase(), logoBoxX + logoSize / 2, logoBoxY + 35);
+            ctx.textAlign = "left";
+          }
+
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 21px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamTitle, colWidths[0] - 96), logoBoxX + logoSize + 14, y + 45);
+          x += colWidths[0];
+
+          // Team Name
+          ctx.fillStyle = "#e2e8f0";
+          ctx.font = "600 20px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamName, colWidths[1] - 28), x + 18, y + 45);
+          x += colWidths[1];
+
+          // Team Captain
+          ctx.fillStyle = "#cbd5e1";
+          ctx.font = "500 20px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamCaptain, colWidths[2] - 28), x + 18, y + 45);
+          x += colWidths[2];
+
+          // Mobile No
+          ctx.fillStyle = "#fcd34d";
+          ctx.font = "bold 21px monospace";
+          ctx.fillText(truncateCanvasText(ctx, row.mobileNo, colWidths[3] - 28), x + 18, y + 45);
+          x += colWidths[3];
+
+          // Payment (Paid or Pending)
+          const pillW = 128;
+          const pillH = 38;
+          const pillX = x + (colWidths[4] - pillW) / 2;
+          const pillY = y + (rowHeight - pillH) / 2;
+          drawRoundedRectPath(ctx, pillX, pillY, pillW, pillH, 10);
+          ctx.fillStyle = row.isPaid ? "rgba(16, 185, 129, 0.22)" : "rgba(245, 158, 11, 0.2)";
+          ctx.fill();
+          ctx.strokeStyle = row.isPaid ? "#34d399" : "#fbbf24";
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+
+          ctx.fillStyle = row.isPaid ? "#6ee7b7" : "#fcd34d";
+          ctx.font = "bold 19px Inter, Arial, sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText(row.paymentLabel.toUpperCase(), pillX + pillW / 2, pillY + 25);
+          ctx.textAlign = "left";
+        });
+
+        pages.push(canvas);
+      }
+      return pages;
+    }
+
+    function buildPdfFromCanvasPages(canvases) {
+      const encoder = new TextEncoder();
+      const chunks = [];
+      let byteLength = 0;
+      const pushBytes = (bytes) => {
+        chunks.push(bytes);
+        byteLength += bytes.length;
+      };
+      const pushText = (text) => pushBytes(encoder.encode(text));
+
+      const pageCount = canvases.length;
+      const totalObjects = 2 + pageCount * 3;
+      const offsets = new Array(totalObjects + 1).fill(0);
+      const pageObjectIds = [];
+
+      pushText("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n");
+
+      let nextId = 3;
+      const pageEntries = canvases.map((canvas, idx) => {
+        const jpegDataUrl = canvas.toDataURL("image/jpeg", 0.92);
+        const base64 = jpegDataUrl.split(",")[1];
+        const binary = atob(base64);
+        const jpegBytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i += 1) {
+          jpegBytes[i] = binary.charCodeAt(i);
+        }
+        const imgId = nextId++;
+        const contentId = nextId++;
+        const pageId = nextId++;
+        pageObjectIds.push(pageId);
+        return {
+          idx,
+          imgId,
+          contentId,
+          pageId,
+          width: canvas.width,
+          height: canvas.height,
+          jpegBytes
+        };
+      });
+
+      offsets[1] = byteLength;
+      pushText("1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n");
+
+      offsets[2] = byteLength;
+      pushText(`2 0 obj\n<< /Type /Pages /Kids [${pageObjectIds.map((id) => `${id} 0 R`).join(" ")}] /Count ${pageCount} >>\nendobj\n`);
+
+      const pdfPageW = 841.89;
+      pageEntries.forEach((entry) => {
+        const pdfPageH = Number(((pdfPageW * entry.height) / entry.width).toFixed(2));
+        offsets[entry.imgId] = byteLength;
+        pushText(
+          `${entry.imgId} 0 obj\n<< /Type /XObject /Subtype /Image /Width ${entry.width} /Height ${entry.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${entry.jpegBytes.length} >>\nstream\n`
+        );
+        pushBytes(entry.jpegBytes);
+        pushText("\nendstream\nendobj\n");
+
+        const contentStream = `q ${pdfPageW} 0 0 ${pdfPageH} 0 0 cm /Im${entry.idx} Do Q\n`;
+        const contentBytes = encoder.encode(contentStream);
+        offsets[entry.contentId] = byteLength;
+        pushText(`${entry.contentId} 0 obj\n<< /Length ${contentBytes.length} >>\nstream\n`);
+        pushBytes(contentBytes);
+        pushText("endstream\nendobj\n");
+
+        offsets[entry.pageId] = byteLength;
+        pushText(
+          `${entry.pageId} 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pdfPageW} ${pdfPageH}] /Resources << /XObject << /Im${entry.idx} ${entry.imgId} 0 R >> >> /Contents ${entry.contentId} 0 R >>\nendobj\n`
+        );
+      });
+
+      const xrefOffset = byteLength;
+      pushText(`xref\n0 ${totalObjects + 1}\n`);
+      pushText("0000000000 65535 f \n");
+      for (let i = 1; i <= totalObjects; i += 1) {
+        pushText(`${String(offsets[i]).padStart(10, "0")} 00000 n \n`);
+      }
+      pushText(`trailer\n<< /Size ${totalObjects + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`);
+
+      return new Blob(chunks, { type: "application/pdf" });
+    }
+
+    let pdfExportInProgress = false;
+    document.getElementById("open-export-teams-btn")?.addEventListener("click", async () => {
+      if (pdfExportInProgress) return;
+      const rows = getAllBookedTeamRows();
+      if (!rows.length) {
+        setTeamSyncStatus("No registered teams available to export yet.", true);
+        return;
+      }
+
+      const btn = document.getElementById("open-export-teams-btn");
+      const label = document.getElementById("export-teams-btn-label");
+      pdfExportInProgress = true;
+      if (btn) btn.disabled = true;
+      if (label) label.textContent = "Exporting PDF...";
+
+      try {
+        const canvases = await renderRosterPdfPages(rows);
+        const pdfBlob = buildPdfFromCanvasPages(canvases);
+        triggerBlobDownload(pdfBlob, "RCL-2027-Teams-Details.pdf");
+        setTeamSyncStatus(`Exported ${rows.length} registered team(s) to PDF.`, false);
+      } catch (err) {
+        console.error("Direct PDF export failed:", err);
+        setTeamSyncStatus("Could not export teams to PDF. Please try again.", true);
+      } finally {
+        pdfExportInProgress = false;
+        if (btn) btn.disabled = false;
+        if (label) label.textContent = "Export All Teams";
+      }
+    });
   </script>
 </body>
 </html>
