@@ -1495,43 +1495,43 @@
         card.append(teamHeading);
 
         const teamName = document.createElement("p");
-        teamName.className = `w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight ${isBooked ? "text-white" : "text-slate-300"}`;
+        teamName.className = `w-full min-w-0 truncate text-[9.5px] min-[400px]:text-[10px] sm:text-[11.5px] leading-snug tracking-tight ${isBooked ? "text-white" : "text-slate-300"}`;
         teamName.title = isBooked ? (slot.teamName || slot.name) : slot.name;
         const teamNameLabel = document.createElement("span");
         teamNameLabel.className = "font-bold";
         teamNameLabel.textContent = "Name: ";
         const teamNameValue = document.createElement("span");
-        teamNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
+        teamNameValue.className = "text-[9px] min-[400px]:text-[9.5px] sm:text-[11px]";
         teamNameValue.textContent = isBooked ? (slot.teamName || slot.name) : slot.name;
         teamName.append(teamNameLabel, teamNameValue);
         card.append(teamName);
 
         const brandName = document.createElement("p");
-        brandName.className = "w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight text-slate-300";
+        brandName.className = "w-full min-w-0 truncate text-[9.5px] min-[400px]:text-[10px] sm:text-[11.5px] leading-snug tracking-tight text-slate-300";
         brandName.title = isBooked ? (slot.brandName || "") : "";
         const brandNameLabel = document.createElement("span");
         brandNameLabel.className = "font-semibold";
         brandNameLabel.textContent = "Title: ";
         const brandNameValue = document.createElement("span");
-        brandNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
+        brandNameValue.className = "text-[9px] min-[400px]:text-[9.5px] sm:text-[11px]";
         brandNameValue.textContent = isBooked ? (slot.brandName || "—") : "—";
         brandName.append(brandNameLabel, brandNameValue);
         card.append(brandName);
 
         const captainName = document.createElement("p");
-        captainName.className = "w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight text-slate-400";
+        captainName.className = "w-full min-w-0 truncate text-[9.5px] min-[400px]:text-[10px] sm:text-[11.5px] leading-snug tracking-tight text-slate-400";
         captainName.title = isBooked ? (slot.captainName || "") : "";
         const captainNameLabel = document.createElement("span");
         captainNameLabel.className = "font-semibold";
         captainNameLabel.textContent = "Captain: ";
         const captainNameValue = document.createElement("span");
-        captainNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
+        captainNameValue.className = "text-[9px] min-[400px]:text-[9.5px] sm:text-[11px]";
         captainNameValue.textContent = isBooked ? (slot.captainName || "") : "—";
         captainName.append(captainNameLabel, captainNameValue);
         card.append(captainName);
 
         const captainPhone = document.createElement("p");
-        captainPhone.className = "w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight text-slate-400";
+        captainPhone.className = "w-full min-w-0 truncate text-[9.5px] min-[400px]:text-[10px] sm:text-[11.5px] leading-snug tracking-tight text-slate-400";
         captainPhone.title = isBooked ? displayPhone : "";
         const captainPhoneLabel = document.createElement("span");
         captainPhoneLabel.className = "font-semibold";
@@ -3232,12 +3232,12 @@
 
       const width = 920;
       const headerHeight = 166;
-      const tableHeaderHeight = 40;
-      const rowHeight = 48;
+      const tableHeaderHeight = 44;
+      const rowHeight = 54;
       const bottomPadding = 28;
       const padX = 24;
       const tableWidth = width - padX * 2;
-      const colWidths = [236, 196, 180, 142, 118];
+      const colWidths = [242, 198, 178, 144, 110];
       const pages = [];
       const paidTotal = rows.filter((r) => r.isPaid).length;
       const pendingTotal = rows.length - paidTotal;
@@ -3461,12 +3461,12 @@
 
         const headers = ["TEAM TITLE", "TEAM NAME", "TEAM CAPTAIN", "MOBILE NO", "PAYMENT"];
         ctx.fillStyle = "#090d16";
-        ctx.font = "800 13.5px Inter, Arial, sans-serif";
+        ctx.font = "800 15.5px Inter, Arial, sans-serif";
         let colX = padX;
         headers.forEach((heading, idx) => {
           const textX = idx === 4 ? colX + colWidths[idx] / 2 : colX + (idx === 0 ? 12 : 10);
           ctx.textAlign = idx === 4 ? "center" : "left";
-          ctx.fillText(heading, textX, tableY + 25);
+          ctx.fillText(heading, textX, tableY + 27);
           colX += colWidths[idx];
         });
         ctx.textAlign = "left";
@@ -3487,7 +3487,7 @@
           let x = padX;
 
           // Team Title: Team Logo + Team Title
-          const logoSize = 32;
+          const logoSize = 34;
           const logoBoxX = x + 10;
           const logoBoxY = y + (rowHeight - logoSize) / 2;
           drawRoundedRectPath(ctx, logoBoxX, logoBoxY, logoSize, logoSize, 7);
@@ -3509,38 +3509,38 @@
             ctx.restore();
           } else {
             ctx.fillStyle = "#fbbf24";
-            ctx.font = "bold 13px Inter, Arial, sans-serif";
+            ctx.font = "bold 15px Inter, Arial, sans-serif";
             ctx.textAlign = "center";
-            ctx.fillText(row.teamTitle.slice(0, 2).toUpperCase(), logoBoxX + logoSize / 2, logoBoxY + 21);
+            ctx.fillText(row.teamTitle.slice(0, 2).toUpperCase(), logoBoxX + logoSize / 2, logoBoxY + 22);
             ctx.textAlign = "left";
           }
 
           ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 14.5px Inter, Arial, sans-serif";
-          ctx.fillText(truncateCanvasText(ctx, row.teamTitle, colWidths[0] - 58), logoBoxX + logoSize + 9, y + 29);
+          ctx.font = "bold 16.5px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamTitle, colWidths[0] - 60), logoBoxX + logoSize + 9, y + 33);
           x += colWidths[0];
 
           // Team Name
           ctx.fillStyle = "#e2e8f0";
-          ctx.font = "600 14px Inter, Arial, sans-serif";
-          ctx.fillText(truncateCanvasText(ctx, row.teamName, colWidths[1] - 18), x + 10, y + 29);
+          ctx.font = "600 16px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamName, colWidths[1] - 18), x + 10, y + 33);
           x += colWidths[1];
 
           // Team Captain
           ctx.fillStyle = "#cbd5e1";
-          ctx.font = "500 14px Inter, Arial, sans-serif";
-          ctx.fillText(truncateCanvasText(ctx, row.teamCaptain, colWidths[2] - 18), x + 10, y + 29);
+          ctx.font = "500 16px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamCaptain, colWidths[2] - 18), x + 10, y + 33);
           x += colWidths[2];
 
           // Mobile No
           ctx.fillStyle = "#fcd34d";
-          ctx.font = "bold 14.5px monospace";
-          ctx.fillText(truncateCanvasText(ctx, row.mobileNo, colWidths[3] - 18), x + 10, y + 29);
+          ctx.font = "bold 16.5px monospace";
+          ctx.fillText(truncateCanvasText(ctx, row.mobileNo, colWidths[3] - 18), x + 10, y + 33);
           x += colWidths[3];
 
           // Payment (Paid or Pending)
-          const pillW = 88;
-          const pillH = 26;
+          const pillW = 94;
+          const pillH = 28;
           const pillX = x + (colWidths[4] - pillW) / 2;
           const pillY = y + (rowHeight - pillH) / 2;
           drawRoundedRectPath(ctx, pillX, pillY, pillW, pillH, 8);
@@ -3551,9 +3551,9 @@
           ctx.stroke();
 
           ctx.fillStyle = row.isPaid ? "#6ee7b7" : "#fcd34d";
-          ctx.font = "bold 12.5px Inter, Arial, sans-serif";
+          ctx.font = "bold 14.5px Inter, Arial, sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText(row.paymentLabel.toUpperCase(), pillX + pillW / 2, pillY + 17.5);
+          ctx.fillText(row.paymentLabel.toUpperCase(), pillX + pillW / 2, pillY + 19);
           ctx.textAlign = "left";
         });
 
