@@ -100,6 +100,23 @@
     .action-blink {
       animation: actionButtonBlink 1.2s ease-in-out infinite;
     }
+    @keyframes progressFireFlicker {
+      0%, 100% {
+        transform: translate(-50%, -56%) scale(1) rotate(-3deg);
+        filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.9)) drop-shadow(0 0 12px rgba(250, 204, 21, 0.65));
+      }
+      35% {
+        transform: translate(-50%, -62%) scale(1.1) rotate(3deg);
+        filter: drop-shadow(0 0 9px rgba(251, 146, 60, 1)) drop-shadow(0 0 16px rgba(239, 68, 68, 0.85));
+      }
+      70% {
+        transform: translate(-50%, -58%) scale(1.05) rotate(-1deg);
+        filter: drop-shadow(0 0 7px rgba(250, 204, 21, 0.95)) drop-shadow(0 0 14px rgba(249, 115, 22, 0.75));
+      }
+    }
+    .progress-fire-flicker {
+      animation: progressFireFlicker 1.1s ease-in-out infinite;
+    }
     .hero-3d-stage {
       perspective: 1200px;
     }
@@ -476,7 +493,7 @@
         </div>
         <div class="flex w-full flex-nowrap items-center gap-2 sm:w-auto">
           <button onclick="setTeamTab('all', this)" class="team-filter-btn flex-1 whitespace-nowrap rounded-lg bg-amber-500 px-3 py-2 text-xs font-bold text-slate-950 transition sm:flex-none sm:px-4">All (24)</button>
-          <button onclick="setTeamTab('booked', this)" class="team-filter-btn flex-1 whitespace-nowrap rounded-lg bg-slate-800 px-3 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700 sm:flex-none sm:px-4">Confirmed (<span id="filter-booked-count">0</span>)</button>
+          <button onclick="setTeamTab('booked', this)" class="team-filter-btn flex-1 whitespace-nowrap rounded-lg bg-slate-800 px-3 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700 sm:flex-none sm:px-4">Registered(<span id="filter-booked-count">0</span>)</button>
           <button onclick="setTeamTab('open', this)" class="team-filter-btn flex-1 whitespace-nowrap rounded-lg bg-slate-800 px-3 py-2 text-xs font-bold text-slate-300 transition hover:bg-slate-700 sm:flex-none sm:px-4">Remaining (<span id="filter-open-count">24</span>)</button>
         </div>
       </div>
@@ -488,8 +505,34 @@
         <span class="text-emerald-400">✅ <span id="progress-booked-count">0</span> Teams Registered</span>
         <span class="text-amber-400">⏳ <span id="progress-open-count">24</span> Slots Remaining</span>
       </div>
-      <div class="h-3 w-full overflow-hidden rounded-full bg-slate-800">
-        <div id="team-progress-bar" class="gold-gradient h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+      <div class="relative mt-2 h-3 w-full rounded-full bg-slate-800">
+        <div class="h-full w-full overflow-hidden rounded-full">
+          <div id="team-progress-bar" class="gold-gradient h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+        </div>
+        <span
+          id="team-progress-fire"
+          aria-hidden="true"
+          class="progress-fire-flicker pointer-events-none absolute top-1/2 z-10 flex h-7 w-7 items-center justify-center transition-all duration-500"
+          style="left: clamp(12px, 0%, calc(100% - 12px));"
+        >
+          <span class="absolute inset-0 rounded-full bg-orange-500/25 blur-xs"></span>
+          <svg viewBox="0 0 24 24" class="relative h-6 w-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="progress-flame-outer" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fde047" />
+                <stop offset="45%" stop-color="#f97316" />
+                <stop offset="100%" stop-color="#dc2626" />
+              </linearGradient>
+              <linearGradient id="progress-flame-inner" x1="12" y1="9" x2="12" y2="20" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fef9c3" />
+                <stop offset="100%" stop-color="#facc15" />
+              </linearGradient>
+            </defs>
+            <path d="M12.6 2.1c.4 2.5-.7 4.4-2.1 5.9-1.2 1.3-2.5 2.5-2.5 4.7 0 1.2.5 2.2 1.2 2.9-.3-1 .1-2.2 1-2.9.2 1.4 1.1 2.2 2 3.1.9.8 1.8 1.6 1.8 3.2 0 .5-.1 1-.3 1.4 2.8-.9 4.8-3.4 4.8-6.6 0-3.4-2.1-5.8-3.8-7.8-.8-1-1.6-2-2.1-3.9Z" fill="url(#progress-flame-outer)"/>
+            <path d="M12.3 2.1C9.5 4.6 6.2 8.2 6.2 13.5c0 4.2 2.9 7.6 6.8 7.9 3.6-.3 6.3-3.2 6.3-7.1 0-3.2-1.8-5.5-3.4-7.4-1.3-1.5-2.7-3-3.6-4.8Z" fill="url(#progress-flame-outer)"/>
+            <path d="M12.2 10.2c-.8 1.2-2.3 2.5-2.3 4.8 0 2 1.3 3.7 3.1 4 1.6-.3 2.8-1.6 2.8-3.4 0-1.9-1.3-3.3-2.4-4.5-.5-.5-.9-.8-1.2-.9Z" fill="url(#progress-flame-inner)"/>
+          </svg>
+        </span>
       </div>
     </div>
 
@@ -1290,12 +1333,15 @@
         const element = document.getElementById(id);
         if (element) element.textContent = count;
       });
+      const progressPercent = rclTeamSlots.length > 0 ? (bookedCount / rclTeamSlots.length) * 100 : 0;
       const progressBar = document.getElementById("team-progress-bar");
-      if (progressBar) progressBar.style.width = `${(bookedCount / rclTeamSlots.length) * 100}%`;
+      if (progressBar) progressBar.style.width = `${progressPercent}%`;
+      const progressFire = document.getElementById("team-progress-fire");
+      if (progressFire) progressFire.style.left = `clamp(12px, ${progressPercent}%, calc(100% - 12px))`;
       document.querySelectorAll(".team-filter-btn").forEach((button) => {
         const countSpan = button.querySelector("#filter-booked-count, #filter-open-count");
         if (countSpan) {
-          button.firstChild.textContent = button.dataset.filterType === "booked" ? "Confirmed (" : "Remaining (";
+          button.firstChild.textContent = button.dataset.filterType === "booked" ? "Registered(" : "Remaining (";
         }
       });
 
@@ -1368,8 +1414,8 @@
         const card = document.createElement(!isBooked ? "button" : "article");
         card.id = `team-card-${slotId}`;
         card.className = isBooked
-          ? `flex min-h-60 min-w-0 w-full flex-col overflow-hidden rounded-xl border ${isOwnedBooked ? "border-emerald-500/60" : "border-amber-500/50"} bg-gradient-to-b from-amber-500/10 to-slate-900 p-3.5 text-left shadow-md transition`
-          : "flex min-h-60 min-w-0 w-full flex-col overflow-hidden rounded-xl border border-dashed border-slate-700 bg-slate-950/70 p-3.5 text-left shadow-md transition hover:border-amber-400 hover:bg-slate-900";
+          ? `flex min-h-60 min-w-0 w-full flex-col overflow-hidden rounded-xl border ${isOwnedBooked ? "border-emerald-500/60" : "border-amber-500/50"} bg-gradient-to-b from-amber-500/10 to-slate-900 p-2 sm:p-3.5 text-left shadow-md transition`
+          : "flex min-h-60 min-w-0 w-full flex-col overflow-hidden rounded-xl border border-dashed border-slate-700 bg-slate-950/70 p-2 sm:p-3.5 text-left shadow-md transition hover:border-amber-400 hover:bg-slate-900";
         if (!isBooked) {
           card.type = "button";
           card.setAttribute("aria-label", `Register for ${slot.name}`);
@@ -1449,34 +1495,43 @@
         card.append(teamHeading);
 
         const teamName = document.createElement("p");
-        teamName.className = `w-full min-w-0 break-words text-[11px] leading-snug ${isBooked ? "text-white" : "text-slate-300"}`;
+        teamName.className = `w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight ${isBooked ? "text-white" : "text-slate-300"}`;
         teamName.title = isBooked ? (slot.teamName || slot.name) : slot.name;
         const teamNameLabel = document.createElement("span");
         teamNameLabel.className = "font-bold";
         teamNameLabel.textContent = "Name: ";
-        teamName.append(teamNameLabel, document.createTextNode(isBooked ? (slot.teamName || slot.name) : slot.name));
+        const teamNameValue = document.createElement("span");
+        teamNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
+        teamNameValue.textContent = isBooked ? (slot.teamName || slot.name) : slot.name;
+        teamName.append(teamNameLabel, teamNameValue);
         card.append(teamName);
 
         const brandName = document.createElement("p");
-        brandName.className = "w-full min-w-0 break-words text-[11px] leading-snug text-slate-300";
+        brandName.className = "w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight text-slate-300";
         brandName.title = isBooked ? (slot.brandName || "") : "";
         const brandNameLabel = document.createElement("span");
         brandNameLabel.className = "font-semibold";
         brandNameLabel.textContent = "Title: ";
-        brandName.append(brandNameLabel, document.createTextNode(isBooked ? (slot.brandName || "—") : "—"));
+        const brandNameValue = document.createElement("span");
+        brandNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
+        brandNameValue.textContent = isBooked ? (slot.brandName || "—") : "—";
+        brandName.append(brandNameLabel, brandNameValue);
         card.append(brandName);
 
         const captainName = document.createElement("p");
-        captainName.className = "w-full min-w-0 truncate text-[11px] leading-snug text-slate-400";
+        captainName.className = "w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight text-slate-400";
         captainName.title = isBooked ? (slot.captainName || "") : "";
         const captainNameLabel = document.createElement("span");
         captainNameLabel.className = "font-semibold";
         captainNameLabel.textContent = "Captain: ";
-        captainName.append(captainNameLabel, document.createTextNode(isBooked ? (slot.captainName || "") : "—"));
+        const captainNameValue = document.createElement("span");
+        captainNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
+        captainNameValue.textContent = isBooked ? (slot.captainName || "") : "—";
+        captainName.append(captainNameLabel, captainNameValue);
         card.append(captainName);
 
         const captainPhone = document.createElement("p");
-        captainPhone.className = "w-full min-w-0 truncate text-[11px] leading-snug text-slate-400";
+        captainPhone.className = "w-full min-w-0 truncate text-[7.5px] min-[400px]:text-[8px] sm:text-[9.5px] leading-snug tracking-tight text-slate-400";
         captainPhone.title = isBooked ? displayPhone : "";
         const captainPhoneLabel = document.createElement("span");
         captainPhoneLabel.className = "font-semibold";
@@ -1958,6 +2013,9 @@
           });
           updateTeamCounts();
           window.applyTeamFilters();
+          if (typeof warmExportLogoCache === "function") {
+            warmExportLogoCache();
+          }
           const syncStatusEl = document.getElementById("team-sync-status");
           if (syncStatusEl && syncStatusEl.classList.contains("text-red-400")) {
             setTeamSyncStatus("");
@@ -3064,23 +3122,31 @@
       return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
     }
 
+    const inlineLogoCache = new Map();
+    const loadedLogoImageCache = new Map();
+
     async function resolveInlineImageDataUrl(url) {
       if (!url) return "";
       if (/^data:image\/(jpeg|png|webp);base64,/i.test(url)) return url;
       if (!/^https:\/\/.+/i.test(url)) return "";
+      if (inlineLogoCache.has(url)) return inlineLogoCache.get(url);
       try {
         const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 2500);
+        const timer = setTimeout(() => controller.abort(), 800);
         const res = await fetch(url, { mode: "cors", signal: controller.signal });
         clearTimeout(timer);
         if (!res.ok) return url;
         const blob = await res.blob();
-        return await new Promise((resolve) => {
+        const dataUrl = await new Promise((resolve) => {
           const reader = new FileReader();
           reader.onloadend = () => resolve(typeof reader.result === "string" ? reader.result : url);
           reader.onerror = () => resolve(url);
           reader.readAsDataURL(blob);
         });
+        if (typeof dataUrl === "string" && dataUrl.startsWith("data:image/")) {
+          inlineLogoCache.set(url, dataUrl);
+        }
+        return dataUrl;
       } catch (_err) {
         return url;
       }
@@ -3092,21 +3158,48 @@
           resolve(null);
           return;
         }
+        if (loadedLogoImageCache.has(url)) {
+          resolve(loadedLogoImageCache.get(url));
+          return;
+        }
         const img = new Image();
         let settled = false;
         const finish = (result) => {
           if (settled) return;
           settled = true;
           clearTimeout(timer);
+          if (result) {
+            loadedLogoImageCache.set(url, result);
+          }
           resolve(result);
         };
-        const timer = setTimeout(() => finish(null), 2600);
+        const timer = setTimeout(() => finish(null), 800);
         if (/^https:\/\//i.test(url)) {
           img.crossOrigin = "anonymous";
         }
         img.onload = () => finish(img);
         img.onerror = () => finish(null);
         img.src = url;
+      });
+    }
+
+    async function getCachedCanvasLogo(logoUrl) {
+      if (!logoUrl) return null;
+      if (loadedLogoImageCache.has(logoUrl)) {
+        return loadedLogoImageCache.get(logoUrl);
+      }
+      const inlineUrl = await resolveInlineImageDataUrl(logoUrl);
+      const img = await loadCanvasSafeImage(inlineUrl);
+      if (img) {
+        loadedLogoImageCache.set(logoUrl, img);
+      }
+      return img;
+    }
+
+    function warmExportLogoCache() {
+      const bookedSlots = rclTeamSlots.filter((slot) => slot.status === "booked" && isValidExportLogoUrl(slot.logoUrl));
+      bookedSlots.forEach((slot) => {
+        getCachedCanvasLogo(slot.logoUrl).catch(() => {});
       });
     }
 
@@ -3132,25 +3225,24 @@
     }
 
     async function renderRosterPdfPages(rows) {
-      const maxRowsPerPage = 12;
+      const maxRowsPerPage = 24;
       const loadedLogos = await Promise.all(
-        rows.map(async (row) => {
-          const inlineUrl = await resolveInlineImageDataUrl(row.logoUrl);
-          return loadCanvasSafeImage(inlineUrl);
-        })
+        rows.map((row) => getCachedCanvasLogo(row.logoUrl))
       );
 
-      const width = 1684;
-      const headerHeight = 190;
-      const tableHeaderHeight = 56;
-      const rowHeight = 76;
-      const bottomPadding = 52;
-      const padX = 52;
+      const width = 920;
+      const headerHeight = 166;
+      const tableHeaderHeight = 40;
+      const rowHeight = 48;
+      const bottomPadding = 28;
+      const padX = 24;
       const tableWidth = width - padX * 2;
-      const colWidths = [470, 390, 320, 230, 170];
+      const colWidths = [236, 196, 180, 142, 118];
       const pages = [];
       const paidTotal = rows.filter((r) => r.isPaid).length;
       const pendingTotal = rows.length - paidTotal;
+      const exportedOn = getExportDateStamp();
+      const mainHeaderText = "Reddy's Association | Reddy's Cricket League (RCL-2027) - Roster";
 
       for (let start = 0; start < rows.length; start += maxRowsPerPage) {
         const chunk = rows.slice(start, start + maxRowsPerPage);
@@ -3163,60 +3255,229 @@
         const ctx = canvas.getContext("2d");
 
         const bgGrad = ctx.createLinearGradient(0, 0, width, height);
-        bgGrad.addColorStop(0, "#090d16");
-        bgGrad.addColorStop(0.5, "#0f172a");
-        bgGrad.addColorStop(1, "#1e1b2e");
+        bgGrad.addColorStop(0, "#070b14");
+        bgGrad.addColorStop(0.45, "#0f172a");
+        bgGrad.addColorStop(1, "#1b1630");
         ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, width, height);
 
+        // Stadium spotlight glow centered behind header
+        const spotlight = ctx.createRadialGradient(width / 2, 66, 12, width / 2, 66, 430);
+        spotlight.addColorStop(0, "rgba(245, 158, 11, 0.28)");
+        spotlight.addColorStop(0.5, "rgba(239, 68, 68, 0.10)");
+        spotlight.addColorStop(1, "rgba(15, 23, 42, 0)");
+        ctx.fillStyle = spotlight;
+        ctx.fillRect(0, 0, width, headerHeight + 20);
+
+        // Top championship gold bar
         const goldGrad = ctx.createLinearGradient(0, 0, width, 0);
-        goldGrad.addColorStop(0, "#f59e0b");
-        goldGrad.addColorStop(0.5, "#fde68a");
-        goldGrad.addColorStop(1, "#f59e0b");
+        goldGrad.addColorStop(0, "#d97706");
+        goldGrad.addColorStop(0.3, "#fde047");
+        goldGrad.addColorStop(0.5, "#ffffff");
+        goldGrad.addColorStop(0.7, "#fde047");
+        goldGrad.addColorStop(1, "#d97706");
         ctx.fillStyle = goldGrad;
-        ctx.fillRect(0, 0, width, 10);
+        ctx.fillRect(0, 0, width, 7);
 
-        ctx.fillStyle = "#f59e0b";
-        ctx.font = "bold 20px Inter, Arial, sans-serif";
-        ctx.fillText("RCL 2027 • REDDY'S CRICKET LEAGUE • REGISTERED TEAMS", padX, 58);
+        // Diagonal subtle speed accents in header corners
+        ctx.save();
+        ctx.strokeStyle = "rgba(251, 191, 36, 0.12)";
+        ctx.lineWidth = 2;
+        for (let i = 0; i < 4; i += 1) {
+          const offset = i * 16;
+          ctx.beginPath();
+          ctx.moveTo(18 + offset, 12);
+          ctx.lineTo(4 + offset, 48);
+          ctx.stroke();
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 46px Inter, Arial, sans-serif";
-        ctx.fillText(`RCL 2027 REGISTERED TEAMS (${rows.length} / 24)`, padX, 112);
+          ctx.beginPath();
+          ctx.moveTo(width - 18 - offset, 12);
+          ctx.lineTo(width - 4 - offset, 48);
+          ctx.stroke();
+        }
+        ctx.restore();
 
+        // Centered Championship Eyebrow Pill with flanking gold streaks
+        const centerX = width / 2;
+        const eyebrowText = `OFFICIAL REGISTERED TEAMS (${rows.length} / 24)`;
+        ctx.font = "800 12px Inter, Arial, sans-serif";
+        const eyebrowW = Math.min(340, ctx.measureText(eyebrowText).width + 52);
+        const eyebrowY = 20;
+
+        const leftStreak = ctx.createLinearGradient(centerX - eyebrowW / 2 - 120, 0, centerX - eyebrowW / 2 - 10, 0);
+        leftStreak.addColorStop(0, "rgba(245, 158, 11, 0)");
+        leftStreak.addColorStop(1, "rgba(251, 191, 36, 0.85)");
+        ctx.strokeStyle = leftStreak;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(centerX - eyebrowW / 2 - 120, eyebrowY + 11);
+        ctx.lineTo(centerX - eyebrowW / 2 - 10, eyebrowY + 11);
+        ctx.stroke();
+
+        const rightStreak = ctx.createLinearGradient(centerX + eyebrowW / 2 + 10, 0, centerX + eyebrowW / 2 + 120, 0);
+        rightStreak.addColorStop(0, "rgba(251, 191, 36, 0.85)");
+        rightStreak.addColorStop(1, "rgba(245, 158, 11, 0)");
+        ctx.strokeStyle = rightStreak;
+        ctx.beginPath();
+        ctx.moveTo(centerX + eyebrowW / 2 + 10, eyebrowY + 11);
+        ctx.lineTo(centerX + eyebrowW / 2 + 120, eyebrowY + 11);
+        ctx.stroke();
+
+        drawRoundedRectPath(ctx, centerX - eyebrowW / 2, eyebrowY, eyebrowW, 22, 11);
+        ctx.fillStyle = "rgba(245, 158, 11, 0.16)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(251, 191, 36, 0.65)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Draw crisp vector gold diamonds on both sides of the eyebrow text
+        [centerX - eyebrowW / 2 + 14, centerX + eyebrowW / 2 - 14].forEach((dx) => {
+          const dy = eyebrowY + 11;
+          ctx.beginPath();
+          ctx.moveTo(dx, dy - 4);
+          ctx.lineTo(dx + 4, dy);
+          ctx.lineTo(dx, dy + 4);
+          ctx.lineTo(dx - 4, dy);
+          ctx.closePath();
+          ctx.fillStyle = "#fbbf24";
+          ctx.fill();
+        });
+
+        ctx.fillStyle = "#fde047";
+        ctx.textAlign = "center";
+        ctx.fillText(eyebrowText, centerX, eyebrowY + 15);
+
+        // Crazy Centered Header Banner Box
+        const bannerX = padX;
+        const bannerY = 50;
+        const bannerW = tableWidth;
+        const bannerH = 54;
+        drawRoundedRectPath(ctx, bannerX, bannerY, bannerW, bannerH, 14);
+        const bannerBg = ctx.createLinearGradient(bannerX, bannerY, bannerX + bannerW, bannerY + bannerH);
+        bannerBg.addColorStop(0, "rgba(15, 23, 42, 0.96)");
+        bannerBg.addColorStop(0.5, "rgba(30, 27, 75, 0.92)");
+        bannerBg.addColorStop(1, "rgba(15, 23, 42, 0.96)");
+        ctx.fillStyle = bannerBg;
+        ctx.fill();
+
+        const bannerBorder = ctx.createLinearGradient(bannerX, bannerY, bannerX + bannerW, bannerY);
+        bannerBorder.addColorStop(0, "rgba(245, 158, 11, 0.35)");
+        bannerBorder.addColorStop(0.25, "#fbbf24");
+        bannerBorder.addColorStop(0.5, "#fef08a");
+        bannerBorder.addColorStop(0.75, "#fbbf24");
+        bannerBorder.addColorStop(1, "rgba(245, 158, 11, 0.35)");
+        ctx.strokeStyle = bannerBorder;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Auto-fit main header text so it always stays centered inside banner
+        let headerFontSize = 23;
+        while (headerFontSize > 15) {
+          ctx.font = `900 ${headerFontSize}px Inter, Arial, sans-serif`;
+          if (ctx.measureText(mainHeaderText).width <= bannerW - 32) break;
+          headerFontSize -= 1;
+        }
+        ctx.save();
+        ctx.shadowColor = "rgba(245, 158, 11, 0.5)";
+        ctx.shadowBlur = 12;
+        ctx.shadowOffsetY = 2;
+        const textGrad = ctx.createLinearGradient(centerX - 360, bannerY, centerX + 360, bannerY + bannerH);
+        textGrad.addColorStop(0, "#fbbf24");
+        textGrad.addColorStop(0.35, "#ffffff");
+        textGrad.addColorStop(0.5, "#fef08a");
+        textGrad.addColorStop(0.65, "#ffffff");
+        textGrad.addColorStop(1, "#f59e0b");
+        ctx.fillStyle = textGrad;
+        ctx.textAlign = "center";
+        ctx.fillText(mainHeaderText, centerX, bannerY + 35);
+        ctx.restore();
+
+        // Centered Summary Pills: Paid : N, Pending : N, Exported On : Date
         const pageNumber = Math.floor(start / maxRowsPerPage) + 1;
         const totalPages = Math.ceil(rows.length / maxRowsPerPage);
-        ctx.fillStyle = "#cbd5e1";
-        ctx.font = "600 20px Inter, Arial, sans-serif";
-        ctx.fillText(
-          `Paid: ${paidTotal}   •   Pending: ${pendingTotal}   •   Exported: ${getExportDateStamp()}${totalPages > 1 ? `   •   Page ${pageNumber}/${totalPages}` : ""}`,
-          padX,
-          152
-        );
+        const statBadges = [
+          {
+            label: `Paid : ${paidTotal}`,
+            bg: "rgba(16, 185, 129, 0.16)",
+            border: "rgba(52, 211, 153, 0.55)",
+            color: "#6ee7b7"
+          },
+          {
+            label: `Pending : ${pendingTotal}`,
+            bg: "rgba(245, 158, 11, 0.16)",
+            border: "rgba(251, 191, 36, 0.55)",
+            color: "#fcd34d"
+          },
+          {
+            label: `Exported On : ${exportedOn}`,
+            bg: "rgba(56, 189, 248, 0.14)",
+            border: "rgba(125, 211, 252, 0.45)",
+            color: "#e2e8f0"
+          }
+        ];
+        if (totalPages > 1) {
+          statBadges.push({
+            label: `Page ${pageNumber}/${totalPages}`,
+            bg: "rgba(148, 163, 184, 0.16)",
+            border: "rgba(148, 163, 184, 0.4)",
+            color: "#cbd5e1"
+          });
+        }
 
+        ctx.font = "700 13px Inter, Arial, sans-serif";
+        const badgeGap = 10;
+        const badgePadX = 16;
+        const badgeWidths = statBadges.map((b) => ctx.measureText(b.label).width + badgePadX * 2);
+        const totalBadgesWidth = badgeWidths.reduce((sum, w) => sum + w, 0) + badgeGap * (statBadges.length - 1);
+        let badgeX = centerX - totalBadgesWidth / 2;
+        const badgeY = 118;
+        const badgeH = 28;
+
+        statBadges.forEach((badge, i) => {
+          const bw = badgeWidths[i];
+          drawRoundedRectPath(ctx, badgeX, badgeY, bw, badgeH, 14);
+          ctx.fillStyle = badge.bg;
+          ctx.fill();
+          ctx.strokeStyle = badge.border;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+
+          ctx.fillStyle = badge.color;
+          ctx.textAlign = "center";
+          ctx.fillText(badge.label, badgeX + bw / 2, badgeY + 18.5);
+          badgeX += bw + badgeGap;
+        });
+        ctx.textAlign = "left";
+
+        // Table Header
         const tableY = headerHeight;
-        drawRoundedRectPath(ctx, padX, tableY, tableWidth, tableHeaderHeight, 12);
-        ctx.fillStyle = "#f59e0b";
+        drawRoundedRectPath(ctx, padX, tableY, tableWidth, tableHeaderHeight, 10);
+        const tblHeadGrad = ctx.createLinearGradient(padX, tableY, padX + tableWidth, tableY);
+        tblHeadGrad.addColorStop(0, "#f59e0b");
+        tblHeadGrad.addColorStop(0.5, "#fbbf24");
+        tblHeadGrad.addColorStop(1, "#f59e0b");
+        ctx.fillStyle = tblHeadGrad;
         ctx.fill();
 
         const headers = ["TEAM TITLE", "TEAM NAME", "TEAM CAPTAIN", "MOBILE NO", "PAYMENT"];
         ctx.fillStyle = "#090d16";
-        ctx.font = "bold 20px Inter, Arial, sans-serif";
+        ctx.font = "800 13.5px Inter, Arial, sans-serif";
         let colX = padX;
         headers.forEach((heading, idx) => {
-          const textX = idx === 4 ? colX + colWidths[idx] / 2 : colX + 18;
+          const textX = idx === 4 ? colX + colWidths[idx] / 2 : colX + (idx === 0 ? 12 : 10);
           ctx.textAlign = idx === 4 ? "center" : "left";
-          ctx.fillText(heading, textX, tableY + 35);
+          ctx.fillText(heading, textX, tableY + 25);
           colX += colWidths[idx];
         });
         ctx.textAlign = "left";
 
+        // Table Rows (Compact for mobile screens)
         chunk.forEach((row, idx) => {
           const y = tableY + tableHeaderHeight + idx * rowHeight;
           ctx.fillStyle = idx % 2 === 0 ? "rgba(15, 23, 42, 0.92)" : "rgba(30, 41, 59, 0.72)";
           ctx.fillRect(padX, y, tableWidth, rowHeight);
 
-          ctx.strokeStyle = "rgba(148, 163, 184, 0.18)";
+          ctx.strokeStyle = "rgba(148, 163, 184, 0.16)";
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(padX, y + rowHeight);
@@ -3225,74 +3486,74 @@
 
           let x = padX;
 
-          // Team Title: Team Logo + Team Title concatenated together
-          const logoBoxX = x + 16;
-          const logoBoxY = y + 11;
-          const logoSize = 54;
-          drawRoundedRectPath(ctx, logoBoxX, logoBoxY, logoSize, logoSize, 10);
+          // Team Title: Team Logo + Team Title
+          const logoSize = 32;
+          const logoBoxX = x + 10;
+          const logoBoxY = y + (rowHeight - logoSize) / 2;
+          drawRoundedRectPath(ctx, logoBoxX, logoBoxY, logoSize, logoSize, 7);
           ctx.fillStyle = "#020617";
           ctx.fill();
           ctx.strokeStyle = "rgba(245, 158, 11, 0.55)";
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = 1.2;
           ctx.stroke();
 
           const img = chunkLogos[idx];
           if (img) {
             ctx.save();
-            drawRoundedRectPath(ctx, logoBoxX + 2, logoBoxY + 2, logoSize - 4, logoSize - 4, 8);
+            drawRoundedRectPath(ctx, logoBoxX + 1.5, logoBoxY + 1.5, logoSize - 3, logoSize - 3, 6);
             ctx.clip();
-            const scale = Math.min((logoSize - 6) / img.width, (logoSize - 6) / img.height);
+            const scale = Math.min((logoSize - 4) / img.width, (logoSize - 4) / img.height);
             const drawW = img.width * scale;
             const drawH = img.height * scale;
             ctx.drawImage(img, logoBoxX + (logoSize - drawW) / 2, logoBoxY + (logoSize - drawH) / 2, drawW, drawH);
             ctx.restore();
           } else {
             ctx.fillStyle = "#fbbf24";
-            ctx.font = "bold 20px Inter, Arial, sans-serif";
+            ctx.font = "bold 13px Inter, Arial, sans-serif";
             ctx.textAlign = "center";
-            ctx.fillText(row.teamTitle.slice(0, 2).toUpperCase(), logoBoxX + logoSize / 2, logoBoxY + 35);
+            ctx.fillText(row.teamTitle.slice(0, 2).toUpperCase(), logoBoxX + logoSize / 2, logoBoxY + 21);
             ctx.textAlign = "left";
           }
 
           ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 21px Inter, Arial, sans-serif";
-          ctx.fillText(truncateCanvasText(ctx, row.teamTitle, colWidths[0] - 96), logoBoxX + logoSize + 14, y + 45);
+          ctx.font = "bold 14.5px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamTitle, colWidths[0] - 58), logoBoxX + logoSize + 9, y + 29);
           x += colWidths[0];
 
           // Team Name
           ctx.fillStyle = "#e2e8f0";
-          ctx.font = "600 20px Inter, Arial, sans-serif";
-          ctx.fillText(truncateCanvasText(ctx, row.teamName, colWidths[1] - 28), x + 18, y + 45);
+          ctx.font = "600 14px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamName, colWidths[1] - 18), x + 10, y + 29);
           x += colWidths[1];
 
           // Team Captain
           ctx.fillStyle = "#cbd5e1";
-          ctx.font = "500 20px Inter, Arial, sans-serif";
-          ctx.fillText(truncateCanvasText(ctx, row.teamCaptain, colWidths[2] - 28), x + 18, y + 45);
+          ctx.font = "500 14px Inter, Arial, sans-serif";
+          ctx.fillText(truncateCanvasText(ctx, row.teamCaptain, colWidths[2] - 18), x + 10, y + 29);
           x += colWidths[2];
 
           // Mobile No
           ctx.fillStyle = "#fcd34d";
-          ctx.font = "bold 21px monospace";
-          ctx.fillText(truncateCanvasText(ctx, row.mobileNo, colWidths[3] - 28), x + 18, y + 45);
+          ctx.font = "bold 14.5px monospace";
+          ctx.fillText(truncateCanvasText(ctx, row.mobileNo, colWidths[3] - 18), x + 10, y + 29);
           x += colWidths[3];
 
           // Payment (Paid or Pending)
-          const pillW = 128;
-          const pillH = 38;
+          const pillW = 88;
+          const pillH = 26;
           const pillX = x + (colWidths[4] - pillW) / 2;
           const pillY = y + (rowHeight - pillH) / 2;
-          drawRoundedRectPath(ctx, pillX, pillY, pillW, pillH, 10);
+          drawRoundedRectPath(ctx, pillX, pillY, pillW, pillH, 8);
           ctx.fillStyle = row.isPaid ? "rgba(16, 185, 129, 0.22)" : "rgba(245, 158, 11, 0.2)";
           ctx.fill();
           ctx.strokeStyle = row.isPaid ? "#34d399" : "#fbbf24";
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = 1.2;
           ctx.stroke();
 
           ctx.fillStyle = row.isPaid ? "#6ee7b7" : "#fcd34d";
-          ctx.font = "bold 19px Inter, Arial, sans-serif";
+          ctx.font = "bold 12.5px Inter, Arial, sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText(row.paymentLabel.toUpperCase(), pillX + pillW / 2, pillY + 25);
+          ctx.fillText(row.paymentLabel.toUpperCase(), pillX + pillW / 2, pillY + 17.5);
           ctx.textAlign = "left";
         });
 
@@ -3348,7 +3609,7 @@
       offsets[2] = byteLength;
       pushText(`2 0 obj\n<< /Type /Pages /Kids [${pageObjectIds.map((id) => `${id} 0 R`).join(" ")}] /Count ${pageCount} >>\nendobj\n`);
 
-      const pdfPageW = 841.89;
+      const pdfPageW = 595.28;
       pageEntries.forEach((entry) => {
         const pdfPageH = Number(((pdfPageW * entry.height) / entry.width).toFixed(2));
         offsets[entry.imgId] = byteLength;
@@ -3382,6 +3643,16 @@
       return new Blob(chunks, { type: "application/pdf" });
     }
 
+    function isMobileShareDevice() {
+      if (navigator.userAgentData && typeof navigator.userAgentData.mobile === "boolean") {
+        return navigator.userAgentData.mobile;
+      }
+      const ua = navigator.userAgent || "";
+      if (/Android|iPhone|iPad|iPod/i.test(ua)) return true;
+      if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return true;
+      return false;
+    }
+
     let pdfExportInProgress = false;
     document.getElementById("open-export-teams-btn")?.addEventListener("click", async () => {
       if (pdfExportInProgress) return;
@@ -3395,13 +3666,36 @@
       const label = document.getElementById("export-teams-btn-label");
       pdfExportInProgress = true;
       if (btn) btn.disabled = true;
-      if (label) label.textContent = "Exporting PDF...";
+      if (label) label.textContent = "Preparing PDF...";
 
       try {
         const canvases = await renderRosterPdfPages(rows);
         const pdfBlob = buildPdfFromCanvasPages(canvases);
-        triggerBlobDownload(pdfBlob, "RCL-2027-Teams-Details.pdf");
-        setTeamSyncStatus(`Exported ${rows.length} registered team(s) to PDF.`, false);
+        const pdfFilename = "RCL-2027-Teams-Details.pdf";
+        const pdfFile = new File([pdfBlob], pdfFilename, { type: "application/pdf" });
+
+        const shareMessage = "Please check the attached file...";
+        if (isMobileShareDevice() && navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+          try {
+            const shareData = navigator.canShare({ files: [pdfFile], text: shareMessage })
+              ? { files: [pdfFile], title: pdfFilename, text: shareMessage }
+              : { files: [pdfFile], title: pdfFilename };
+            await navigator.share(shareData);
+            setTeamSyncStatus(`Shared ${pdfFilename} for ${rows.length} registered team(s).`, false);
+            return;
+          } catch (shareErr) {
+            if (shareErr?.name === "AbortError") {
+              setTeamSyncStatus("PDF share cancelled.", false);
+              return;
+            }
+          }
+        }
+
+        triggerBlobDownload(pdfBlob, pdfFilename);
+        setTeamSyncStatus(
+          `Saved ${pdfFilename}. Attach or drop the downloaded PDF directly into WhatsApp.`,
+          false
+        );
       } catch (err) {
         console.error("Direct PDF export failed:", err);
         setTeamSyncStatus("Could not export teams to PDF. Please try again.", true);
