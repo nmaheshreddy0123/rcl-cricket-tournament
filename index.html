@@ -1501,7 +1501,7 @@
         teamNameLabel.className = "font-bold";
         teamNameLabel.textContent = "Name: ";
         const teamNameValue = document.createElement("span");
-        teamNameValue.className = "text-[8px] min-[400px]:text-[8.5px] sm:text-[10px]";
+        teamNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
         teamNameValue.textContent = isBooked ? (slot.teamName || slot.name) : slot.name;
         teamName.append(teamNameLabel, teamNameValue);
         card.append(teamName);
@@ -1513,7 +1513,7 @@
         brandNameLabel.className = "font-semibold";
         brandNameLabel.textContent = "Title: ";
         const brandNameValue = document.createElement("span");
-        brandNameValue.className = "text-[8px] min-[400px]:text-[8.5px] sm:text-[10px]";
+        brandNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
         brandNameValue.textContent = isBooked ? (slot.brandName || "—") : "—";
         brandName.append(brandNameLabel, brandNameValue);
         card.append(brandName);
@@ -1525,7 +1525,7 @@
         captainNameLabel.className = "font-semibold";
         captainNameLabel.textContent = "Captain: ";
         const captainNameValue = document.createElement("span");
-        captainNameValue.className = "text-[8px] min-[400px]:text-[8.5px] sm:text-[10px]";
+        captainNameValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
         captainNameValue.textContent = isBooked ? (slot.captainName || "") : "—";
         captainName.append(captainNameLabel, captainNameValue);
         card.append(captainName);
@@ -1537,7 +1537,7 @@
         captainPhoneLabel.className = "font-semibold";
         captainPhoneLabel.textContent = "Mobile: ";
         const captainPhoneValue = document.createElement("span");
-        captainPhoneValue.className = "text-[8px] min-[400px]:text-[8.5px] sm:text-[10px]";
+        captainPhoneValue.className = "text-[7px] min-[400px]:text-[7.5px] sm:text-[9px]";
         captainPhoneValue.textContent = isBooked ? displayPhone : "—";
         captainPhone.append(captainPhoneLabel, captainPhoneValue);
         card.append(captainPhone);
